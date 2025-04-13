@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Memory Flip Game</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 10px 20px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    .kali-logo {
+      position: fixed;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    h1 {
+      color: #00ccff;
+      margin-bottom: 30px;
+    }
+    button {
+      background-color: #00ccff;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      font-family: monospace;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    input {
+      background-color: #222;
+      color: #00ffcc;
+      border: 1px solid #00ccff;
+      padding: 8px;
+      margin: 10px;
+    }
+    .game-output {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+    <a href="../Index.html">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+  <h1>Memory Flip Game</h1>
+  <div id="grid" style="display:grid; grid-template-columns:repeat(4,60px); gap:10px; justify-content:center;"></div>
+  <div class="game-output" id="output"></div>
+  <script>
+    
+          const grid = document.getElementById('grid');
+          const symbols = ['A','B','C','D','E','F','G','H'];
+          let cards = [...symbols, ...symbols].sort(() => 0.5 - Math.random());
+          let firstCard = null, lock = false;
+
+          cards.forEach(sym => {
+            const card = document.createElement('div');
+            card.style.width = '60px'; card.style.height = '60px';
+            card.style.border = '1px solid #00ccff'; card.style.cursor = 'pointer';
+            card.style.fontSize = '1.5rem'; card.style.color = 'transparent';
+            card.style.display = 'flex'; card.style.alignItems = 'center'; card.style.justifyContent = 'center';
+            card.textContent = sym;
+            card.onclick = () => {
+              if (lock || card.classList.contains('revealed')) return;
+              card.style.color = '#00ffcc'; card.classList.add('revealed');
+              if (!firstCard) firstCard = card;
+              else {
+                lock = true;
+                if (firstCard.textContent === card.textContent && firstCard !== card) {
+                  firstCard = null; lock = false;
+                } else {
+                  setTimeout(() => {
+                    firstCard.style.color = 'transparent';
+                    card.style.color = 'transparent';
+                    firstCard.classList.remove('revealed');
+                    card.classList.remove('revealed');
+                    firstCard = null; lock = false;
+                  }, 700);
+                }
+              }
+            };
+            grid.appendChild(card);
+          });
+        
+  </script>
+</body>
+</html>

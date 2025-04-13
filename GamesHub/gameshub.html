@@ -1,0 +1,134 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Kali Linux Fun Games Hub</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    .kali-logo {
+      position: fixed;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    h1 {
+      font-size: 2.5rem;
+      color: #00ccff;
+      margin-bottom: 40px;
+    }
+    .game-links {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 500px;
+      margin: auto;
+    }
+    a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 15px;
+      border-radius: 10px;
+      color: #00ffcc;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: background 0.3s;
+    }
+    a:hover {
+      background-color: #00ccff22;
+    }
+  </style>
+</head>
+<body>
+    <canvas id="matrixCanvas"></canvas>
+    <a href="PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.6rem;
+      font-family: 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 70px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    top: 30px;
+    right: 138px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 80px;
+    ">GameHub</button>
+  </a>
+  <a href="../Index.html"
+     class="logo-link">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+  <h1>Kali Linux Fun Games Hub</h1>
+  <div class="game-links">
+    <a href="hacker-terminal.html">Hacker Typing Simulator</a>
+    <a href="guess-number.html">Guess the Number</a>
+    <a href="rock-paper-scissors.html">Rock, Paper, Scissors</a>
+    <a href="memory-match.html">Memory Flip Game</a>
+    <a href="coin-flip.html">Coin Flip</a>
+    <a href="dice-roller.html">Dice Roller</a>
+    <a href="trivia.html">Simple Trivia</a>
+    <a href="reaction-test.html">Reaction Time Test</a>
+  </div>
+</body>
+</html>

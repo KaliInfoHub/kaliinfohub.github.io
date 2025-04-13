@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock, Paper, Scissors</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 10px 20px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    .kali-logo {
+      position: fixed;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    h1 {
+      color: #00ccff;
+      margin-bottom: 30px;
+    }
+    button {
+      background-color: #00ccff;
+      color: black;
+      border: none;
+      padding: 10px 20px;
+      margin: 10px;
+      font-family: monospace;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    input {
+      background-color: #222;
+      color: #00ffcc;
+      border: 1px solid #00ccff;
+      padding: 8px;
+      margin: 10px;
+    }
+    .game-output {
+      margin-top: 20px;
+      font-size: 1.2rem;
+    }
+  </style>
+</head>
+<body>
+    <a href="../Index.html">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+  <h1>Rock, Paper, Scissors</h1>
+  <button onclick="play('rock')">Rock</button><button onclick="play('paper')">Paper</button><button onclick="play('scissors')">Scissors</button>
+  <div class="game-output" id="output"></div>
+  <script>
+    
+          function play(choice) {
+            const options = ['rock','paper','scissors'];
+            const cpu = options[Math.floor(Math.random()*3)];
+            let result = "";
+            if (choice === cpu) result = "It’s a tie!";
+            else if ((choice === 'rock' && cpu === 'scissors') || (choice === 'paper' && cpu === 'rock') || (choice === 'scissors' && cpu === 'paper'))
+              result = "You win!";
+            else result = "You lose!";
+            document.getElementById('output').textContent = `CPU chose ${cpu}. ${result}`;
+          }
+        
+  </script>
+</body>
+</html>
