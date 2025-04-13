@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Burp Suite Tutorial - The Kali Linux Info Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    code {
+      display: block;
+      background-color: #111;
+      border-left: 4px solid #00ccff;
+      padding: 10px;
+      margin: 10px 0;
+      white-space: pre-wrap;
+    }
+
+    ul li {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../Index.html"
+     class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Burp Suite Tutorial</header>
+
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
+<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">--Burpe Suite--</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
+  <section>
+    <h2>Overview: What is Burp Suite?</h2>
+    <p>Burp Suite is a powerful platform used for testing the security of web applications. It allows you to intercept, analyze, and manipulate HTTP/S traffic between your browser and target web servers. It's widely used by penetration testers, bug bounty hunters, and security researchers.</p>
+    <p>There are two main versions:</p>
+    <ul>
+      <li><strong>Burp Community (Free)</strong> – Basic tools like Proxy, Repeater, Decoder.</li>
+      <li><strong>Burp Professional (Paid)</strong> – Adds features like Scanner, Intruder, and Extensions.</li>
+    </ul>
+
+    <h2>1. Setting Up Burp</h2>
+    <p>Start Burp Suite from Kali:</p>
+    <code>burpsuite</code>
+
+    <p>Then set your browser (e.g., Firefox) to use a proxy:</p>
+    <ul>
+      <li>Proxy IP: <code>127.0.0.1</code></li>
+      <li>Port: <code>8080</code></li>
+    </ul>
+
+    <p>Install Burp’s CA certificate in your browser for HTTPS support (found at <code>http://burpsuite</code>).</p>
+
+    <h2>2. Intercept and Inspect Traffic</h2>
+    <p>With "Intercept is ON", browse any site in your browser and Burp will capture the request.</p>
+
+    <p>Useful actions:</p>
+    <ul>
+      <li>Right-click &rarr; "Send to Repeater" to modify and resend</li>
+      <li>Forward intercepted traffic to allow it through</li>
+    </ul>
+
+    <h2>3. Using the Repeater</h2>
+    <p>Repeater allows manual testing of requests with modified headers, cookies, input, etc.</p>
+    <code>POST /login HTTP/1.1
+Host: target.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 32
+
+username=admin&password=admin</code>
+
+    <p>Change values and resend to observe responses.</p>
+
+    <h2>4. Using Intruder (Pro Only)</h2>
+    <p>Intruder automates attacks like fuzzing or brute force.</p>
+    <ul>
+      <li>Mark payload positions using <code>§</code></li>
+      <li>Select payload type: wordlist, numbers, etc.</li>
+      <li>Start the attack and analyze the results</li>
+    </ul>
+
+    <h2>5. Scanning (Pro Only)</h2>
+    <p>Burp Scanner finds common vulnerabilities like:</p>
+    <ul>
+      <li>SQL Injection</li>
+      <li>Cross-Site Scripting (XSS)</li>
+      <li>Insecure Headers</li>
+      <li>Open Redirects</li>
+    </ul>
+
+    <h2>6. Decoder & Comparer</h2>
+    <ul>
+      <li><strong>Decoder</strong> – Encode/decode Base64, URL, HTML, etc.</li>
+      <li><strong>Comparer</strong> – Diff two requests or responses</li>
+    </ul>
+
+    <h2>7. Practical Example: Login Form Testing</h2>
+    <ol>
+      <li>Intercept login form POST request</li>
+      <li>Send to Repeater</li>
+      <li>Test credentials manually or send to Intruder</li>
+      <li>Observe response length, status, or redirects to detect valid login</li>
+    </ol>
+
+    <h2>Pro Tips</h2>
+    <ul>
+      <li>Use <code>Burp Collaborator</code> (Pro) to detect blind vulnerabilities</li>
+      <li>Turn off "Intercept" when browsing normally</li>
+      <li>Use extensions like "Autorize" and "Turbo Intruder"</li>
+    </ul>
+
+    <h2>Ethical Use Notice</h2>
+    <p>Always use Burp Suite on applications you own or have written permission to test. Respect laws and ethics.</p>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
+</body>
+</html>

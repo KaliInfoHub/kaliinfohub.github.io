@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Nmap | Kali Linux Info Hub</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      line-height: 1.6;
+    }
+	 .kali-logo {
+      position: absolute;
+      display: block;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #00ccff;
+    }
+    section {
+      background: #111;
+      border: 1px solid #00ccff33;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    code {
+      display: block;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #00ffcc44;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<a href="../Index.html"
+   class="logo-link">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+<canvas id="matrixCanvas"></canvas>
+<style>
+  canvas#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body > *:not(canvas) {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+  <header>Nmap</header>
+  <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">--Nmap Scanning--</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="install.html">Installation Guide</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Aircrack Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
+
+  <section>
+    <h2>What is Nmap?</h2>
+    <p>Nmap (Network Mapper) is an open-source tool for network discovery and security auditing. It is widely used by system administrators and security professionals to scan networks and gather information about hosts and services.</p>
+  </section>
+
+  <section>
+    <h2>Basic Usage</h2>
+    <p>The most basic Nmap command scans a single host:</p>
+    <code>nmap 192.168.1.1</code>
+    <p>Scan a range of IPs:</p>
+    <code>nmap 192.168.1.1-100</code>
+    <p>Scan an entire subnet:</p>
+    <code>nmap 192.168.1.0/24</code>
+    <p>Service and version detection:</p>
+    <code>nmap -sV 192.168.1.1</code>
+    <p>Operating system detection:</p>
+    <code>nmap -O 192.168.1.1</code>
+  </section>
+
+  <section>
+    <h2>Practical Example</h2>
+    <p>Perform an aggressive scan to gather as much info as possible:</p>
+    <code>nmap -A 192.168.1.1</code>
+    <p>This will perform OS detection, version detection, script scanning, and traceroute.</p>
+  </section>
+  
+  <section>
+  <h2>Common Nmap Scan Types (Explained)</h2>
+  <p>Here’s a breakdown of common scan types you’ll use with Nmap and what they actually do:</p>
+  
+  <h3>- TCP Connect Scan (Transfer Control Protocol)</h3>
+  <p>This is the default scan if run without root privileges. It completes the full TCP handshake.</p>
+  <code>nmap -sT 192.168.1.1</code>
+  <p><strong>Use case:</strong> Quick scans without root access. Easier to detect by firewalls.</p>
+
+  <h3>- SYN Scan (Stealth Scan, also knows as a synchronize scan)</h3>
+  <p>Sends SYN packets and waits for a response without completing the handshake. Requires root.</p>
+  <code>nmap -sS 192.168.1.1</code>
+  <p><strong>Use case:</strong> Faster and stealthier scan to identify open ports.</p>
+
+  <h3>- UDP Scan (User Datagram Protocol)</h3>
+  <p>Checks for open UDP ports. Slower and less reliable than TCP scanning but useful.</p>
+  <code>nmap -sU 192.168.1.1</code>
+  <p><strong>Use case:</strong> Checking services like DNS (53), SNMP (161), and others running over UDP.</p>
+
+  <h3>- Scan Specific Ports</h3>
+  <p>You can scan a single port or a range:</p>
+  <code>nmap -p 22 192.168.1.1</code>
+  <code>nmap -p 1-1000 192.168.1.1</code>
+</section>
+
+<section>
+  <h2>Advanced Features</h2>
+
+  <h3>- Script Scanning (Nmap Scripting Engine - NSE)</h3>
+  <p>Run custom scripts for more in-depth analysis (e.g., brute-force, vulnerabilities):</p>
+  <code>nmap --script=default 192.168.1.1</code>
+  <code>nmap --script=vuln 192.168.1.1</code>
+  <p><strong>Use case:</strong> Automate security tasks like banner grabbing or detecting known vulnerabilities.</p>
+
+  <h3>- Output Formats</h3>
+  <p>Save scan results in readable or parsable formats:</p>
+  <code>nmap -oN output.txt 192.168.1.1   <!-- Normal output --></code>
+  <code>nmap -oX output.xml 192.168.1.1  <!-- XML for tools --></code>
+</section>
+
+<section>
+  <h2>Real-World Usage Scenarios</h2>
+
+  <h3>1. Discover Live Hosts on Network</h3>
+  <code>nmap -sn 192.168.1.0/24</code>
+  <p>This “ping scan” tells you which hosts are online without checking ports.</p>
+
+  <h3>2. Quick Discovery of Open Services</h3>
+  <code>nmap -F 192.168.1.1</code>
+  <p>“Fast scan” only checks the most common 100 ports. Great for quick audits.</p>
+
+  <h3>3. Firewall Evasion</h3>
+  <code>nmap -D RND:10 192.168.1.1</code>
+  <p>Use decoy IPs to mask your scan. Helps confuse intrusion detection systems.</p>
+
+  <h3>4. Scan an External Website</h3>
+  <code>nmap -Pn example.com</code>
+  <p>Skip host discovery (ping) and scan assuming the host is up. Useful for scanning live websites.</p>
+</section>
+
+
+  <p><a href="../Index.html">← Back to Home</a></p>
+
+<script>
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const nums = "0123456789";
+  const alphabet = katakana + latin + nums;
+
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#cccccc";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 35);
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>

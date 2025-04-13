@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Burp Suite | Kali Linux Info Hub</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      line-height: 1.6;
+    }
+	.kali-logo {
+      position: absolute;
+      top: -25px;
+      left: -15px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      text-align: center;
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+      color: #00ccff;
+    }
+    section {
+      background: #111;
+      border: 1px solid #00ccff33;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    code {
+      display: block;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #00ffcc44;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<a href="../Index.html"
+   class="logo-link">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+<canvas id="matrixCanvas"></canvas>
+<style>
+  canvas#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body > *:not(canvas) {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+
+  <header>Burp Suite</header>
+  <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Select a Tool:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">BurpSuite</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
+  <section>
+    <h2>What is Burp Suite?</h2>
+    <p>Burp Suite is a powerful tool for web application security testing. It allows users to intercept, modify, and replay HTTP requests, scan for vulnerabilities, and perform manual testing.</p>
+  </section>
+  <section>
+    <h2>Basic Usage</h2>
+    <p>Configure browser to use Burp as a proxy (default: 127.0.0.1:8080), then visit web apps to intercept requests via the Proxy tab.</p>
+  </section>
+  <section>
+    <h2>Practical Example</h2>
+    <p>Intercept a login form, modify POST parameters, and test for SQL injection or XSS vulnerabilities in real time.</p>
+  </section>
+  <p><a href="../Index.html">← Back to Home</a></p>
+
+<script>
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const nums = "0123456789";
+  const alphabet = katakana + latin + nums;
+
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#cccccc";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 35);
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>

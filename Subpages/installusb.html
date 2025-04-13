@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boot from Live USB | Kali Info Hub</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: #00ccff;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .overview {
+      text-align: center;
+      font-size: 1.1rem;
+    }
+
+    ul {
+      line-height: 1.8;
+    }
+
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<a href="../Index.html">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+
+<header>Boot from Live USB</header>
+
+<nav>
+  <ul>
+    <li><a href="AboutKali.html">About Kali</a></li>
+    <li><a href="install.html">Installation</a></li>
+    <li><a href="tools.html">Tools & Features</a></li>
+    <li><a href="commands.html">Commands</a></li>
+    <li><a href="tutorials.html">Tutorials</a></li>
+    <li><a href="community.html">Community Area</a></li>
+    <li><a href="contact.html">Contact Page</a></li>
+  </ul>
+</nav>
+<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="install.html">--Boot from Live USB--</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="install.html">Installation Guide</option>
+    <option value="installusb.html">Boot from Live USB</option>
+    <option value="installdualboot.html">Dual Boot Kali</option>
+    <option value="installnethunter.html">Install Kali Nethunter</option>
+    <option value="installextra">Extra</option>
+  </select>
+</div>
+<section class="overview">
+  <p>This guide will show you how to run Kali Linux straight from a USB stick without installing it. Great for testing or forensic tasks.</p>
+</section>
+
+<section>
+  <h2 class="section-title">How to Boot from Live USB</h2>
+  <ul>
+    <li>Download the <a href="https://www.kali.org/get-kali/#kali-live" target="_blank">Kali Linux Live ISO</a>.</li>
+    <li>Use a tool like <strong>Rufus</strong> (Windows) or <strong>balenaEtcher</strong> (Linux/macOS) to write the ISO to a USB stick.</li>
+    <li>Reboot and access your BIOS/UEFI menu to set USB as the boot device.</li>
+    <li>Choose "Live" mode when Kali boots — no installation required.</li>
+  </ul>
+  <p><strong>Ideal For:</strong> Portability, safe testing, temporary environments, forensics.</p>
+</section>
+
+<script>
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const letters = '01';
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = '#0f0';
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 33);
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+</body>
+</html>

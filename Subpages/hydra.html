@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hydra | Kali Linux Info Hub</title>
+  <style>
+    body {
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      line-height: 1.6;
+    }
+	  .kali-logo {
+      position: absolute;
+      top: -25px;
+      left: -15px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+      color: #00ccff;
+    }
+    section {
+      background: #111;
+      border: 1px solid #00ccff33;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    h2 {
+      color: #00ccff;
+    }
+    code {
+      display: block;
+      background: #1a1a1a;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1px solid #00ffcc44;
+      margin-top: 10px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+<a href="../Index.html"
+   class="logo-link">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+<canvas id="matrixCanvas"></canvas>
+<style>
+  canvas#matrixCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  body > *:not(canvas) {
+    position: relative;
+    z-index: 1;
+  }
+</style>
+
+  <header>Hydra</header>
+
+  <section>
+    <h2>What is Hydra?</h2>
+    <p>Hydra is a fast and flexible password-cracking tool that supports a wide range of protocols including FTP, SSH, Telnet, HTTP, HTTPS, SMB, and more. It is primarily used to perform dictionary-based brute-force attacks on login credentials.</p>
+  </section>
+
+  <section>
+    <h2>Basic Usage</h2>
+    <p>Brute-force an SSH login with a username and a password list:</p>
+    <code>hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.10</code>
+    <p>Brute-force an HTTP login form:</p>
+    <code>hydra -L users.txt -P passwords.txt 192.168.1.10 http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"</code>
+    <p>Brute-force FTP service with multiple usernames and passwords:</p>
+    <code>hydra -L users.txt -P passwords.txt ftp://192.168.1.10</code>
+  </section>
+
+  <section>
+    <h2>Practical Example</h2>
+    <p>Attempt to crack SSH on a local target using common usernames and passwords:</p>
+    <code>hydra -L common_users.txt -P top_passwords.txt ssh://192.168.1.5</code>
+    <p>This approach is useful in penetration testing scenarios where weak login credentials may be in use.</p>
+  </section>
+
+  <p><a href="C:\Users\Buds\Desktop\My Website\Kali Linux Info Hub.html">← Back to Home</a></p>
+
+<script>
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
+  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const nums = "0123456789";
+  const alphabet = katakana + latin + nums;
+
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function drawMatrix() {
+    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#cccccc";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(drawMatrix, 35);
+
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+</body>
+</html>

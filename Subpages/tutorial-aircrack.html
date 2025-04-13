@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Aircrack-ng Tutorial - The Kali Linux Info Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    code {
+      display: block;
+      background-color: #111;
+      border-left: 4px solid #00ccff;
+      padding: 10px;
+      margin: 10px 0;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../Index.html">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Aircrack-ng Tutorial</header>
+
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
+<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">--Aircrack-ng--</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Aircrack Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
+  <section>
+    <h2>Introduction to Aircrack-ng</h2>
+    <p>Aircrack-ng is a suite of tools used to assess Wi-Fi network security. It allows for packet capturing, deauthentication attacks, and WPA/WEP password cracking.</p>
+
+    <h2>1. Enable Monitor Mode</h2>
+    <code>airmon-ng start wlan0</code>
+    <p>This puts your wireless adapter into monitor mode (e.g., <code>wlan0mon</code>).</p>
+
+    <h2>2. Scan for Networks</h2>
+    <code>airodump-ng wlan0mon</code>
+    <p>Lists nearby wireless access points. Note the BSSID (MAC) and channel of your target.</p>
+
+    <h2>3. Target Specific Network</h2>
+    <code>airodump-ng -c 6 --bssid 00:11:22:33:44:55 -w capture wlan0mon</code>
+    <p>This locks onto a single AP and captures handshake packets.</p>
+
+    <h2>4. Deauthentication Attack</h2>
+    <code>aireplay-ng -0 10 -a 00:11:22:33:44:55 wlan0mon</code>
+    <p>This sends 10 deauth packets to the target AP to force re-authentication (needed to grab handshake).</p>
+
+    <h2>5. Crack the Handshake</h2>
+    <code>aircrack-ng capture-01.cap -w /usr/share/wordlists/rockyou.txt</code>
+    <p>Attempts to crack the captured handshake using a wordlist.</p>
+
+    <h2>Pro Tips</h2>
+    <ul>
+      <li>Use <code>airmon-ng check kill</code> to stop conflicting services</li>
+      <li>Use <code>--essid</code> if targeting by name instead of BSSID</li>
+      <li>You can capture packets longer to increase your success rate</li>
+    </ul>
+
+    <h2>Legal Warning</h2>
+    <p>Only use Aircrack-ng on networks you own or have explicit permission to test. Unauthorized use is illegal and unethical.</p>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
+</body>
+</html>

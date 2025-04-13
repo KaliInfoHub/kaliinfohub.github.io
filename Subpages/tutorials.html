@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Requirments - The Kali Linux Info Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    code {
+      display: block;
+      background-color: #111;
+      border-left: 4px solid #00ccff;
+      padding: 10px;
+      margin: 10px 0;
+      white-space: pre-wrap;
+    }
+
+    ul {
+      margin-top: 10px;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../Index.html"
+     class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Getting Started with Kali Linux</header>
+
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
+<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">--Requirments--</option>
+    <option value="tutorials.html">Requirmemts</option>
+    <option value="install.html">Installation Guide</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
+  <section>
+    <h2>What is Kali Linux?</h2>
+    <p>Kali Linux is a security-focused Linux distribution developed by Offensive Security. It comes preloaded with hundreds of powerful penetration testing and digital forensics tools.</p>
+
+    <h2>System Requirements</h2>
+    <ul>
+      <li>2+ GHz dual-core processor</li>
+      <li>2 GB RAM minimum (4 GB recommended)</li>
+      <li>20 GB of disk space</li>
+      <li>USB drive (for Live boot) or virtual machine software</li>
+    </ul>
+
+    <h2>Download Kali</h2>
+    <p>Get the latest ISO image from:</p>
+    <code>https://www.kali.org/get-kali/</code>
+
+    <h2>Install Options</h2>
+
+    <h3>1. Live USB Boot (Recommended for Beginners)</h3>
+    <ul>
+      <li>Use <code>balenaEtcher</code> or <code>Rufus</code> to write the ISO to a USB stick</li>
+      <li>Boot from USB and run Kali in live or install mode</li>
+    </ul>
+
+    <h3>2. Virtual Machine (VMware/VirtualBox)</h3>
+    <ul>
+      <li>Download the Kali VM image (pre-built VMs are available)</li>
+      <li>Import into VirtualBox or VMware</li>
+      <li>Enable networking and guest additions</li>
+    </ul>
+
+    <h3>3. Kali on Windows (WSL)</h3>
+    <code>wsl --install -d kali-linux</code>
+    <p>Runs Kali from within Windows using the Windows Subsystem for Linux.</p>
+
+    <h2>Post-Installation Tips</h2>
+    <ul>
+      <li>Update your system:</li>
+      <code>sudo apt update && sudo apt upgrade</code>
+
+      <li>Enable root login (optional):</li>
+      <code>sudo passwd root</code>
+
+      <li>Use <code>kali-undercover</code> to make Kali look like Windows for stealth mode</li>
+      <code>kali-undercover</code>
+    </ul>
+
+    <h2>Start Exploring</h2>
+    <p>Once installed, open the terminal and start testing tools like <code>nmap</code>, <code>hydra</code>, or launch <code>burpsuite</code> to begin exploring ethical hacking.</p>
+  </section>
+
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
+</body>
+</html>

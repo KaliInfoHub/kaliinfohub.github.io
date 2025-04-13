@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tools & Features - The Kali Linux Info Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .tool-list {
+      margin-top: 20px;
+    }
+
+    .tool {
+      background-color: #1a1a1a;
+      border: 1px solid #00ccff33;
+      padding: 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+    }
+
+    .tool h3 {
+      color: #00ccff;
+      margin-top: 0;
+    }
+
+    .tool a {
+      color: #00ccff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../Index.html"
+     class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Kali Linux Tools & Features</header>
+
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
+<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">Tools</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="install.html">Installation Guide</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
+  <section>
+  <h2>Explore the Power of Kali Linux</h2>
+  <p>Kali Linux is packed with hundreds of tools designed to assist security professionals in every stage of the penetration testing lifecycle. Below are just a few of the most widely used tools that come bundled with Kali.</p>
+
+  <div class="tool-list">
+    <div class="tool">
+      <h3><a href="nmap.html">Nmap</a></h3>
+      <img src="../Icons/nmap.png" alt="Nmap Icon" style="height:50px;">
+      <p>Nmap (Network Mapper) is an open-source tool used for network discovery and security auditing. It identifies hosts, services, open ports, and OS details across networks.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="metasploit.html">Metasploit Framework</a></h3>
+      <img src="../Icons/metasploit.png" alt="Metasploit Icon" style="height:50px;">
+      <p>A robust penetration testing framework used to develop, test, and execute exploits. It's ideal for simulating real-world attacks and verifying vulnerabilities.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="wireshark.html">Wireshark</a></h3>
+      <img src="../Icons/wireshark.png" alt="Wireshark Icon" style="height:50px;">
+      <p>Wireshark is a protocol analyzer for network troubleshooting and forensics. It captures and displays data packets in real time, offering deep visibility into network activity.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="hydra.html">Hydra</a></h3>
+      <img src="../Icons/hydra.png" alt="Hydra Icon" style="height:50px;">
+      <p>Hydra is a fast and flexible password-cracking tool supporting many protocols. Often used in brute-force attacks on services like SSH, FTP, HTTP, and SMB.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="burpsuite.html">Burp Suite</a></h3>
+      <img src="../Icons/burpsuite.png" alt="Burp Suite Icon" style="height:50px;">
+      <p>Burp Suite is an essential toolkit for web application security testing. It includes a proxy, spider, scanner, and repeater to intercept and modify HTTP requests.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="aircrack-ng.html">Aircrack-ng</a></h3>
+      <img src="../Icons/aircrack.png" alt="Aircrack-ng Icon" style="height:50px;">
+      <p>Aircrack-ng is a suite for auditing wireless networks. It focuses on monitoring, attacking, testing, and cracking Wi-Fi security protocols like WPA and WEP.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="#">John the Ripper</a></h3>
+      <img src="../Icons/john.png" alt="John the Ripper Icon" style="height:50px;">
+      <p>John the Ripper is a fast password cracker commonly used to test password strength on UNIX systems. It's efficient for cracking hashes using dictionary attacks.</p>
+    </div>
+
+    <div class="tool">
+      <h3><a href="#">Nikto</a></h3>
+      <img src="../Icons/nikto.png" alt="Nikto Icon" style="height:50px;">
+      <p>Nikto is a web server scanner that detects potential issues like outdated software, insecure files, and misconfigurations — perfect for initial recon.</p>
+    </div>
+  </div>
+</section>
+
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
+</body>
+</html>

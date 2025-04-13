@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kali Commands - The Kali Linux Info Hub</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
+
+    nav {
+      text-align: center;
+      margin-top: 10px;
+      z-index: 1;
+      position: relative;
+    }
+
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h2 {
+      color: #00ccff;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .command-block {
+      background-color: #1a1a1a;
+      border: 1px solid #00ccff33;
+      border-radius: 10px;
+      padding: 15px;
+      margin-bottom: 15px;
+    }
+
+    .command-block code {
+      display: block;
+      background-color: #000;
+      padding: 10px;
+      border-left: 4px solid #00ccff;
+      color: #00ffcc;
+      margin-bottom: 10px;
+      font-size: 1rem;
+      overflow-x: auto;
+    }
+
+    .command-block p {
+      margin: 0;
+      line-height: 1.6;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../Index.html"
+     class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Essential Kali Linux Commands</header>
+
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
+
+  <section>
+  <h2>Kali Linux Command Reference</h2>
+  <div style="text-align:center; margin-bottom: 20px;">
+  <a href="../Downloads/kali_commands.txt" download>
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      font-family: monospace;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+    ">Download TXT Cheatsheet</button>
+  </a>
+  <a href="../Downloads/kali_commands.pdf" download>
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      font-family: monospace;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 5px;
+    ">Download PDF Cheatsheet</button>
+  </a>
+</div>
+  <p>This guide is a collection of essential Kali Linux commands grouped by category. Whether you're navigating the system, gathering info, or launching tools — this reference has you covered.</p>
+
+  <h3>1. System Information & User Management</h3>
+
+  <div class="command-block">
+    <code>whoami</code>
+    <p>Displays the currently logged-in user.</p>
+    <code># Example: whoami</code>
+  </div>
+
+  <div class="command-block">
+    <code>uname -a</code>
+    <p>Displays kernel and OS information.</p>
+    <code># Example: uname -a</code>
+  </div>
+
+  <div class="command-block">
+    <code>id</code>
+    <p>Shows user ID (UID), group ID (GID), and associated groups.</p>
+  </div>
+
+  <div class="command-block">
+    <code>passwd</code>
+    <p>Change password of current (or specified) user.</p>
+  </div>
+
+  <h3>2. Networking & Scanning</h3>
+
+  <div class="command-block">
+    <code>ip a</code>
+    <p>Shows IP addresses of network interfaces (modern replacement for <code>ifconfig</code>).</p>
+  </div>
+
+  <div class="command-block">
+    <code>netdiscover</code>
+    <p>Finds live hosts on your local network via ARP requests.</p>
+  </div>
+
+  <div class="command-block">
+    <code>nmap -sS -T4 192.168.1.0/24</code>
+    <p>Performs a fast stealth scan on an entire subnet.</p>
+  </div>
+
+  <div class="command-block">
+    <code>ping -c 4 google.com</code>
+    <p>Sends 4 ICMP packets to test network reachability.</p>
+  </div>
+
+  <div class="command-block">
+    <code>netstat -tulnp</code>
+    <p>Lists all listening ports and associated services.</p>
+  </div>
+
+  <h3>3. File & Directory Management</h3>
+
+  <div class="command-block">
+    <code>ls -la</code>
+    <p>Lists files in long format, including hidden ones.</p>
+  </div>
+
+  <div class="command-block">
+    <code>cd /etc</code>
+    <p>Changes the working directory to `/etc`.</p>
+  </div>
+
+  <div class="command-block">
+    <code>cp file.txt /tmp/</code>
+    <p>Copies a file to `/tmp` directory.</p>
+  </div>
+
+  <div class="command-block">
+    <code>rm -rf /tmp/testdir</code>
+    <p>Forcefully deletes a directory and its contents.</p>
+  </div>
+
+  <div class="command-block">
+    <code>cat /etc/passwd</code>
+    <p>Displays contents of the system password file.</p>
+  </div>
+
+  <h3>4. Privilege Escalation</h3>
+
+  <div class="command-block">
+    <code>sudo su</code>
+    <p>Switches to root user with full privileges.</p>
+  </div>
+
+  <div class="command-block">
+    <code>sudo -l</code>
+    <p>Lists allowed (and forbidden) sudo commands for the current user.</p>
+  </div>
+
+  <div class="command-block">
+    <code>find / -perm -4000 -type f 2>/dev/null</code>
+    <p>Searches for SUID binaries (common privilege escalation targets).</p>
+  </div>
+
+  <h3>5. Package Management & System Updates</h3>
+
+  <div class="command-block">
+    <code>apt update && apt upgrade</code>
+    <p>Refreshes package index and upgrades installed software.</p>
+  </div>
+
+  <div class="command-block">
+    <code>apt install nmap</code>
+    <p>Installs Nmap from the Kali package repository.</p>
+  </div>
+
+  <h3>6. Common Pentesting Tools</h3>
+
+  <div class="command-block">
+    <code>msfconsole</code>
+    <p>Starts the Metasploit Framework console for launching exploits.</p>
+  </div>
+
+  <div class="command-block">
+    <code>hydra -l admin -P rockyou.txt ssh://192.168.1.10</code>
+    <p>Uses Hydra to brute-force SSH login using a username and password list.</p>
+  </div>
+
+  <div class="command-block">
+    <code>airmon-ng start wlan0</code>
+    <p>Enables monitor mode on a wireless adapter for packet capturing.</p>
+  </div>
+
+  <div class="command-block">
+    <code>aircrack-ng capture.cap -w wordlist.txt</code>
+    <p>Cracks Wi-Fi handshake using a wordlist attack.</p>
+  </div>
+
+  <div class="command-block">
+    <code>burpsuite</code>
+    <p>Launches Burp Suite GUI for web application testing.</p>
+  </div>
+
+  <div class="command-block">
+    <code>nikto -h http://192.168.1.100</code>
+    <p>Scans a web server for known vulnerabilities and misconfigurations.</p>
+  </div>
+
+</section>
+
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#0f0';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  </script>
+</body>
+</html>
