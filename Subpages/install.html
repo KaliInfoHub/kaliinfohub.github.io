@@ -5,67 +5,56 @@
   <title>Installing Kali Linux | Info Hub</title>
   <style>
     body {
+      margin: 0;
+      font-family: 'Courier New', Courier, monospace;
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      margin: 0;
-      padding: 0 20px;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    .kali-logo {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 110px;
-      height: auto;
-      z-index: 999;
-    }.kali-logo {
-      position: absolute;
-      top: -25px;
-      left: -15px;
-      width: 100px;
-      height: auto;
-      z-index: 999;
-    }
-    .logo-link {
-  display: inline-block;  /* Makes the anchor wrap the image fully */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 999;
-}
-
-    a {
-      color: #00ccff;
-      text-decoration: none;
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
     }
 
-    a:hover {
-      text-decoration: underline;
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
     }
 
     header {
-      text-align: center;
-      font-size: 2rem;
-      margin: 100px 0 20px;
-      color: #00ccff;
-    }
-header {
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
-      padding: 10px 20px 20px;
-      margin-top: 50px;
-      font-size: 1.8rem;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
       font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
     }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+
     nav {
       text-align: center;
-      margin-top: -30px;
-      margin-bottom: 10px;
+      margin-top: 10px;
       z-index: 1;
       position: relative;
     }
@@ -83,7 +72,7 @@ header {
     nav li a {
       background-color: #111;
       border: 1px solid #00ccff;
-      padding: 10px;
+      padding: 10px 15px;
       border-radius: 6px;
       color: #00ccff;
       text-decoration: none;
@@ -91,213 +80,198 @@ header {
     }
 
     section {
+      padding: 20px;
+      max-width: 900px;
+      margin: auto;
       background: #111;
       border: 1px solid #00ccff33;
-      padding: 20px;
       border-radius: 10px;
-      margin-bottom: 10px;
+      margin-top: 20px;
     }
 
     h2, h3 {
       color: #00ccff;
     }
 
-    canvas#matrixCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1;
-      pointer-events: none;
-      margin: 0;
-      padding: 0;
+    a {
+      color: #00ccff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    p {
+      line-height: 1.6;
     }
   </style>
 </head>
 <body>
-<canvas id="matrixCanvas"></canvas>
-<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100px;
-    ">User/Pass Generator</button>
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="position: absolute; top: 10px; right: 10px; z-index: 999;">
+    <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Courier New'; border-radius: 4px; cursor: pointer; width: 100px;">User/Pass Generator</button>
   </a>
-  <a href="../GamesHub/gameshub.html" title="GameHub" style="
-    position: absolute;
-    left: 140px;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100px;
-    ">GameHub</button>
+
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="position: absolute; left: 140px; top: 10px; z-index: 999;">
+    <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Courier New'; border-radius: 4px; cursor: pointer; width: 100px;">GameHub</button>
   </a>
-<a href="../index.html"
-   class="logo-link">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-<header>Installing Kali Linux</header>
-<nav>
-  <ul>
-    <li><a href="AboutKali.html">About Kali</a></li>
-    <li><a href="install.html">Installation</a></li>
-    <li><a href="tools.html">Tools & Features</a></li>
-    <li><a href="commands.html">Commands</a></li>
-    <li><a href="tutorials.html">Tutorials</a></li>
-    <li><a href="community.html">Community Area</a></li>
-    <li><a href="contact.html">Contact Page</a></li>
-  </ul>
-</nav>
-<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
-  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
-  <select id="tutorialNav" onchange="location = this.value;" style="
-    background-color: #000;
-    color: #00ffcc;
-    border: 1px solid #00ccff;
-    padding: 8px 10px;
-    font-family: monospace;
-    margin-left: 10px;
-  ">
-    <option value="install.html">--Installation Guide--</option>
-    <option value="tutorials.html">Getting Started</option>
-    <option value="install.html">Installation Guide</option>
-    <option value="installusb.html">Boot from Live USB</option>
-    <option value="installdualboot.html">Dual Boot Kali</option>
-    <option value="installnethunter.html">Install Kali Nethunter</option>
-    <option value="installextra.html">Extra</option>
-  </select>
-</div>
-<section>
-  <h2>1. Virtual Machine Installation</h2>
-  <p>Install Kali Linux using virtualization software like <strong>VirtualBox</strong> or <strong>VMware</strong>. This is the safest way to get started.</p>
-  <h3>Steps:</h3>
-  <ul>
-    <li>Download <a href="https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">Kali VM image</a>.</li>
-    <li>Install VirtualBox or VMware on your system.</li>
-    <li>Import the downloaded .ova file or create a new virtual machine and attach the Kali ISO.</li>
-    <li>Boot and follow the setup wizard to install Kali.</li>
-  </ul>
-  <p><strong>Good for:</strong> Beginners, testing without affecting your host system.</p>
+
+  <a href="../index.html">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Installing Kali Linux</header>
+
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
+
+  <section>
+  <h2>Installation Overview</h2>
+  <p>Kali Linux is a powerful system used by professionals in ethical hacking and cybersecurity. You can install it in different ways, depending on how much access and performance you need. Below are five main installation methods explained in detail.</p>
 </section>
 
 <section>
-  <h2>2. Live USB (Bootable)</h2>
-  <p>Run Kali Linux directly from a USB drive without installing it on your hard drive.</p>
-  <h3>Steps:</h3>
-  <ul>
-    <li>Download the <a href="https://www.kali.org/get-kali/#kali-live" target="_blank">Kali ISO</a>.</li>
-    <li>Use a tool like <strong>Rufus</strong> (Windows) or <strong>balenaEtcher</strong> (macOS/Linux) to burn the ISO to a USB drive.</li>
-    <li>Boot your system from the USB (change boot order in BIOS/UEFI).</li>
-    <li>Choose "Live" mode to run Kali without installing.</li>
-  </ul>
-  <p><strong>Good for:</strong> Portability, testing on different systems, forensics.</p>
+  <h2>1. Install via Virtual Machine</h2>
+  <p><strong>Why:</strong> Safe, fast to reset, and perfect for learning without risk.</p>
+  <ol>
+    <li>Download a pre-built image: <a href="https://www.kali.org/get-kali/#kali-virtual-machines" target="_blank">Kali VM OVA</a>.</li>
+    <li>Open VirtualBox or VMware, and import the image.</li>
+    <li>Give it at least 2 CPUs and 2GB+ RAM for good performance.</li>
+    <li>Start the VM. Default login is <code>kali / kali</code>.</li>
+    <li>Update the system:
+      <pre><code>sudo apt update && sudo apt upgrade</code></pre>
+    </li>
+  </ol>
+  <p>Optional: install extra tools:
+    <pre><code>sudo apt install kali-linux-large</code></pre>
+  </p>
 </section>
 
 <section>
-  <h2>3. Full Bare-Metal Installation</h2>
-  <p>Install Kali Linux as the main OS on your computer. This gives the best performance but replaces your current system.</p>
-  <h3>Steps:</h3>
-  <ul>
-    <li>Download the <a href="https://www.kali.org/get-kali/#kali-installer-images" target="_blank">Kali Installer ISO</a>.</li>
-    <li>Create a bootable USB using Rufus or similar.</li>
-    <li>Boot from the USB and select “Graphical Install”.</li>
-    <li>Follow the installer steps (partitioning, user setup, GRUB bootloader).</li>
-  </ul>
-  <p><strong>Good for:</strong> Advanced users who want full control and performance.</p>
+  <h2>2. Run Kali from a Live USB</h2>
+  <p><strong>Why:</strong> Portability, no changes to your hard drive, great for forensics.</p>
+  <ol>
+    <li>Download the Kali ISO: <a href="https://www.kali.org/get-kali/#kali-live" target="_blank">Kali Live</a>.</li>
+    <li>Create a bootable USB using <a href="https://rufus.ie" target="_blank">Rufus</a> or <a href="https://www.balena.io/etcher/" target="_blank">Etcher</a>.</li>
+    <li>Boot your computer from USB (F12 / ESC / DEL usually opens the boot menu).</li>
+    <li>Select “Live” from the Kali boot menu.</li>
+    <li>Optional: configure <strong>persistence</strong> to save your files across reboots.</li>
+  </ol>
 </section>
 
 <section>
-  <h2>4. Dual Boot with Windows</h2>
-  <p>Install Kali alongside Windows so you can choose between the two at startup.</p>
-  <h3>Steps:</h3>
-  <ul>
-    <li>Shrink your Windows partition to free up space (in Disk Management).</li>
-    <li>Create a Kali bootable USB.</li>
-    <li>Boot from USB and choose “Graphical Install”.</li>
-    <li>During partitioning, select the free space to install Kali.</li>
-    <li>GRUB bootloader will let you pick between Windows and Kali on startup.</li>
-  </ul>
-  <p><strong>Good for:</strong> Users who want both Windows and Kali on the same device.</p>
+  <h2>3. Full Installation on Bare Metal</h2>
+  <p><strong>Why:</strong> Maximum speed, direct hardware access, full control.</p>
+  <ol>
+    <li>Download the Kali installer ISO: <a href="https://www.kali.org/get-kali/#kali-installer-images" target="_blank">Kali Installer</a>.</li>
+    <li>Create a bootable USB and boot from it.</li>
+    <li>Choose “Graphical Install” from the boot menu.</li>
+    <li>Go through locale, hostname, user creation.</li>
+    <li>Select “Use entire disk” unless dual-booting.</li>
+    <li>Install the GRUB bootloader.</li>
+    <li>Reboot and login with the user you created.</li>
+  </ol>
 </section>
 
 <section>
-  <h2>5. WSL (Windows Subsystem for Linux)</h2>
-  <p>Run Kali Linux inside Windows 10/11 using WSL2 without a virtual machine.</p>
-  <h3>Steps:</h3>
-  <ul>
-    <li>Enable WSL and Virtual Machine Platform from Windows Features.</li>
-    <li>Install Kali from the Microsoft Store: <code>wsl --install -d kali-linux</code></li>
-    <li>Launch Kali from the Start Menu and update packages.</li>
-  </ul>
-  <p><strong>Good for:</strong> Developers or penetration testers using Windows who want fast access to Kali tools.</p>
+  <h2>4. Dual Boot Kali with Windows</h2>
+  <p><strong>Why:</strong> Run both Kali and Windows on the same system with full speed on both.</p>
+  <ol>
+    <li>In Windows, open Disk Management and shrink your main partition to free space.</li>
+    <li>Create a Kali bootable USB and boot from it.</li>
+    <li>During install, select “Guided - use the largest continuous free space.”</li>
+    <li>Install GRUB bootloader when asked.</li>
+    <li>After reboot, choose between Kali and Windows at startup.</li>
+  </ol>
+  <p><strong>Important:</strong> Always back up your system before dual booting!</p>
 </section>
 
-<p><a href="../index.html">← Back to Home</a></p>
+<section>
+  <h2>5. Install Kali via WSL on Windows</h2>
+  <p><strong>Why:</strong> Use Kali tools inside Windows 10 or 11 without a VM.</p>
+  <ol>
+    <li>Open PowerShell as Admin:
+      <pre><code>wsl --install</code></pre>
+    </li>
+    <li>Install Kali:
+      <pre><code>wsl --install -d kali-linux</code></pre>
+    </li>
+    <li>Run Kali from the Start Menu.</li>
+    <li>Update the system:
+      <pre><code>sudo apt update && sudo apt upgrade</code></pre>
+    </li>
+    <li>Install tools:
+      <pre><code>sudo apt install nmap net-tools hydra</code></pre>
+    </li>
+    <li>If you're on Windows 11, WSLg supports GUI apps like Wireshark.</li>
+  </ol>
+</section>
 
-<script>
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
+<section>
+  <h2>Tips & Best Practices</h2>
+  <ul>
+    <li><strong>Verify your ISO file</strong> using checksums from kali.org.</li>
+    <li>Don't test tools like <code>hydra</code> or <code>nmap</code> on unauthorized networks.</li>
+    <li>Take VM snapshots before running risky tests.</li>
+    <li>Learn Bash scripting and Python — they’re powerful in the hacking world.</li>
+    <li>Use <code>man</code> or <code>--help</code> to explore any tool’s options.</li>
+  </ul>
+  <p style="text-align:center;"><a href="../index.html">← Back to Home</a></p>
+</section>
 
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
+  <p style="text-align:center; margin: 40px 0;">
 
-  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const nums = "0123456789";
-  const alphabet = katakana + latin + nums;
-
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
-
-  function drawMatrix() {
-    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#cccccc";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < drops.length; i++) {
-      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(drawMatrix, 35);
-
-  window.addEventListener("resize", () => {
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
-  });
-</script>
 
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = '#ccc';
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 33);
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
-</html>
+  </html>
