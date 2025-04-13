@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Hacker Typing Simulator</title>
+  <meta charset="UTF-8" />
+  <title>Kali Linux Terminal Emulator</title>
   <style>
     body {
       background-color: #0d0d0d;
@@ -11,18 +11,28 @@
       padding: 40px 20px;
       text-align: center;
     }
-    header, section, .kali-logo, a {
-      position: relative;
-      z-index: 1;
+.kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
     }
-
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
     header {
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-align: center;
-      padding: 10px 20px 20px;
-      font-size: 1rem;
+      padding-top: 30px;
+      padding-bottom: 20px;
+      font-size: 1.5rem;
       font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
     }
@@ -31,57 +41,180 @@
       from { text-shadow: 0 0 10px #00ffcc; }
       to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
-    
-    .kali-logo {
-      position: fixed;
-      top: -20px;
-      left: -10px;
-      width: 100px;
-      height: auto;
-      z-index: 999;
+
+    .terminal-box {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #000;
+      padding: 20px;
+      border: 1px solid #00ccff55;
+      border-radius: 8px;
+      box-shadow: 0 0 20px #00ffcc33;
+      text-align: left;
     }
-    h1 {
+
+    #output {
+      min-height: 300px;
+      background: #111;
+      color: #00ffcc;
+      padding: 15px;
+      white-space: pre-wrap;
+      overflow-y: auto;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+
+    .prompt-line {
+      display: flex;
+      align-items: center;
+    }
+
+    .prompt-symbol {
+      margin-right: 8px;
       color: #00ccff;
-      margin-bottom: 30px;
     }
+
+    input#command {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      color: #00ffcc;
+      padding: 8px;
+      width: 100%;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+    }
+
     button {
       background-color: #00ccff;
-      color: black;
+      color: #000;
       border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      font-family: monospace;
+      padding: 8px 20px;
+      margin-top: 10px;
+      font-family: 'Courier New', monospace;
       border-radius: 6px;
       cursor: pointer;
     }
-    input {
-      background-color: #222;
-      color: #00ffcc;
-      border: 1px solid #00ccff;
-      padding: 8px;
-      margin: 10px;
-    }
-    .game-output {
+
+    .links {
       margin-top: 20px;
-      font-size: 1.2rem;
+    }
+
+    .links a {
+      color: #00ccff;
+      margin: 0 10px;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-    <a href="../Index.html">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-  <h1>Hacker Typing Simulator</h1>
-  <input type="text" oninput="hackerType()" placeholder="Type like a hacker..." /><div id="output" style="background:#000; padding:10px; height:200px; overflow-y:auto;"></div>
-  <div class="game-output" id="output"></div>
-  <script>
+    <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    left: 5px;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">GameHub</button>
+  </a>
+<a href="../index.html"
+    class="logo-link">
     
-          function hackerType() {
-            const lines = ['Bypassing firewall...', 'Injecting payload...', 'Root access granted!', 'Downloading credentials...', 'Accessing mainframe...'];
-            document.getElementById('output').innerHTML += lines[Math.floor(Math.random()*lines.length)] + "<br>";
-            document.getElementById('output').scrollTop = document.getElementById('output').scrollHeight;
+<img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
+  <header>Kali Linux Terminal Emulator</header>
+
+  <div class="terminal-box">
+    <div id="output">Welcome to the Kali Linux Terminal Emulator.
+Type <strong>help</strong> to view commands.</div>
+
+    <div class="prompt-line">
+      <span class="prompt-symbol">kali@local:~$</span>
+      <input type="text" id="command" onkeydown="handleKey(event)" autofocus />
+    </div>
+
+    <button onclick="resetTerminal()">Reset Terminal</button>
+  </div>
+
+  <div class="links">
+    <a href="../index.html">← Back to Info Hub</a>
+    <a href="gameshub.html">GameHub</a>
+  </div>
+
+  <script>
+    const outputDiv = document.getElementById('output');
+    const commandInput = document.getElementById('command');
+
+    const commandResponses = {
+      "help": "Available commands:\n- help\n- ls\n- pwd\n- whoami\n- ifconfig\n- clear\n- exit",
+      "ls": "Desktop  Documents  Downloads  Music  Pictures  Public  Templates  Videos",
+      "pwd": "/home/kali",
+      "whoami": "kali",
+      "ifconfig": "eth0: inet 192.168.1.10  netmask 255.255.255.0\nwlan0: disconnected",
+      "clear": "__CLEAR__",
+      "exit": "Session closed. Have a secure day!",
+    };
+
+    function handleKey(e) {
+      if (e.key === "Enter") {
+        const cmd = commandInput.value.trim();
+        appendOutput(`kali@local:~$ ${cmd}`);
+        if (commandResponses[cmd]) {
+          if (commandResponses[cmd] === "__CLEAR__") {
+            outputDiv.innerText = "";
+          } else {
+            appendOutput(commandResponses[cmd]);
           }
-        
+        } else {
+          appendOutput(`Command not found: ${cmd}`);
+        }
+
+        if (cmd === "exit") {
+          commandInput.disabled = true;
+        }
+
+        commandInput.value = "";
+        outputDiv.scrollTop = outputDiv.scrollHeight;
+      }
+    }
+
+    function appendOutput(text) {
+      outputDiv.innerText += `\n${text}`;
+    }
+
+    function resetTerminal() {
+      outputDiv.innerText = "Welcome to the Kali Linux Terminal Emulator.\nType \"help\" to view commands.";
+      commandInput.disabled = false;
+      commandInput.value = "";
+      commandInput.focus();
+    }
   </script>
 </body>
 </html>
