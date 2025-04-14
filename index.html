@@ -432,20 +432,33 @@
     const drops = Array(Math.floor(columns)).fill(1);
 
     function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ccc';
-      ctx.font = fontSize + 'px monospace';
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fades previous characters
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
+  ctx.font = fontSize + 'px monospace';
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+
+    // Randomize color: mostly grey, with rare green and blue
+    const rand = Math.random();
+    if (rand < 0.85) {
+      ctx.fillStyle = '#888'; // grey
+    } else if (rand < 0.95) {
+      ctx.fillStyle = '#0f0'; // green
+    } else {
+      ctx.fillStyle = '#00ccff'; // blue
     }
+
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+
+    drops[i]++;
+  }
+}
 
     setInterval(draw, 33);
 
