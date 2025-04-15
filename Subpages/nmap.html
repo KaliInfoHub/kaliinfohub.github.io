@@ -59,9 +59,67 @@
       margin-top: 10px;
       white-space: pre-wrap;
     }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
+    }
   </style>
 </head>
 <body>
+<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    left: 140px;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">GameHub</button>
+  </a>
 <a href="../index.html"
    class="logo-link">
   <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
@@ -191,7 +249,11 @@
 
 
   <p><a href="../index.html">← Back to Home</a></p>
-
+<div class="nav-buttons">
+    <a href="nmap.html"><button class="nav-button">Nmap</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="metasploit.html"><button class="nav-button">metasploit</button></a>
+  </div>
 <script>
   const canvas = document.getElementById('matrixCanvas');
   const ctx = canvas.getContext('2d');
