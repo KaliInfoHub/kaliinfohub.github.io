@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About Kali - The Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
       background-color: #0d0d0d;
       color: #00ffcc;
       overflow-x: hidden;
@@ -118,7 +119,7 @@
       border: none;
       padding: 6px 10px;
       font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
       width: 100px;
@@ -137,7 +138,7 @@
       border: none;
       padding: 6px 10px;
       font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
       width: 100px;
@@ -178,22 +179,29 @@
   <script>
     const canvas = document.getElementById('matrixCanvas');
     const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     const letters = '01';
     const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops = Array(Math.floor(columns)).fill(1);
 
-    function draw() {
+    function drawMatrix() {
       ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#ccc';
       ctx.font = fontSize + 'px monospace';
 
       for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        const rand = Math.random();
+        if (rand < 0.85) {
+          ctx.fillStyle = '#888'; // grey
+        } else if (rand < 0.95) {
+          ctx.fillStyle = '#0f0'; // green
+        } else {
+          ctx.fillStyle = '#00ccff'; // blue
+        }
         ctx.fillText(text, i * fontSize, drops[i] * fontSize);
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
