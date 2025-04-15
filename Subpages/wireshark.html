@@ -20,12 +20,12 @@
       z-index: 999;
     }
     .logo-link {
-  display: inline-block;  /* Makes the anchor wrap the image fully */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 999;
-}
+      display: inline-block;  /* Makes the anchor wrap the image fully */
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
 	.wirehshark-logo {
       position: absolute;
       top: 20px;
@@ -33,6 +33,46 @@
       width: 150px;
       height: auto;
       z-index: 999;
+    }
+	nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
     }
     a {
       color: #00ccff;
@@ -57,6 +97,10 @@
     h2 {
       color: #00ccff;
     }
+    h3 {
+      color: #00ccff;
+      margin-top: 20px;
+    }
     code {
       display: block;
       background: #1a1a1a;
@@ -66,9 +110,73 @@
       margin-top: 10px;
       white-space: pre-wrap;
     }
+    .inline-code {
+      display: inline;
+      background: #1a1a1a;
+      padding: 2px 4px;
+      border-radius: 3px;
+      border: 1px solid #00ffcc44;
+      white-space: nowrap;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    th, td {
+      padding: 8px;
+      text-align: left;
+      border: 1px solid #00ffcc44;
+    }
+    th {
+      background-color: #1a1a1a;
+    }
+    .tip {
+      background-color: #1a2a33;
+      border-left: 4px solid #00ccff;
+      padding: 10px;
+      margin: 15px 0;
+    }
   </style>
 </head>
 <body>
+<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    left: 140px;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">GameHub</button>
+  </a>
 <a href="../index.html"
    class="logo-link">
   <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
@@ -90,46 +198,321 @@
 </style>
 
   <header>Wireshark</header>
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
   <section>
     <h2>What is Wireshark?</h2>
-    <p>Wireshark is a network protocol analyzer used to capture and inspect packets in real time. It's useful for debugging, monitoring, and analyzing network traffic.</p>
+    <p>Wireshark is a network protocol analyzer used to capture and inspect packets in real time. It's useful for debugging, monitoring, and analyzing network traffic. As one of the most powerful tools in a network security professional's arsenal, Wireshark allows you to examine data from a live network or from a capture file on disk.</p>
+    
+    <h3>Key Features</h3>
+    <ul>
+      <li>Deep inspection of hundreds of protocols, with more being added all the time</li>
+      <li>Live capture and offline analysis</li>
+      <li>Multi-platform: Runs on Windows, Linux, macOS, and other Unix-like systems</li>
+      <li>Rich VoIP analysis</li>
+      <li>Read/write many different capture file formats</li>
+      <li>Decryption support for many protocols including IPsec, ISAKMP, Kerberos, SNMPv3, SSL/TLS, WEP, and WPA/WPA2</li>
+      <li>Coloring rules can be applied to the packet list for quick, intuitive analysis</li>
+    </ul>
   </section>
+
+  <section>
+    <h2>Installation in Kali Linux</h2>
+    <p>Wireshark comes pre-installed in Kali Linux. You can verify the installation or update to the latest version using:</p>
+    <code>sudo apt update
+sudo apt install wireshark</code>
+
+    <p>To run Wireshark with root privileges (required for capturing on most interfaces):</p>
+    <code>sudo wireshark</code>
+    
+    <div class="tip">
+      <strong>Security Tip:</strong> Running Wireshark as root can be a security risk. Consider setting up dumpcap with appropriate permissions instead:
+      <code>sudo dpkg-reconfigure wireshark-common
+sudo usermod -a -G wireshark $USER</code>
+      Then log out and back in for changes to take effect.
+    </div>
+  </section>
+
   <section>
     <h2>Basic Usage</h2>
     <p>Select a network interface and start capturing. Use filters to narrow down traffic, e.g.:</p>
     <code>http, ip.addr == 192.168.1.10, tcp.port == 80</code>
+    
+    <h3>Starting a Capture</h3>
+    <ol>
+      <li>Launch Wireshark</li>
+      <li>From the home screen, select the network interface you want to monitor</li>
+      <li>Click the shark fin icon in the toolbar to begin capturing packets</li>
+      <li>To stop capturing, click the red square icon</li>
+    </ol>
+    
+    <h3>Display Filters</h3>
+    <p>Use display filters to view only packets that match specific criteria:</p>
+    <table>
+      <tr>
+        <th>Filter</th>
+        <th>Description</th>
+      </tr>
+      <tr>
+        <td><span class="inline-code">ip.addr == 192.168.1.1</span></td>
+        <td>Show only packets with this IP address as source or destination</td>
+      </tr>
+      <tr>
+        <td><span class="inline-code">ip.src == 192.168.1.1</span></td>
+        <td>Show only packets from this source IP</td>
+      </tr>
+      <tr>
+        <td><span class="inline-code">tcp.port == 443</span></td>
+        <td>Show only packets using TCP port 443 (HTTPS)</td>
+      </tr>
+      <tr>
+        <td><span class="inline-code">http.request</span></td>
+        <td>Show only HTTP request packets</td>
+      </tr>
+      <tr>
+        <td><span class="inline-code">dns</span></td>
+        <td>Show only DNS packets</td>
+      </tr>
+      <tr>
+        <td><span class="inline-code">icmp</span></td>
+        <td>Show only ICMP packets</td>
+      </tr>
+    </table>
+    
+    <h3>Combining Filters</h3>
+    <p>Use logical operators to create more complex filters:</p>
+    <code>http && ip.addr == 192.168.1.10     # HTTP traffic from/to 192.168.1.10
+http || dns                       # Either HTTP or DNS traffic
+!(arp || icmp)                    # Everything except ARP and ICMP
+tcp.port == 80 || tcp.port == 443 # HTTP or HTTPS traffic</code>
   </section>
+
+  <section>
+    <h2>Capture Filters</h2>
+    <p>Unlike display filters, capture filters are applied before packets are captured, reducing resource usage:</p>
+    <code>host 192.168.1.1            # Capture traffic only for this host
+net 192.168.0.0/24          # Capture traffic for this network
+port 53                     # Capture only DNS traffic
+not port 3389               # Ignore RDP traffic
+tcp port 80 and not host 192.168.1.1 # HTTP traffic except from/to 192.168.1.1</code>
+  </section>
+
+  <section>
+    <h2>Analyzing Packets</h2>
+    <p>Wireshark divides its interface into three main panes:</p>
+    <ol>
+      <li><strong>Packet List:</strong> Shows a summary of each packet including timestamp, source, destination, protocol, and info</li>
+      <li><strong>Packet Details:</strong> Shows the protocols and protocol fields of the selected packet in a tree view</li>
+      <li><strong>Packet Bytes:</strong> Shows the raw data of the packet in hex and ASCII</li>
+    </ol>
+    
+    <h3>Following TCP Streams</h3>
+    <p>To view the entire conversation in a TCP connection:</p>
+    <ol>
+      <li>Right-click on a TCP packet</li>
+      <li>Select "Follow" → "TCP Stream"</li>
+    </ol>
+    <p>This is particularly useful for analyzing HTTP, FTP, SMTP, and other text-based protocols.</p>
+    
+    <h3>Using Statistics</h3>
+    <p>Wireshark offers various statistical tools under the "Statistics" menu:</p>
+    <ul>
+      <li><strong>Protocol Hierarchy:</strong> Shows distribution of protocols</li>
+      <li><strong>Conversations:</strong> Lists all connections between endpoints</li>
+      <li><strong>Endpoints:</strong> Lists all detected network hosts</li>
+      <li><strong>I/O Graph:</strong> Shows packet rate over time</li>
+    </ul>
+  </section>
+
   <section>
     <h2>Practical Example</h2>
     <p>Capture HTTP credentials sent in plaintext and analyze the session behavior between client and server.</p>
+    
+    <h3>Step-by-step Walkthrough</h3>
+    <ol>
+      <li>Start Wireshark capture on your network interface</li>
+      <li>Apply the display filter: <span class="inline-code">http.request.method == "POST"</span></li>
+      <li>Generate traffic by logging into a non-HTTPS website</li>
+      <li>Look for POST requests in the packet list</li>
+      <li>Select a POST request packet and expand the HTTP protocol in the packet details pane</li>
+      <li>Look for form data or authorization headers that may contain credentials</li>
+      <li>Right-click on the packet and select "Follow HTTP Stream" to see the full request and response</li>
+    </ol>
+    
+    <div class="tip">
+      <strong>Ethical Reminder:</strong> Only perform packet analysis on networks you own or have explicit permission to monitor. Capturing credentials on public networks without authorization is illegal in most jurisdictions.
+    </div>
   </section>
-  <p><a href="../index.html">← Back to Home</a></p>
 
+  <section>
+    <h2>Advanced Features</h2>
+    
+    <h3>Decrypting SSL/TLS Traffic</h3>
+    <p>To decrypt HTTPS traffic in Wireshark, you need either:</p>
+    <ul>
+      <li>The server's private key (for non-ephemeral key exchange)</li>
+      <li>Pre-master secrets from the client (using browser or OS keylog features)</li>
+    </ul>
+    <p>Configure in: Edit → Preferences → Protocols → TLS → (Pre)-Master-Secret log filename</p>
+    
+    <h3>Expert Information</h3>
+    <p>Wireshark's expert system highlights potential problems or points of interest:</p>
+    <p>Access via: Analyze → Expert Information</p>
+    
+    <h3>Command Line Usage</h3>
+    <p>Wireshark includes <span class="inline-code">tshark</span>, a command-line version:</p>
+    <code>tshark -i eth0 -f "port 80" -w capture.pcap     # Capture HTTP traffic to file
+tshark -r capture.pcap -Y "http.request"      # Read file, filter for HTTP requests
+tshark -i eth0 -T fields -e ip.src -e ip.dst  # Display only source and dest IPs</code>
+  </section>
+
+  <section>
+    <h2>Keyboard Shortcuts</h2>
+    <table>
+      <tr>
+        <th>Shortcut</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>Ctrl+E</td>
+        <td>Start/Stop capture</td>
+      </tr>
+      <tr>
+        <td>Ctrl+R</td>
+        <td>Restart current capture</td>
+      </tr>
+      <tr>
+        <td>Ctrl+O</td>
+        <td>Open capture file</td>
+      </tr>
+      <tr>
+        <td>Ctrl+S</td>
+        <td>Save capture file</td>
+      </tr>
+      <tr>
+        <td>Ctrl+F</td>
+        <td>Find packet</td>
+      </tr>
+      <tr>
+        <td>Ctrl+.</td>
+        <td>Go to next packet in conversation</td>
+      </tr>
+      <tr>
+        <td>Ctrl+,</td>
+        <td>Go to previous packet in conversation</td>
+      </tr>
+      <tr>
+        <td>Ctrl+M</td>
+        <td>Mark/unmark packet</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Troubleshooting</h2>
+    
+    <h3>No Interfaces Available</h3>
+    <p>If no capture interfaces appear in Wireshark:</p>
+    <ul>
+      <li>Verify you have sufficient permissions (run as root or add user to wireshark group)</li>
+      <li>Check if interface is up: <span class="inline-code">ip link show</span></li>
+      <li>Ensure capture library is installed: <span class="inline-code">apt install libpcap0.8</span></li>
+    </ul>
+    
+    <h3>High CPU Usage</h3>
+    <p>If Wireshark consumes too many resources during capture:</p>
+    <ul>
+      <li>Use more specific capture filters to reduce packet volume</li>
+      <li>Disable name resolution (Edit → Preferences → Name Resolution)</li>
+      <li>Consider using tshark with output to file instead</li>
+    </ul>
+    
+    <h3>Protocol Decoding Issues</h3>
+    <p>If Wireshark doesn't correctly decode a protocol:</p>
+    <ul>
+      <li>Check if the protocol runs on non-standard ports (Edit → Preferences → [Protocol] → Ports)</li>
+      <li>Try enabling heuristic dissection (Edit → Preferences → Protocols → [Protocol])</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Common Use Cases</h2>
+    
+    <h3>Network Troubleshooting</h3>
+    <ul>
+      <li>Identifying dropped packets or retransmissions</li>
+      <li>Locating DNS resolution issues</li>
+      <li>Analyzing latency problems</li>
+    </ul>
+    
+    <h3>Security Analysis</h3>
+    <ul>
+      <li>Detecting unusual traffic patterns</li>
+      <li>Identifying malware communication</li>
+      <li>Investigating potential data exfiltration</li>
+    </ul>
+    
+    <h3>Application Debugging</h3>
+    <ul>
+      <li>Verifying API requests and responses</li>
+      <li>Debugging client-server communication</li>
+      <li>Validating protocol implementations</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Additional Resources</h2>
+    <ul>
+      <li><a href="https://www.wireshark.org/docs/">Official Wireshark Documentation</a></li>
+      <li><a href="https://wiki.wireshark.org/DisplayFilters">Display Filter Reference</a></li>
+      <li><a href="https://packetlife.net/library/cheat-sheets/">PacketLife Cheat Sheets</a></li>
+    </ul>
+  </section>
+
+<div class="nav-buttons">
+    <a href="metasploit.html"><button class="nav-button">← Metasploit</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="hydra.html"><button class="nav-button">Hydra →</button></a>
+  </div>
 <script>
   const canvas = document.getElementById('matrixCanvas');
   const ctx = canvas.getContext('2d');
-
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const nums = "0123456789";
-  const alphabet = katakana + latin + nums;
-
+  const letters = '01';
   const fontSize = 14;
   const columns = canvas.width / fontSize;
   const drops = Array(Math.floor(columns)).fill(1);
 
   function drawMatrix() {
-    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
+    // Fade the previous frame slightly for the trailing effect
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#cccccc";
-    ctx.font = fontSize + "px monospace";
+    ctx.font = fontSize + 'px monospace';
 
     for (let i = 0; i < drops.length; i++) {
-      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+
+      // Randomly pick color: mostly grey, sometimes green or blue
+      const rand = Math.random();
+      if (rand < 0.85) {
+        ctx.fillStyle = '#888'; // grey
+      } else if (rand < 0.95) {
+        ctx.fillStyle = '#0f0'; // green
+      } else {
+        ctx.fillStyle = '#00ccff'; // blue
+      }
+
       ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -140,7 +523,7 @@
     }
   }
 
-  setInterval(drawMatrix, 35);
+  setInterval(drawMatrix, 33);
 
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
