@@ -59,6 +59,25 @@
       margin-top: 10px;
       white-space: pre-wrap;
     }
+	nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
 	.nav-buttons {
       display: flex;
       justify-content: space-between;
@@ -141,6 +160,17 @@
 </style>
 
   <header>Nmap</header>
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
   <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
   <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
   <select id="tutorialNav" onchange="location = this.value;" style="
@@ -151,6 +181,7 @@
     font-family: monospace;
     margin-left: 10px;
   ">
+  
     <option value="#">--Nmap Scanning--</option>
     <option value="tutorials.html">Getting Started</option>
     <option value="install.html">Installation Guide</option>
