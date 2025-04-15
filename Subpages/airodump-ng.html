@@ -3,14 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <title>Airodump-ng | Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #0d0d0d;
-      color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      padding: 0px;
-      line-height: 1.6;
-    }
+  margin: 0;
+  font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+  background-color: #0d0d0d;
+  color: #00ffcc;
+  overflow-x: hidden;
+}
 	.kali-logo {
       position: absolute;
       top: -25px;
@@ -74,7 +75,7 @@
       border: none;
       padding: 6px 10px;
       font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
       width: 100px;
@@ -93,7 +94,7 @@
       border: none;
       padding: 6px 10px;
       font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
       width: 100px;
@@ -158,47 +159,53 @@
   </section>
   <p><a href="../index.html">← Back to Home</a></p>
 
-<script>
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
-
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const nums = "0123456789";
-  const alphabet = katakana + latin + nums;
-
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
-
-  function drawMatrix() {
-    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#cccccc";
-    ctx.font = fontSize + "px monospace";
-
-    for (let i = 0; i < drops.length; i++) {
-      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(drawMatrix, 35);
-
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
+// Matrix Effect Script
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
     canvas.height = window.innerHeight;
-  });
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fades previous characters
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.font = fontSize + 'px monospace';
+
+  for (let i = 0; i < drops.length; i++) {
+    const text = letters[Math.floor(Math.random() * letters.length)];
+
+    // Randomize color: mostly grey, with rare green and blue
+    const rand = Math.random();
+    if (rand < 0.85) {
+      ctx.fillStyle = '#888'; // grey
+    } else if (rand < 0.95) {
+      ctx.fillStyle = '#0f0'; // green
+    } else {
+      ctx.fillStyle = '#00ccff'; // blue
+    }
+
+    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+
+    drops[i]++;
+  }
+}
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+  
 </script>
 </body>
 </html>
