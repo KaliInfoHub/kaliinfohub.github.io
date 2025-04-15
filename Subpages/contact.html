@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact Us - The Kali Linux Info Hub</title>
-  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+  <title>Contact Us - Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet" />
   <style>
     body {
-  margin: 0;
-  font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
-  background-color: #0d0d0d;
-  color: #00ffcc;
-  overflow-x: hidden;
-}
+      margin: 0;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
 
     canvas#matrixCanvas {
       position: fixed;
@@ -24,11 +24,6 @@
       pointer-events: none;
     }
 
-    header, section, .kali-logo, a {
-      position: relative;
-      z-index: 1;
-    }
-
     header {
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
@@ -38,6 +33,8 @@
       font-size: 2rem;
       font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes glow {
@@ -53,19 +50,12 @@
       height: auto;
       z-index: 999;
     }
-    .logo-link {
-  display: inline-block;  /* Makes the anchor wrap the image fully */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 999;
-}
 
     nav {
       text-align: center;
       margin-top: 10px;
-      z-index: 1;
       position: relative;
+      z-index: 1;
     }
 
     nav ul {
@@ -78,7 +68,7 @@
       flex-wrap: wrap;
     }
 
-    nav ul li a {
+    nav a {
       background-color: #111;
       border: 1px solid #00ccff;
       padding: 10px 15px;
@@ -88,157 +78,145 @@
       display: inline-block;
     }
 
-    section {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    h2 {
-      color: #00ccff;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    form {
+    .contact {
+      max-width: 600px;
+      margin: 40px auto;
       background-color: #111;
-      padding: 20px;
+      border: 1px solid #00ffcc33;
+      padding: 30px;
       border-radius: 10px;
-      border: 1px solid #00ccff44;
+      position: relative;
+      z-index: 1;
     }
 
-    input, textarea {
-      width: 100%;
-      background-color: #000;
-      border: 1px solid #00ccff;
+    .contact h2 {
+      text-align: center;
+      color: #00ccff;
+    }
+
+    .contact form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .contact label {
+      margin: 10px 0 5px;
+    }
+
+    .contact input,
+    .contact textarea {
       padding: 10px;
-      margin-bottom: 15px;
+      background-color: #1a1a1a;
+      border: 1px solid #00ccff44;
       color: #00ffcc;
       font-family: monospace;
+      border-radius: 5px;
     }
 
-    button {
+    .contact button {
+      margin-top: 20px;
+      padding: 10px;
       background-color: #00ccff;
       color: #000;
       border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
+      font-family: 'Kelly Slab', monospace;
+      border-radius: 6px;
       cursor: pointer;
     }
 
-    p.note {
-      text-align: center;
-      color: #ccc;
-      font-size: 0.9rem;
+    .contact button:hover {
+      background-color: #00bbee;
     }
   </style>
 </head>
 <body>
-  <canvas id="matrixCanvas"></canvas>
-<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Kelly Slab', 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100px;
-    ">User/Pass Generator</button>
-  </a>
-  <a href="../GamesHub/gameshub.html" title="GameHub" style="
-    position: absolute;
-    left: 140px;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Kelly Slab', 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100px;
-    ">GameHub</button>
-  </a>
-  <a href="../index.html"
-     class="logo-link">
-    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-  </a>
 
-  <header>Contact Us</header>
+<canvas id="matrixCanvas"></canvas>
 
-  <nav>
-    <ul>
-      <li><a href="AboutKali.html">About Kali</a></li>
-      <li><a href="install.html">Installation</a></li>
-      <li><a href="tools.html">Tools & Features</a></li>
-      <li><a href="commands.html">Commands</a></li>
-      <li><a href="tutorials.html">Tutorials</a></li>
-      <li><a href="community.html">Community Area</a></li>
-      <li><a href="contact.html">Contact Page</a></li>
-    </ul>
-  </nav>
+<a href="../index.html">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
 
-  <section>
-    <h2>Reach Out to Us</h2>
-    <p>If you have questions, feedback, or want to collaborate — drop us a message below!</p>
+<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="position: absolute; top: 10px; right: 10px; z-index: 999;">
+  <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
+    User/Pass Generator
+  </button>
+</a>
 
-    <form>
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
-      <button type="submit">Send Message</button>
-    </form>
+<a href="../GamesHub/gameshub.html" title="GameHub" style="position: absolute; left: 140px; top: 10px; z-index: 999;">
+  <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
+    GameHub
+  </button>
+</a>
 
-    <p class="note">Note: This form is static for now. Integrate with Formspree, Netlify Forms, or your own backend to activate it.</p>
-  </section>
+<header>Contact Us</header>
 
-  <script>
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
+<nav>
+  <ul>
+    <li><a href="AboutKali.html">About Kali</a></li>
+    <li><a href="install.html">Installation</a></li>
+    <li><a href="tools.html">Tools & Features</a></li>
+    <li><a href="commands.html">Commands</a></li>
+    <li><a href="tutorials.html">Tutorials</a></li>
+    <li><a href="community.html">Community Area</a></li>
+    <li><a href="contact.html">Contact Page</a></li>
+  </ul>
+</nav>
+
+<section class="contact">
+  <h2>Get in Touch</h2>
+  <form>
+    <label for="name">Your Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="email">Your Email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="message">Message</label>
+    <textarea id="message" name="message" rows="5" required></textarea>
+
+    <button type="submit">Send Message</button>
+  </form>
+</section>
+
+<script>
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = '01';
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      const rand = Math.random();
+      ctx.fillStyle = rand < 0.85 ? '#888' : rand < 0.95 ? '#0f0' : '#00ccff';
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 33);
+
+  window.addEventListener('resize', () => {
     canvas.height = window.innerHeight;
     canvas.width = window.innerWidth;
+  });
+</script>
 
-    const letters = '01';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0f0';
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    setInterval(draw, 33);
-
-    window.addEventListener('resize', () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-    });
-  </script>
 </body>
 </html>
