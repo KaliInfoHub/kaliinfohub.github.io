@@ -47,12 +47,19 @@
 
     .kali-logo {
       position: absolute;
-      top: -20px;
-      left: -10px;
+      top: -25px;
+      left: -15px;
       width: 100px;
       height: auto;
       z-index: 999;
     }
+    .logo-link {
+  display: inline-block;  /* Makes the anchor wrap the image fully */
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 999;
+}
 
     nav {
       text-align: center;
@@ -125,7 +132,8 @@
     <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', 'Courier New'; border-radius: 4px; cursor: pointer; width: 100px;">GameHub</button>
   </a>
 
-  <a href="../index.html">
+  <a href="../index.html"
+     class="logo-link">
     <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
   </a>
 
