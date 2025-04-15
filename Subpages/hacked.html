@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>!!! SYSTEM BREACH DETECTED !!!</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Kelly Slab', monospace;
+      background-color: #000;
+      color: #ff0000;
+      overflow: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    #hacked-container {
+      text-align: center;
+      padding: 100px 20px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .glitch {
+      color: #ff0000;
+      font-size: 2.5rem;
+      position: relative;
+      animation: glitch 1s infinite;
+    }
+
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .glitch::before {
+      animation: glitchTop 1s infinite;
+      color: #00ffcc;
+      top: -2px;
+    }
+
+    .glitch::after {
+      animation: glitchBottom 1s infinite;
+      color: #ff00ff;
+      top: 2px;
+    }
+
+    @keyframes glitch {
+      0% { transform: none; }
+      20% { transform: skew(-0.5deg, -0.9deg); }
+      40% { transform: skew(0.5deg, 0.9deg); }
+      60% { transform: skew(-0.5deg, -0.9deg); }
+      80% { transform: skew(0.5deg, 0.9deg); }
+      100% { transform: none; }
+    }
+
+    @keyframes glitchTop {
+      0% { clip-path: inset(0 0 90% 0); }
+      50% { clip-path: inset(20% 0 40% 0); }
+      100% { clip-path: inset(0 0 90% 0); }
+    }
+
+    @keyframes glitchBottom {
+      0% { clip-path: inset(90% 0 0 0); }
+      50% { clip-path: inset(60% 0 20% 0); }
+      100% { clip-path: inset(90% 0 0 0); }
+    }
+
+    #typewriter {
+      font-family: monospace;
+      color: #ff4444;
+      font-size: 1.2rem;
+      margin-top: 30px;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="matrixCanvas"></canvas>
+
+<div id="hacked-container">
+  <h1 class="glitch" data-text="!!! SYSTEM BREACH DETECTED !!!">!!! SYSTEM BREACH DETECTED !!!</h1>
+  <p id="typewriter"></p>
+</div>
+
+<script>
+  // Matrix rain effect
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = '01';
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
+
+  function draw() {
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.font = fontSize + 'px monospace';
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters[Math.floor(Math.random() * letters.length)];
+      const rand = Math.random();
+      ctx.fillStyle = rand < 0.8 ? '#ff0000' : rand < 0.9 ? '#00ffcc' : '#ffffff';
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 33);
+
+  window.addEventListener('resize', () => {
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+  });
+
+  // Typewriter hacking sequence
+  const lines = [
+    "Initializing backdoor...",
+    "Accessing system files...",
+    "Bypassing firewall...",
+    "Downloading credentials...",
+    "Injecting payload...",
+    "⚠️ SYSTEM CONTROL OVERRIDDEN ⚠️",
+    "YOU HAVE BEEN HACKED."
+  ];
+
+  let line = 0;
+  let charIndex = 0;
+  const typer = document.getElementById("typewriter");
+
+  function type() {
+    if (line < lines.length) {
+      if (charIndex < lines[line].length) {
+        typer.innerHTML += lines[line][charIndex++];
+        setTimeout(type, 40);
+      } else {
+        typer.innerHTML += "\n";
+        charIndex = 0;
+        line++;
+        setTimeout(type, 700);
+      }
+    }
+  }
+
+  setTimeout(type, 1000); // Start typing after delay
+</script>
+
+</body>
+</html>
