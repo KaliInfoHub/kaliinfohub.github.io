@@ -170,7 +170,24 @@
       <li><a href="contact.html">Contact Page</a></li>
     </ul>
   </nav>
-
+<div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
+  <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
+  <select id="tutorialNav" onchange="location = this.value;" style="
+    background-color: #000;
+    color: #00ffcc;
+    border: 1px solid #00ccff;
+    padding: 8px 10px;
+    font-family: monospace;
+    margin-left: 10px;
+  ">
+    <option value="#">--Installation--</option>
+    <option value="tutorials.html">Getting Started</option>
+    <option value="tutorial-nmap.html">Nmap Scanning</option>
+    <option value="tutorial-hydra.html">Hydra Attacks</option>
+    <option value="tutorial-aircrack.html">Wi-Fi Cracking</option>
+    <option value="tutorial-burp.html">Burp Suite Testing</option>
+  </select>
+</div>
   <section>
   <h2>Installation Overview</h2>
   <p>Kali Linux is a powerful system used by professionals in ethical hacking and cybersecurity. You can install it in different ways, depending on how much access and performance you need. Below are five main installation methods explained in detail.</p>
