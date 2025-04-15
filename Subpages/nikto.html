@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Nikto - Kali Linux Tool</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header, section, .kali-logo, a {
+      position: relative;
+      z-index: 1;
+    }
+
+    header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      padding: 70px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    .kali-logo {
+      position: absolute;
+      top: -20px;
+      left: -10px;
+      width: 100px;
+      height: auto;
+      z-index: 999;
+    }
+
+    section {
+      padding: 20px;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .tool-section {
+      background-color: #111;
+      border: 1px solid #00ffcc33;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      color: #00ccff;
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .command-box {
+      background-color: #1a1a1a;
+      border: 1px solid #00ccff33;
+      border-radius: 6px;
+      padding: 15px;
+      font-family: monospace;
+      margin: 15px 0;
+      overflow-x: auto;
+    }
+
+    .command-title {
+      color: #00ccff;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    .command-example {
+      color: #00ffcc;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+      border: 1px solid #00ccff33;
+    }
+
+    th {
+      background-color: #1a1a1a;
+      color: #00ccff;
+    }
+
+    tr:nth-child(even) {
+      background-color: #0f0f0f;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+    }
+
+    .nav-button {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      transition: all 0.3s;
+    }
+
+    .nav-button:hover {
+      background-color: #00ccff22;
+    }
+
+    .quiz {
+      background-color: #111;
+      border: 1px solid #00ffcc33;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 20px;
+    }
+
+    .question {
+      margin: 15px 0;
+    }
+
+    .question h4 {
+      margin: 0 0 10px;
+    }
+
+    .question button {
+      display: block;
+      background-color: #222;
+      border: 1px solid #00ccff44;
+      color: #00ffcc;
+      margin: 5px 0;
+      padding: 8px;
+      width: 100%;
+      font-family: monospace;
+      cursor: pointer;
+    }
+
+    .correct {
+      background-color: #006600 !important;
+      color: #ccffcc;
+    }
+
+    .incorrect {
+      background-color: #660000 !important;
+      color: #ffcccc;
+    }
+
+    .tip-box {
+      background-color: #1a1a1a;
+      border-left: 4px solid #00ccff;
+      padding: 10px 15px;
+      margin: 15px 0;
+    }
+
+    .tip-title {
+      color: #00ccff;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .output-box {
+      background-color: #0a0a0a;
+      color: #00ff99;
+      font-family: monospace;
+      padding: 15px;
+      border-radius: 6px;
+      margin: 15px 0;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../../index.html">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <header>Nikto</header>
+
+  <nav style="text-align:center; margin-top: 10px; z-index: 1; position: relative;">
+    <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
+      <li><a href="Subpages/AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
+      <li><a href="Subpages/install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
+      <li><a href="Subpages/tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tools & Features</a></li>
+      <li><a href="Subpages/commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
+      <li><a href="Subpages/tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
+      <li><a href="Subpages/community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community Area</a></li>
+      <li><a href="Subpages/contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
+    </ul>
+  </nav>
+
+  <section>
+    <div class="tool-section">
+      <h2 class="section-title">What is Nikto?</h2>
+      <p>Nikto is an open-source web server scanner that performs comprehensive tests against web servers for multiple security vulnerabilities. It scans for outdated server software, dangerous files, misconfigured server settings, and other web application security issues.</p>
+      
+      <p>As a part of Kali Linux's security toolkit, Nikto is designed to be fast, thorough, and easy to use, making it ideal for security professionals conducting penetration tests on web applications.</p>
+    </div>
+
+    <div class="tool-section">
+      <h2 class="section-title">Key Features</h2>
+      <ul>
+        <li>Checks for over 6700 potentially dangerous files/programs</li>
+        <li>Identifies outdated versions of over 1250 servers</li>
+        <li>Scans for version-specific problems on over 270 servers</li>
+        <li>Checks for server configuration issues</li>
+        <li>Supports SSL for testing secure services</li>
+        <li>Multiple output formats (text, HTML, XML, etc.)</li>
+        <li>Proxy support for scanning through firewalls</li>
+        <li>Customizable scanning options</li>
+      </ul>
+    </div>
+
+    <div class="tool-section">
+      <h2 class="section-title">Common Commands</h2>
+      
+      <div class="command-box">
+        <div class="command-title">Basic Syntax:</div>
+        <div class="command-example">nikto -h [host] [options]</div>
+      </div>
+
+      <div class="command-box">
+        <div class="command-title">Basic Scan:</div>
+        <div class="command-example">nikto -h example.com</div>
+      </div>
+
+      <div class="command-box">
+        <div class="command-title">Scan with SSL:</div>
+        <div class="command-example">nikto -h https://example.com</div>
+      </div>
+
+      <div class="command-box">
+        <div class="command-title">Specify Port:</div>
+        <div class="command-example">nikto -h example.com -p 8080</div>
+      </div>
+
+      <div class="command-box">
+        <div class="command-title">Save Output to File:</div>
+        <div class="command-example">nikto -h example.com -o report.html -Format html</div>
+      </div>
+
+      <div class="command-box">
+        <div class="command-title">Tuning Options (Targeting Specific Vulnerabilities):</div>
+        <div class="command-example">nikto -h example.com -Tuning 123bx</div>
+      </div>
+    </div>
+
+    <div class="tool-section">
+      <h2 class="section-title">Tuning Options</h2>
+      <p>Nikto's tuning options allow you to focus your scans on specific types of vulnerabilities:</p>
+      
+      <table>
+        <tr>
+          <th>Code</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>0</td>
+          <td>File Upload</td>
+        </tr>
+        <tr>
+          <td>1</td>
+          <td>Interesting File / Seen in logs</td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Misconfiguration / Default File</td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>Information Disclosure</td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Injection (XSS/Script/HTML)</td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>Remote File Retrieval</td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Denial of Service</td>
+        </tr>
+        <tr>
+          <td>7</td>
+          <td>Remote File Retrieval</td>
+        </tr>
+        <tr>
+          <td>8</td>
+          <td>Command Execution / Remote Shell</td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>SQL Injection</td>
+        </tr>
+        <tr>
+          <td>a</td>
+          <td>Authentication Bypass</td>
+        </tr>
+        <tr>
+          <td>b</td>
+          <td>Software Identification</td>
+        </tr>
+        <tr>
+          <td>c</td>
+          <td>Remote Source Inclusion</td>
+        </tr>
+        <tr>
+          <td>x</td>
+          <td>Reverse Tuning Options (exclude)</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="tool-section">
+      <h2 class="section-title">Practical Example</h2>
+      <p>Here's a typical workflow for scanning a website with Nikto and generating an HTML report:</p>
+
+      <div class="command-box">
+        <div class="command-title">Comprehensive Scan with HTML Output:</div>
+        <div class="command-example">nikto -h example.com -o scan_results.html -Format htm</div>
+      </div>
+
+      <p>Example output (simplified):</p>
+      <div class="output-box">
+- Nikto v2.1.6<br>
+- Target: example.com<br>
++ Target IP: 93.184.216.34<br>
++ Server: nginx<br>
++ The anti-clickjacking X-Frame-Options header is not present.<br>
++ The X-XSS-Protection header is not defined. This header can hint to the user agent to protect against some forms of XSS<br>
++ The X-Content-Type-Options header is not set. This could allow the user agent to render the content of the site in a different fashion to the MIME type<br>
++ No CGI Directories found (use '-C all' to force check all possible dirs)<br>
++ Web Server returns a valid response with junk HTTP methods, this may cause false positives.<br>
++ 7915 requests: 0 error(s) and 4 item(s) reported on remote host<br>
++ End Time: 2025-04-15 14:30:22<br>
++ 1 host(s) tested
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <div class="tip-title">💡 Pro Tip:</div>
+      <p>Nikto can generate a lot of traffic and is not designed to be stealthy. This can trigger IDS/IPS systems. For more discreet scanning, use the <code>-evasion</code> option with techniques like:</p>
+      <code>nikto -h example.com -evasion 1</code>
+    </div>
+
+    <div class="quiz">
+      <h2 class="section-title">Test Your Knowledge</h2>
+      
+      <div class="question">
+        <h4>1. What is the primary purpose of Nikto?</h4>
+        <button onclick="checkAnswer(this, true)">Web server vulnerability scanning</button>
+        <button onclick="checkAnswer(this, false)">Password cracking</button>
+        <button onclick="checkAnswer(this, false)">Network sniffing</button>
+        <button onclick="checkAnswer(this, false)">Social engineering</button>
+      </div>
+
+      <div class="question">
+        <h4>2. Which option is used to specify the target host in Nikto?</h4>
+        <button onclick="checkAnswer(this, false)">-t</button>
+        <button onclick="checkAnswer(this, true)">-h</button>
+        <button onclick="checkAnswer(this, false)">-s</button>
+        <button onclick="checkAnswer(this, false)">-host</button>
+      </div>
+
+      <div class="question">
+        <h4>3. What tuning option would you use to focus on SQL Injection vulnerabilities?
+		
+		
+		
+		<div class="nav-buttons">
+      <a href="johntheripper.html" class="nav-button">← John the Ripper</a>
+      <a href="tools.html" class="nav-button">Tools Index</a>
+      <a href="nikto.html" class="nav-button">Nikto →</a>
+    </div>
+  </section>
