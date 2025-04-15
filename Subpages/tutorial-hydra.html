@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Hydra Tutorial - The Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
       background-color: #0d0d0d;
       color: #00ffcc;
       overflow-x: hidden;
@@ -60,13 +61,6 @@
   z-index: 999;
 }
 
-    nav {
-      text-align: center;
-      margin-top: 10px;
-      z-index: 1;
-      position: relative;
-    }
-
     nav ul {
       list-style: none;
       padding: 0;
@@ -85,6 +79,27 @@
       color: #00ccff;
       text-decoration: none;
       display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
     section {
@@ -111,7 +126,43 @@
 </head>
 <body>
   <canvas id="matrixCanvas"></canvas>
-
+<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    left: 140px;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">GameHub</button>
+  </a>
   <a href="../index.html"
      class="logo-link">
     <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
@@ -185,41 +236,58 @@ hydra -l admin -P passwords.txt 192.168.1.10 http-post-form "/login.php:user=^US
     <h2>Ethical Use Notice</h2>
     <p>Hydra is a powerful tool and should only be used on systems you own or have explicit permission to test. Unauthorized usage is illegal and unethical.</p>
   </section>
-
+<div class="nav-buttons">
+    <a href="tutotial-nmap.html"><button class="nav-button">← Nmap</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="tutorial-aircrack-ng.html"><button class="nav-button">Aircrack-ng →</button></a>
+  </div>
   <script>
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+  const canvas = document.getElementById('matrixCanvas');
+  const ctx = canvas.getContext('2d');
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
 
-    const letters = '01';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
+  const letters = '01';
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+  const drops = Array(Math.floor(columns)).fill(1);
 
-    function draw() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = '#0f0';
-      ctx.font = fontSize + 'px monospace';
+  function drawMatrix() {
+    // Fade the previous frame slightly for the trailing effect
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.font = fontSize + 'px monospace';
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters[Math.floor(Math.random() * letters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+
+      // Randomly pick color: mostly grey, sometimes green or blue
+      const rand = Math.random();
+      if (rand < 0.85) {
+        ctx.fillStyle = '#888'; // grey
+      } else if (rand < 0.95) {
+        ctx.fillStyle = '#0f0'; // green
+      } else {
+        ctx.fillStyle = '#00ccff'; // blue
       }
+
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+
+      drops[i]++;
     }
+  }
 
-    setInterval(draw, 33);
+  setInterval(drawMatrix, 33);
 
-    window.addEventListener('resize', () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-    });
-  </script>
+  window.addEventListener("resize", () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
   <p><a href="../index.html">← Back to Home</a></p>
 </body>
 </html>
