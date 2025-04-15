@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,14 +6,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>The Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Courier New', Courier, monospace;
-      background-color: #0d0d0d;
-      color: #00ffcc;
-      overflow-x: hidden;
-    }
+  margin: 0;
+  font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+  background-color: #0d0d0d;
+  color: #00ffcc;
+  overflow-x: hidden;
+}
 
     canvas#matrixCanvas {
       position: fixed;
@@ -194,50 +196,7 @@
       color: #ffcccc;
     }
   
-.terminal-section {
-  background-color: #000;
-  color: #00ffcc;
-  font-family: monospace;
-  padding: 20px;
-  margin-top: 40px;
-  border-top: 1px solid #00ffcc33;
-}
 
-#terminal {
-  background-color: #111;
-  border: 1px solid #00ffcc33;
-  border-radius: 8px;
-  padding: 20px;
-  max-width: 1000px;
-  margin: auto;
-}
-
-#terminal-output {
-  white-space: pre-wrap;
-  line-height: 1.5em;
-  margin-bottom: 10px;
-  min-height: 200px;
-}
-
-.terminal-input-line {
-  display: flex;
-  align-items: center;
-}
-
-.prompt {
-  color: #00ccff;
-  margin-right: 5px;
-}
-
-#terminal-input {
-  background: none;
-  border: none;
-  color: #00ffcc;
-  flex: 1;
-  font-family: monospace;
-  font-size: 1rem;
-  outline: none;
-}
 </style>
 </head>
 <body>
@@ -256,7 +215,7 @@
       border: none;
       padding: 6px 10px;
       font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
       width: 100px;
@@ -266,6 +225,7 @@
     position: absolute;
     left: 140px;
     top: 10px;
+    right: 10px;
     z-index: 999;
   ">
     <button style="
@@ -274,7 +234,7 @@
       border: none;
       padding: 6px 10px;
       font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
       width: 100px;
@@ -301,10 +261,15 @@
 
 
   <section class="overview">
-    <p><strong>Kali Linux</strong> is a powerful, Debian-based operating system built for cybersecurity professionals and ethical hackers. It comes pre-installed with hundreds of great tools for things like penetration testing, digital forensics, reverse engineering and so much more!</p>
-    <p>So whether you're scanning networks with <em>Nmap</em>, capturing packets with <em>Wireshark</em>, or simulating attacks with <em>Metasploit</em>, Kali is the ultimate playground for learning and practicing cybersecurity and ethical hacking.</p>
+    <p><a href="https://www.kali.org" target="_blank" style="color: #00ccff; text-decoration: none;">
+        Kali Linux
+      </a> is a powerful, Debian-based operating system built for cybersecurity professionals and ethical hackers. It comes pre-installed with hundreds of great tools for things like penetration testing, digital forensics, reverse engineering and so much more!</p>
+    <p>So whether you're scanning networks with <a href="Subpages/nmap.html" target="_blank" style="color: #00ccff; text-decoration: none;">
+      <em>Nmap</em></a>, capturing packets with <a href="Subpages/wireshark.html" target="_blank" style="color: #00ccff; text-decoration: none;">
+      <em>Wireshark</em></a>, or simulating attacks with <a href="Subpages/metasploit.html" target="_blank" style="color: #00ccff; text-decoration: none;">
+      <em>Metasploit</em></a>, Kali is the ultimate playground for learning and practicing cybersecurity and ethical hacking.</p>
   </section>
-<section style="background-color: #4f575e; padding: 20px; text-align: center; border-top: 1px solid #00ccff33; border-bottom: 1px solid #00ccff33;">
+<section style="background-color: #111; padding: 20px; text-align: center; border-top: 1px solid #00ccff33; border-bottom: 1px solid #00ccff33;">
   <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;">
     <div style="text-align: center;">
       <img src="https://img.icons8.com/ios-filled/50/linux.png" alt="Kali Tools" style="height: 50px; margin-bottom: 10px;">
@@ -343,7 +308,9 @@
 
   <section class="examples">
     <h2 class="section-title">Real-World Use Cases</h2>
-    <p>Kali Linux is used by penetration testers to assess the security of networks, by forensic analysts to investigate cybercrime, and by educators to train the next generation of cybersecurity professionals.</p>
+    <p><a href="https://www.kali.org" target="_blank" style="color: #00ccff; text-decoration: none;">
+        Kali Linux
+      </a> is used by penetration testers to assess the security of networks, by forensic analysts to investigate cybercrime, and by educators to train the next generation of cybersecurity professionals.</p>
     <p>Examples include ethical hacking competitions, security audits, malware analysis, and red team simulations.</p>
   </section>
 
@@ -351,7 +318,7 @@
     <h2 class="section-title">Community Forum</h2>
     <p>Join the discussion! Share tips, ask for help, or collaborate on security challenges in our interactive community forum.</p>
     <form id="forumForm">
-      <input type="text" id="postTitle" placeholder="Enter topic..." style="width: 80%; padding: 8px; font-family: monospace;">
+      <input type="text" id="postTitle" placeholder="Enter topic..." style="width: 80%; padding: 8px; font-family: 'Kelly Slab', monospace;">
       <button type="submit" style="padding: 8px 16px; font-family: monospace; background: #00ccff; color: black; border: none;">Post</button>
     </form>
     <div class="forum-posts" id="forumPosts"></div>
@@ -467,65 +434,10 @@
       canvas.width = window.innerWidth;
     });
   
-
-document.addEventListener('DOMContentLoaded', function() {
-  const terminalInput = document.getElementById('terminal-input');
-const terminalOutput = document.getElementById('terminal-output');
-
-
-const commands = {
-  'help': `Available commands:
-help, ls, pwd, echo, clear, whoami, ifconfig, sudo, neofetch`,
-  'ls': 'Desktop  Documents  Downloads  Tools  kali.txt',
-  'pwd': '/home/kali',
-  'whoami': 'kali',
-  'echo': (args) => args.join(' '),
-  'clear': () => { terminalOutput.innerHTML = ''; return ''; },
-  'ifconfig': `eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-inet 192.168.1.10  netmask 255.255.255.0  broadcast 192.168.1.255`,
-  'sudo': 'Nice try, but you’re not root here!',
-  'neofetch': `kali@webshell
-------------------
-OS: Kali Linux Web
-Kernel: 5.10-custom
-Shell: Bash
-Terminal: WebSim`
-};
-
-
-terminalInput.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter') {
-    const input = terminalInput.value.trim();
-    const [cmd, ...args] = input.split(' ');
-    let output = '';
-
-    if (commands[cmd]) {
-      output = typeof commands[cmd] === 'function' ? commands[cmd](args) : commands[cmd];
-    } else {
-      output = `Command not found: ${cmd}`;
-    }
-
-    terminalOutput.innerHTML += `<div><span class="prompt">kali@webshell:~$</span> ${input}</div>`;
-    if (output) terminalOutput.innerHTML += `<div>${output}</div>`;
-    terminalInput.value = '';
-    terminalOutput.scrollTop = terminalOutput.scrollHeight;
-  }
-});
-});
-
 </script>
 
 
-  <section class="terminal-section">
-    <h2 class="section-title">Try the Terminal</h2>
-    <div id="terminal">
-      <div id="terminal-output"></div>
-      <div class="terminal-input-line">
-        <span class="prompt">kali@webshell:~$</span>
-        <input type="text" id="terminal-input"autocomplete="off" />
-      </div>
-    </div>
-  </section>
+  
 
 </body>
 </html>
