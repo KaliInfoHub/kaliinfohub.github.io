@@ -6,13 +6,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
-  margin: 0;
-  font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
-  background-color: #0d0d0d;
-  color: #00ffcc;
-  overflow-x: hidden;
-}
-	.kali-logo {
+      margin: 0;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00ffcc;
+      overflow-x: hidden;
+    }
+    .kali-logo {
       position: absolute;
       top: -25px;
       left: -15px;
@@ -21,12 +21,12 @@
       z-index: 999;
     }
     .logo-link {
-  display: inline-block;  /* Makes the anchor wrap the image fully */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 999;
-}
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
     a {
       color: #00ccff;
       text-decoration: none;
@@ -60,9 +60,71 @@
       margin-top: 10px;
       white-space: pre-wrap;
     }
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
+    }
+    .table-container {
+      overflow-x: auto;
+      margin: 20px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    th, td {
+      border: 1px solid #00ccff33;
+      padding: 8px 12px;
+      text-align: left;
+    }
+    th {
+      background-color: #1a1a1a;
+      color: #00ccff;
+    }
+    .command-example {
+      margin-bottom: 15px;
+    }
   </style>
 </head>
 <body>
+
     <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
     position: absolute;
     top: 10px;
@@ -123,6 +185,17 @@
 </style>
 
   <header>Airodump-ng</header>
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
   <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
   <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
   <select id="tutorialNav" onchange="location = this.value;" style="
@@ -133,7 +206,7 @@
     font-family: monospace;
     margin-left: 10px;
   ">
-    <option value="#">--Aircrack-ng--</option>
+    <option value="#">--Airdump-ng--</option>
     <option value="tutorials.html">Getting Started</option>
     <option value="install.html">Installation Guide</option>
     <option value="tutorial-nmap.html">Nmap Scanning</option>
@@ -144,21 +217,140 @@
 </div>
   <section>
     <h2>What is Airodump-ng?</h2>
-    <p>Airodump-ng is part of the Aircrack-ng suite used for wireless network analysis and packet capture. It helps identify nearby access points, clients, and collect data needed for cracking WPA/WPA2 keys.</p>
+    <p>Airodump-ng is part of the Aircrack-ng suite used for wireless network analysis and packet capture. It's a powerful tool designed to capture raw 802.11 frames and is particularly suitable for collecting WEP IVs (Initialization Vectors) for later use with Aircrack-ng. It also helps identify nearby access points, connected clients, and collect data needed for cracking WPA/WPA2 handshakes.</p>
+    
+    <p>Key capabilities include:</p>
+    <ul>
+      <li>Packet capture and export to various formats (pcap, csv, etc.)</li>
+      <li>GPS information logging (when available)</li>
+      <li>Display of access point names (ESSIDs)</li>
+      <li>MAC address filtering</li>
+      <li>Channel hopping to monitor traffic across multiple channels</li>
+    </ul>
   </section>
+  
   <section>
     <h2>Basic Usage</h2>
-    <p>Start monitoring on a wireless interface:</p>
-    <code>airodump-ng wlan0mon</code>
-    <p>Target a specific BSSID and channel:</p>
-    <code>airodump-ng --bssid 00:11:22:33:44:55 -c 6 -w capture wlan0mon</code>
+    <div class="command-example">
+      <p>First, put your wireless interface into monitor mode:</p>
+      <code>airmon-ng start wlan0</code>
+      <p>This creates a monitor interface (typically named wlan0mon).</p>
+    </div>
+    
+    <div class="command-example">
+      <p>Start monitoring on all channels to discover nearby networks:</p>
+      <code>airodump-ng wlan0mon</code>
+    </div>
+    
+    <div class="command-example">
+      <p>Target a specific BSSID (access point) and channel, writing the capture to a file:</p>
+      <code>airodump-ng --bssid 00:11:22:33:44:55 -c 6 -w capture_file wlan0mon</code>
+      <p>Where:</p>
+      <ul>
+        <li><strong>--bssid</strong>: Specifies the access point's MAC address</li>
+        <li><strong>-c</strong>: Sets the channel to monitor</li>
+        <li><strong>-w</strong>: Defines the output filename prefix for captures</li>
+      </ul>
+    </div>
+    
+    <div class="table-container">
+      <h3>Common Airodump-ng Options</h3>
+      <table>
+        <tr>
+          <th>Option</th>
+          <th>Description</th>
+        </tr>
+        <tr>
+          <td>--bssid</td>
+          <td>Filter access points by BSSID (MAC address)</td>
+        </tr>
+        <tr>
+          <td>--essid</td>
+          <td>Filter access points by ESSID (network name)</td>
+        </tr>
+        <tr>
+          <td>-c</td>
+          <td>Channel to listen on</td>
+        </tr>
+        <tr>
+          <td>-w</td>
+          <td>Write capture to file (prefix)</td>
+        </tr>
+        <tr>
+          <td>--output-format</td>
+          <td>Set output format (pcap, csv, kismet, etc.)</td>
+        </tr>
+        <tr>
+          <td>--ignore-negative-one</td>
+          <td>Fix for certain broken drivers</td>
+        </tr>
+      </table>
+    </div>
   </section>
+  
   <section>
-    <h2>Practical Example</h2>
-    <p>Capture a WPA handshake by monitoring the target AP and then performing a deauthentication attack using aireplay-ng.</p>
+    <h2>Practical Example: Capturing WPA Handshake</h2>
+    <p>A common use of Airodump-ng is to capture the WPA handshake, which can later be used for offline password cracking. Here's a step-by-step process:</p>
+    
+    <h3>Step 1: Identify the Target Network</h3>
+    <p>First, scan all networks in your area:</p>
+    <code>airodump-ng wlan0mon</code>
+    <p>Make note of the BSSID, channel, and ESSID of your target network.</p>
+    
+    <h3>Step 2: Focus on the Target Network</h3>
+    <p>Start airodump-ng focused on just that network:</p>
+    <code>airodump-ng --bssid 00:11:22:33:44:55 -c 6 -w wpa_handshake wlan0mon</code>
+    <p>Leave this running to capture the handshake.</p>
+    
+    <h3>Step 3: Deauthenticate a Client (Optional)</h3>
+    <p>In another terminal, force a client to reconnect (which generates the handshake):</p>
+    <code>aireplay-ng --deauth 5 -a 00:11:22:33:44:55 -c AA:BB:CC:DD:EE:FF wlan0mon</code>
+    <p>Where:</p>
+    <ul>
+      <li><strong>--deauth 5</strong>: Send 5 deauthentication packets</li>
+      <li><strong>-a</strong>: The access point's BSSID</li>
+      <li><strong>-c</strong>: The client's MAC address</li>
+    </ul>
+    
+    <h3>Step 4: Verify Handshake Capture</h3>
+    <p>Watch the airodump-ng window for a "WPA handshake: 00:11:22:33:44:55" message in the top right, indicating a successful capture.</p>
+    
+    <h3>Step 5: Crack the Handshake (Using Aircrack-ng)</h3>
+    <p>Once you have the handshake, you can attempt to crack it:</p>
+    <code>aircrack-ng -w /path/to/wordlist.txt wpa_handshake-01.cap</code>
   </section>
-  <p><a href="../index.html">← Back to Home</a></p>
+  
+  <section>
+    <h2>Advanced Tips</h2>
+    <h3>Filter Traffic by MAC Address</h3>
+    <p>You can use Airodump-ng to monitor specific clients:</p>
+    <code>airodump-ng --bssid 00:11:22:33:44:55 --station AA:BB:CC:DD:EE:FF wlan0mon</code>
+    
+    <h3>Using GPS with Airodump-ng</h3>
+    <p>If you have a GPS device connected, you can log coordinates:</p>
+    <code>airodump-ng --gpsd wlan0mon</code>
+    
+    <h3>Writing in Multiple Formats</h3>
+    <p>Simultaneously write captures in several formats:</p>
+    <code>airodump-ng --output-format pcap,csv,kismet -w capture wlan0mon</code>
+    
+    <h3>Aircrack-ng Suite Integration</h3>
+    <p>Remember that Airodump-ng works best with other tools in the suite:</p>
+    <ul>
+      <li><strong>Airmon-ng</strong>: Manage monitor mode</li>
+      <li><strong>Aireplay-ng</strong>: Generate traffic/deauth clients</li>
+      <li><strong>Aircrack-ng</strong>: Crack captured handshakes</li>
+      <li><strong>Airodump-ng</strong>: Capture packets</li>
+    </ul>
+  </section>
+  
+  <div class="nav-buttons">
+    <a href="burpsuite.html"><button class="nav-button">Burp Suite</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="johntheripper.html"><button class="nav-button">John the Ripper →</button></a>
+  </div>
 
+<script>
 // Matrix Effect Script
     const canvas = document.getElementById('matrixCanvas');
     const ctx = canvas.getContext('2d');
@@ -205,7 +397,6 @@
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
     });
-  
 </script>
 </body>
 </html>
