@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Burp Suite | Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      padding: 20px;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
-	.kali-logo {
+    .kali-logo {
       position: absolute;
       top: -25px;
       left: -15px;
@@ -20,12 +21,52 @@
       z-index: 999;
     }
     .logo-link {
-  display: inline-block;  /* Makes the anchor wrap the image fully */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 999;
-}
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
+	nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
+    }
     a {
       color: #00ccff;
       text-decoration: none;
@@ -49,6 +90,10 @@
     h2 {
       color: #00ccff;
     }
+    h3 {
+      color: #00ccff;
+      margin-top: 20px;
+    }
     code {
       display: block;
       background: #1a1a1a;
@@ -58,11 +103,88 @@
       margin-top: 10px;
       white-space: pre-wrap;
     }
+    .inline-code {
+      display: inline;
+      background: #1a1a1a;
+      padding: 2px 5px;
+      border-radius: 3px;
+      border: 1px solid #00ffcc22;
+      font-family: monospace;
+    }
+    .warning {
+      background-color: rgba(255, 204, 0, 0.1);
+      border-left: 4px solid #ffcc00;
+      padding: 10px;
+      margin: 15px 0;
+    }
+    .tip {
+      background-color: rgba(0, 255, 204, 0.1);
+      border-left: 4px solid #00ffcc;
+      padding: 10px;
+      margin: 15px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    th, td {
+      border: 1px solid #00ccff55;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #111a1a;
+    }
+    .screenshot {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 15px auto;
+      border: 1px solid #00ccff55;
+      border-radius: 5px;
+    }
   </style>
 </head>
 <body>
-<a href="../index.html"
-   class="logo-link">
+<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    left: 140px;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">GameHub</button>
+  </a>
+<a href="../index.html" class="logo-link">
   <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
 </a>
 <canvas id="matrixCanvas"></canvas>
@@ -81,8 +203,18 @@
   }
 </style>
 
-
-  <header>Burp Suite</header>
+  <header>Burp Suite - Web Application Security Testing Platform</header>
+  <nav>
+    <ul>
+      <li><a href="AboutKali.html">About Kali</a></li>
+      <li><a href="install.html">Installation</a></li>
+      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="commands.html">Commands</a></li>
+      <li><a href="tutorials.html">Tutorials</a></li>
+      <li><a href="community.html">Community Area</a></li>
+      <li><a href="contact.html">Contact Page</a></li>
+    </ul>
+  </nav>
   <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
   <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Select a Tool:</label>
   <select id="tutorialNav" onchange="location = this.value;" style="
@@ -101,45 +233,354 @@
     <option value="tutorial-burp.html">Burp Suite Testing</option>
   </select>
 </div>
+
   <section>
     <h2>What is Burp Suite?</h2>
-    <p>Burp Suite is a powerful tool for web application security testing. It allows users to intercept, modify, and replay HTTP requests, scan for vulnerabilities, and perform manual testing.</p>
+    <p>Burp Suite is an integrated platform for performing security testing of web applications. Developed by PortSwigger, it has become the industry-standard tool used by information security professionals and penetration testers worldwide.</p>
+    
+    <p>The platform works as an intercepting proxy, placing itself between your browser and target applications to inspect, analyze, and modify the raw HTTP/S traffic passing in both directions. This capability allows security professionals to understand how applications work and to identify security vulnerabilities.</p>
+    
+    <div class="tip">
+      <strong>Why use Burp Suite?</strong> Traditional vulnerability scanners operate as black-box tools with limited understanding of application context. Burp Suite allows for hands-on testing with complete control over requests, enabling discovery of vulnerabilities that automated scanners might miss.
+    </div>
+    
+    <img src="../Icons/burpsuiteimg.png" alt="Burp Suite Interface" class="screenshot">
   </section>
-  <section>
-    <h2>Basic Usage</h2>
-    <p>Configure browser to use Burp as a proxy (default: 127.0.0.1:8080), then visit web apps to intercept requests via the Proxy tab.</p>
-  </section>
-  <section>
-    <h2>Practical Example</h2>
-    <p>Intercept a login form, modify POST parameters, and test for SQL injection or XSS vulnerabilities in real time.</p>
-  </section>
-  <p><a href="../index.html">← Back to Home</a></p>
 
+  <section>
+    <h2>Key Components and Features</h2>
+    
+    <h3>Core Components</h3>
+    <table>
+      <tr>
+        <th>Component</th>
+        <th>Description</th>
+        <th>Common Usage</th>
+      </tr>
+      <tr>
+        <td>Proxy</td>
+        <td>Intercepts and modifies HTTP/S traffic between browser and target applications</td>
+        <td>Inspecting request/response pairs, modifying parameters before they reach the server</td>
+      </tr>
+      <tr>
+        <td>Spider</td>
+        <td>Crawls web applications to discover content and functionality</td>
+        <td>Mapping application structure, finding hidden directories</td>
+      </tr>
+      <tr>
+        <td>Scanner</td>
+        <td>Automatically identifies security vulnerabilities (Pro version)</td>
+        <td>Detecting SQLi, XSS, CSRF and other common vulnerabilities</td>
+      </tr>
+      <tr>
+        <td>Intruder</td>
+        <td>Automated attack tool for testing inputs with multiple payloads</td>
+        <td>Brute forcing, fuzzing parameters, testing for injection flaws</td>
+      </tr>
+      <tr>
+        <td>Repeater</td>
+        <td>Manual request manipulation and response analysis tool</td>
+        <td>Testing single vulnerabilities, refining exploit attempts</td>
+      </tr>
+      <tr>
+        <td>Decoder</td>
+        <td>Encodes/decodes data in various formats</td>
+        <td>Working with Base64, URL encoding, hex, hashing functions</td>
+      </tr>
+      <tr>
+        <td>Comparer</td>
+        <td>Visual comparison tool for responses or payloads</td>
+        <td>Analyzing subtle differences between responses</td>
+      </tr>
+      <tr>
+        <td>Sequencer</td>
+        <td>Analyzes randomness in application tokens</td>
+        <td>Testing session token strength and predictability</td>
+      </tr>
+    </table>
+    
+    <h3>Advanced Features</h3>
+    <ul>
+      <li><strong>Project files:</strong> Save your work between testing sessions</li>
+      <li><strong>Issue definitions:</strong> Comprehensive vulnerability knowledge base</li>
+      <li><strong>Extensions:</strong> Add custom functionality through the BApp Store</li>
+      <li><strong>Macros:</strong> Automate multi-step processes like authentication</li>
+      <li><strong>Site map:</strong> Visual representation of application structure</li>
+      <li><strong>Target scope:</strong> Define in-scope hosts to focus testing</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Installation and Setup</h2>
+    
+    <h3>Running Burp Suite in Kali Linux</h3>
+    <p>Burp Suite comes pre-installed in Kali Linux. You can launch it from the Applications menu or via terminal:</p>
+    <code>sudo burpsuite</code>
+    <p>or</p>
+    <code>sudo burpsuite-pro # If you have the Professional version</code>
+    
+    <h3>Browser Configuration</h3>
+    <p>To use Burp Suite effectively, you need to configure your browser to route traffic through Burp's proxy:</p>
+    
+    <h4>Firefox Setup:</h4>
+    <code>
+1. Open Firefox Preferences
+2. Search for "proxy" and click "Settings"
+3. Select "Manual proxy configuration"
+4. Set HTTP Proxy to 127.0.0.1 and Port to 8080
+5. Check "Also use this proxy for HTTPS"
+6. Click "OK" to save changes</code>
+    
+    <h4>Certificate Installation:</h4>
+    <p>To intercept HTTPS traffic without browser warnings:</p>
+    <code>
+1. Start Burp Suite and configure your browser to use its proxy
+2. Navigate to http://burp in your browser
+3. Click on "CA Certificate" in the top-right corner
+4. Import the downloaded certificate into your browser's trusted certificate store</code>
+    
+    <div class="warning">
+      <strong>Security Note:</strong> Only install Burp's CA certificate in browsers used specifically for testing. Never use a browser with Burp's certificate installed for regular browsing.
+    </div>
+  </section>
+
+  <section>
+    <h2>Practical Examples</h2>
+    
+    <h3>Basic Request Interception</h3>
+    <p>Follow these steps to intercept and modify a basic form submission:</p>
+    <code>
+1. Start Burp Suite and ensure Intercept is ON in the Proxy tab
+2. Configure your browser to use Burp's proxy
+3. Navigate to a login page
+4. Enter credentials but don't submit yet
+5. Click submit - the request will be captured in Burp
+6. Examine the request parameters
+7. Modify values as needed for testing
+8. Click "Forward" to send the modified request</code>
+    
+    <h3>SQL Injection Testing</h3>
+    <p>Basic SQL injection test using Burp Suite:</p>
+    <code>
+# Original login request
+POST /login.php HTTP/1.1
+Host: vulnerable-site.com
+Content-Type: application/x-www-form-urlencoded
+
+username=admin&password=test123
+
+# Modified request to test SQL injection
+POST /login.php HTTP/1.1
+Host: vulnerable-site.com
+Content-Type: application/x-www-form-urlencoded
+
+username=admin' OR 1=1 --&password=anything</code>
+    
+    <h3>Automating with Intruder</h3>
+    <p>Testing multiple payloads against a parameter:</p>
+    <code>
+1. Capture a request in Proxy
+2. Right-click and select "Send to Intruder"
+3. In Intruder, go to the "Positions" tab
+4. Clear all automatically selected positions
+5. Select the parameter you want to test and click "Add §"
+6. Go to the "Payloads" tab and add your test payloads
+7. Click "Start attack" to begin sending requests
+8. Analyze the results for anomalies in response length, status code, or content</code>
+    
+    <h3>Content Discovery with Spider</h3>
+    <p>To discover hidden content in a web application:</p>
+    <code>
+1. Configure target scope in the Target tab
+2. Right-click on the target domain in the site map
+3. Select "Spider this host"
+4. Configure spider options (forms handling, maximum depth)
+5. Click "Start Spider"
+6. Monitor discovered content in the "Spider" tab and site map</code>
+  </section>
+
+  <section>
+    <h2>Advanced Techniques</h2>
+    
+    <h3>Session Handling Rules</h3>
+    <p>Configure Burp to automatically handle session management:</p>
+    <code>
+1. Go to Project options > Sessions
+2. Create a new Session handling rule
+3. Define scope (tools and URLs where rule applies)
+4. Add actions like "Run a macro" for authentication
+5. Configure a macro to perform login steps
+6. Enable the rule</code>
+    
+    <h3>Using BApp Extensions</h3>
+    <p>Extend Burp's functionality with community-created extensions:</p>
+    <code>
+1. Go to the Extender tab
+2. Click on "BApp Store"
+3. Browse or search for extensions
+4. Click "Install" on desired extensions
+5. Extensions will appear as new tabs or modify existing functionality</code>
+    
+    <h3>Collaborative Testing</h3>
+    <p>Configure Burp for team-based penetration testing:</p>
+    <code>
+1. Save project file (.burp) regularly
+2. Use shared project files for team collaboration
+3. Leverage "Use comments" feature to add notes to requests
+4. Create detailed issue definitions for findings
+5. Use project-level scope definitions for consistency</code>
+  </section>
+
+  <section>
+    <h2>Community vs. Professional Edition</h2>
+    
+    <table>
+      <tr>
+        <th>Feature</th>
+        <th>Community (Free)</th>
+        <th>Professional</th>
+      </tr>
+      <tr>
+        <td>Manual Tools (Proxy, Repeater)</td>
+        <td>✓</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>Automated Scanner</td>
+        <td>✗</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>Intruder Speed</td>
+        <td>Throttled</td>
+        <td>Full Speed</td>
+      </tr>
+      <tr>
+        <td>Project Saving</td>
+        <td>Limited</td>
+        <td>Full Support</td>
+      </tr>
+      <tr>
+        <td>Scan Reports</td>
+        <td>✗</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>Burp Collaborator</td>
+        <td>✗</td>
+        <td>✓</td>
+      </tr>
+      <tr>
+        <td>API Scanning</td>
+        <td>✗</td>
+        <td>✓</td>
+      </tr>
+    </table>
+    
+    <div class="tip">
+      <strong>Student Discount:</strong> PortSwigger offers educational licenses for students and academic institutions at significantly reduced prices.
+    </div>
+  </section>
+
+  <section>
+    <h2>Best Practices for Ethical Use</h2>
+    
+    <p>When using Burp Suite, adhere to these ethical guidelines:</p>
+    <ul>
+      <li><strong>Authorized testing only:</strong> Never test applications without explicit permission</li>
+      <li><strong>Scope compliance:</strong> Stay within defined scope boundaries</li>
+      <li><strong>Data handling:</strong> Treat captured sensitive data with appropriate care</li>
+      <li><strong>Responsible disclosure:</strong> Report vulnerabilities to application owners</li>
+      <li><strong>Documentation:</strong> Maintain detailed records of testing activities</li>
+    </ul>
+    
+    <div class="warning">
+      <strong>Legal Warning:</strong> Unauthorized security testing is illegal in most jurisdictions. Always obtain written permission before testing any systems you don't own.
+    </div>
+  </section>
+
+  <section>
+    <h2>Troubleshooting Common Issues</h2>
+    
+    <h3>HTTPS Interception Problems</h3>
+    <code>
+# Issue: Browser security warnings or connection failures
+# Solution:
+1. Verify CA certificate is properly imported
+2. Check proxy listener is running (Proxy > Options)
+3. Ensure "Support invisible proxying" is enabled for non-proxy-aware clients</code>
+    
+    <h3>Performance Issues</h3>
+    <code>
+# Issue: Burp becoming slow or unresponsive
+# Solution:
+1. Increase Java heap size (burpsuite --max-memory-mb=2048)
+2. Clear project history periodically
+3. Limit scope to relevant targets only
+4. Filter out static content (images, CSS, etc.)</code>
+    
+    <h3>Connection Timeouts</h3>
+    <code>
+# Issue: Requests timing out
+# Solution:
+1. Check network connectivity
+2. Increase timeout settings in Project options > Connections
+3. Use upstream proxy if behind corporate firewall</code>
+  </section>
+
+  <section>
+    <h2>Additional Resources</h2>
+    
+    <h3>Learning Materials</h3>
+    <ul>
+      <li><a href="#">PortSwigger Web Security Academy</a> - Free interactive labs</li>
+      <li><a href="#">Official Burp Suite Documentation</a> - Comprehensive guides</li>
+      <li><a href="#">Burp Suite Certified Practitioner Exam</a> - Professional certification</li>
+    </ul>
+    
+    <h3>Community and Support</h3>
+    <ul>
+      <li><a href="#">PortSwigger Forum</a> - Community discussions and help</li>
+      <li><a href="#">Burp Suite Extension Development</a> - Creating custom extensions</li>
+      <li><a href="#">Kali Linux Forums</a> - Kali-specific configuration help</li>
+    </ul>
+  </section>
+
+<div class="nav-buttons">
+    <a href="nmap.html"><button class="nav-button">Nmap</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="metasploit.html"><button class="nav-button">metasploit</button></a>
+  </div>
 <script>
   const canvas = document.getElementById('matrixCanvas');
   const ctx = canvas.getContext('2d');
-
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
 
-  const katakana = "アァイィウヴエカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン";
-  const latin = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  const nums = "0123456789";
-  const alphabet = katakana + latin + nums;
-
+  const letters = '01';
   const fontSize = 14;
   const columns = canvas.width / fontSize;
   const drops = Array(Math.floor(columns)).fill(1);
 
   function drawMatrix() {
-    ctx.fillStyle = "rgba(13, 13, 13, 0.1)";
+    // Fade the previous frame slightly for the trailing effect
+    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#cccccc";
-    ctx.font = fontSize + "px monospace";
+    ctx.font = fontSize + 'px monospace';
 
     for (let i = 0; i < drops.length; i++) {
-      const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+
+      // Randomly pick color: mostly grey, sometimes green or blue
+      const rand = Math.random();
+      if (rand < 0.85) {
+        ctx.fillStyle = '#888'; // grey
+      } else if (rand < 0.95) {
+        ctx.fillStyle = '#0f0'; // green
+      } else {
+        ctx.fillStyle = '#00ccff'; // blue
+      }
+
       ctx.fillText(text, i * fontSize, drops[i] * fontSize);
 
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
@@ -150,7 +591,7 @@
     }
   }
 
-  setInterval(drawMatrix, 35);
+  setInterval(drawMatrix, 33);
 
   window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
