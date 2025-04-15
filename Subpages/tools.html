@@ -7,12 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
-      margin: 0;
-      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
-      background-color: #0d0d0d;
-      color: #00ffcc;
-      overflow-x: hidden;
-    }
+  margin: 0;
+  font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+  background-color: #0d0d0d;
+  color: #00ffcc;
+  overflow-x: hidden;
+}
 
     canvas#matrixCanvas {
       position: fixed;
@@ -61,13 +61,6 @@
   z-index: 999;
 }
 
-    nav {
-      text-align: center;
-      margin-top: 10px;
-      z-index: 1;
-      position: relative;
-    }
-
     nav ul {
       list-style: none;
       padding: 0;
@@ -86,6 +79,27 @@
       color: #00ccff;
       text-decoration: none;
       display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
     section {
@@ -241,19 +255,23 @@
     </div>
 
     <div class="tool">
-      <h3><a href="#">John the Ripper</a></h3>
+      <h3><a href="johntheripper.html">John the Ripper</a></h3>
       <img src="../Icons/john.png" alt="John the Ripper Icon" style="height:50px;">
       <p>John the Ripper is a fast password cracker commonly used to test password strength on UNIX systems. It's efficient for cracking hashes using dictionary attacks.</p>
     </div>
 
     <div class="tool">
-      <h3><a href="#">Nikto</a></h3>
+      <h3><a href="nikto.html">Nikto</a></h3>
       <img src="../Icons/nikto.png" alt="Nikto Icon" style="height:50px;">
       <p>Nikto is a web server scanner that detects potential issues like outdated software, insecure files, and misconfigurations — perfect for initial recon.</p>
     </div>
   </div>
 </section>
-
+<div class="nav-buttons">
+    <a href="metasploit.html"><button class="nav-button">← Metasploit</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="hydra.html"><button class="nav-button">Hydra →</button></a>
+  </div>
   <script>
   const canvas = document.getElementById('matrixCanvas');
   const ctx = canvas.getContext('2d');
@@ -266,12 +284,15 @@
   const drops = Array(Math.floor(columns)).fill(1);
 
   function drawMatrix() {
+    // Fade the previous frame slightly for the trailing effect
     ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.font = fontSize + 'px monospace';
 
     for (let i = 0; i < drops.length; i++) {
       const text = letters.charAt(Math.floor(Math.random() * letters.length));
+
+      // Randomly pick color: mostly grey, sometimes green or blue
       const rand = Math.random();
       if (rand < 0.85) {
         ctx.fillStyle = '#888'; // grey
@@ -280,29 +301,23 @@
       } else {
         ctx.fillStyle = '#00ccff'; // blue
       }
+
       ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
       if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
         drops[i] = 0;
       }
+
       drops[i]++;
     }
   }
 
-  setInterval(drawMatrix, 33); // ✅ FIXED: was incorrectly calling draw()
+  setInterval(drawMatrix, 33);
 
-  window.addEventListener('resize', () => {
+  window.addEventListener("resize", () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
 </script>
-
-
-    setInterval(draw, 33);
-
-    window.addEventListener('resize', () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-    });
-  </script>
 </body>
 </html>
