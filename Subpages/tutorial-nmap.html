@@ -4,10 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Nmap Tutorial - The Kali Linux Info Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
-      font-family: 'Courier New', Courier, monospace;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
       background-color: #0d0d0d;
       color: #00ffcc;
       overflow-x: hidden;
@@ -60,13 +61,6 @@
   z-index: 999;
 }
 
-    nav {
-      text-align: center;
-      margin-top: 10px;
-      z-index: 1;
-      position: relative;
-    }
-
     nav ul {
       list-style: none;
       padding: 0;
@@ -85,6 +79,27 @@
       color: #00ccff;
       text-decoration: none;
       display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
     section {
@@ -111,6 +126,43 @@
 </head>
 <body>
   <canvas id="matrixCanvas"></canvas>
+  <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">User/Pass Generator</button>
+  </a>
+  <a href="../GamesHub/gameshub.html" title="GameHub" style="
+    position: absolute;
+    left: 140px;
+    top: 10px;
+    right: 10px;
+    z-index: 999;
+  ">
+    <button style="
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 6px 10px;
+      font-size: 0.8rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100px;
+    ">GameHub</button>
+  </a>
 <button style="
       background-color: #00ccff;
       color: #000;
@@ -224,7 +276,11 @@ MAC Address: 00:0C:29:3E:22:5B (VMware)
       <li>Use <code>nmap --top-ports 100</code> to quickly scan common ports</li>
     </ul>
   </section>
-
+<div class="nav-buttons">
+    <a href="metasploit.html"><button class="nav-button">← Metasploit</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="hydra.html"><button class="nav-button">Hydra →</button></a>
+  </div>
   <script>
     const canvas = document.getElementById('matrixCanvas');
     const ctx = canvas.getContext('2d');
