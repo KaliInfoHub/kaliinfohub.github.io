@@ -1,18 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kali Linux Fun Games Hub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
+      margin: 0;
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      text-align: center;
-      padding: 40px 20px;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      overflow-x: hidden;
     }
+
     canvas#matrixCanvas {
       position: fixed;
       top: 0;
@@ -22,106 +23,111 @@
       z-index: 0;
       pointer-events: none;
     }
-    header, section, .kali-logo, a {
-      position: relative;
-      z-index: 1;
-    }
 
     header {
+      text-align: center;
+      font-size: 2.2rem;
+      padding: 80px 20px 30px;
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-align: center;
-      padding: 70px 20px 20px;
-      font-size: 1rem;
-      font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
+      position: relative;
+      z-index: 1;
     }
 
     @keyframes glow {
       from { text-shadow: 0 0 10px #00ffcc; }
       to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
-    
-    .kali-logo {
+
+    .logo-link {
       position: fixed;
-      top: -20px;
-      left: -10px;
-      width: 100px;
-      height: auto;
+      top: 10px;
+      left: 10px;
       z-index: 999;
     }
-    h1 {
-      font-size: 2.5rem;
-      color: #00ccff;
-      margin-bottom: 40px;
+
+    .logo-link img {
+      width: 80px;
+      height: auto;
     }
-    .game-links {
-      display: flex;
-      flex-direction: column;
+
+    .button-fixed {
+      position: absolute;
+      z-index: 999;
+      background-color: #00ccff;
+      color: #000;
+      font-size: 0.8rem;
+      padding: 6px 10px;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+    }
+
+    .userpass-button {
+      top: 10px;
+      right: 10px;
+    }
+
+    .gamehub-button {
+      top: 40px;
+      right: 10px;
+    }
+
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
-      max-width: 500px;
-      margin: auto;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+      position: relative;
+      z-index: 1;
     }
-    a {
+
+    .games-grid a {
       background-color: #111;
       border: 1px solid #00ccff;
-      padding: 15px;
-      border-radius: 10px;
+      padding: 20px;
+      border-radius: 12px;
       color: #00ffcc;
       text-decoration: none;
-      font-size: 1.2rem;
-      transition: background 0.3s;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 8px #00ccff33;
     }
-    a:hover {
+
+    .games-grid a:hover {
       background-color: #00ccff22;
+      transform: scale(1.05);
+      box-shadow: 0 0 12px #00ccff66;
     }
   </style>
 </head>
 <body>
-    <canvas id="matrixCanvas"></canvas>
-    <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.6rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 70px;
-    ">User/Pass Generator</button>
+  <!-- Matrix Background -->
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Logo -->
+  <a href="../index.html" class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" />
   </a>
-  <a href="gameshub.html" title="GameHub" style="
-    position: absolute;
-    top: 30px;
-    right: 138px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 80px;
-    ">GameHub</button>
+
+  <!-- Utility Buttons -->
+  <a href="../PassGen/Anonypass.html" title="User/Pass Generator">
+    <button class="button-fixed userpass-button">User/Pass Generator</button>
   </a>
-  <a href="../index.html"
-     class="logo-link">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-  <h1>Kali Linux Fun Games Hub</h1>
-  <div class="game-links">
+  <a href="gameshub.html" title="GameHub">
+    <button class="button-fixed gamehub-button">GameHub</button>
+  </a>
+
+  <!-- Page Header -->
+  <header>Kali Linux Fun Games Hub</header>
+
+  <!-- Game Links Grid -->
+  <div class="games-grid">
     <a href="hacker-terminal.html">Hacker Typing Simulator</a>
     <a href="rock-paper-scissors.html">Rock, Paper, Scissors</a>
     <a href="memory-match.html">Memory Flip Game</a>
@@ -130,5 +136,48 @@
     <a href="trivia.html">Simple Trivia</a>
     <a href="reaction-test.html">Reaction Time Test</a>
   </div>
+
+  <!-- Matrix Effect Script -->
+  <script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+        const rand = Math.random();
+        if (rand < 0.85) {
+          ctx.fillStyle = '#888'; // grey
+        } else if (rand < 0.95) {
+          ctx.fillStyle = '#0f0'; // green
+        } else {
+          ctx.fillStyle = '#00ccff'; // blue
+        }
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
 </body>
 </html>
