@@ -158,57 +158,97 @@
       width: 100px;
     ">GameHub</button>
   </a>
-<a href="../index.html"
-   class="logo-link">
-    
+<a href="../index.html" class="logo-link">
   <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
 </a>
 
 <canvas id="matrixCanvas"></canvas>
 
 <header>Metasploit Framework</header>
+
 <nav>
-    <ul>
-      <li><a href="AboutKali.html">About Kali</a></li>
-      <li><a href="install.html">Installation</a></li>
-      <li><a href="tools.html">Tools & Features</a></li>
-      <li><a href="commands.html">Commands</a></li>
-      <li><a href="tutorials.html">Tutorials</a></li>
-      <li><a href="community.html">Community Area</a></li>
-      <li><a href="contact.html">Contact Page</a></li>
-    </ul>
-  </nav>
+  <ul>
+    <li><a href="AboutKali.html">About Kali</a></li>
+    <li><a href="install.html">Installation</a></li>
+    <li><a href="tools.html">Tools & Features</a></li>
+    <li><a href="commands.html">Commands</a></li>
+    <li><a href="tutorials.html">Tutorials</a></li>
+    <li><a href="community.html">Community Area</a></li>
+    <li><a href="contact.html">Contact Page</a></li>
+  </ul>
+</nav>
+
 <section>
   <h2>What is Metasploit?</h2>
-  <p>Metasploit is a powerful penetration testing framework used to develop and execute exploits against remote targets. It includes tools for information gathering, exploit development, payload creation, and post-exploitation.</p>
+  <p>Metasploit is an open-source penetration testing platform that enables security professionals and ethical hackers to identify, exploit, and validate vulnerabilities in systems. It includes a comprehensive set of tools for reconnaissance, exploitation, privilege escalation, and post-exploitation.</p>
+  <p>Developed originally by H.D. Moore, Metasploit has grown into a vital tool in cybersecurity, integrated into nearly every professional penetration tester’s workflow.</p>
 </section>
 
 <section>
   <h2>Basic Usage</h2>
   <p>Start Metasploit:</p>
   <code>msfconsole</code>
+
   <p>Search for an exploit:</p>
   <code>search vsftpd</code>
+
   <p>Use an exploit module:</p>
   <code>use exploit/unix/ftp/vsftpd_234_backdoor</code>
+
   <p>Set options and run:</p>
   <code>
 set RHOST 192.168.1.10<br>
+set RPORT 21<br>
 exploit
   </code>
+
+  <p>Get a list of payloads:</p>
+  <code>show payloads</code>
 </section>
 
 <section>
   <h2>Practical Example</h2>
-  <p>Exploit a vulnerable FTP server and gain shell access to perform further testing and enumeration on the target system.</p>
+  <p>Suppose you're testing a target machine running an outdated FTP service vulnerable to backdoor access. Using Metasploit, you can:</p>
+  <ul>
+    <li>Scan the network for hosts using Nmap</li>
+    <li>Identify service versions</li>
+    <li>Launch an appropriate exploit</li>
+    <li>Gain a shell or meterpreter session</li>
+    <li>Perform post-exploitation actions like hash dumping or privilege escalation</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Key Modules Explained</h2>
+  <ul>
+    <li><strong>Exploit:</strong> The code that takes advantage of a vulnerability</li>
+    <li><strong>Payload:</strong> What gets executed after the exploit is successful (e.g., reverse shell)</li>
+    <li><strong>Auxiliary:</strong> Tools for scanning, fuzzing, sniffing, etc.</li>
+    <li><strong>Post:</strong> Modules for post-exploitation, like gathering system information</li>
+    <li><strong>Encoder:</strong> Obfuscates payloads to avoid detection</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Tips for Beginners</h2>
+  <ul>
+    <li>Use <code>info</code> after selecting a module to learn what it does</li>
+    <li>Start with known vulnerable machines like Metasploitable or TryHackMe labs</li>
+    <li>Use <code>setg</code> to globally set options across modules</li>
+    <li>Save your sessions with <code>sessions -s</code> and list them using <code>sessions -l</code></li>
+    <li>Check out <a href="https://docs.rapid7.com/metasploit/" target="_blank">official Metasploit docs</a></li>
+  </ul>
 </section>
 
 <p><a href="../index.html">← Back to Home</a></p>
+
 <div class="nav-buttons">
-    <a href="nmap.html"><button class="nav-button">Nmap</button></a>
-    <a href="../index.html"><button class="nav-button">Home</button></a>
-    <a href="wireshark.html"><button class="nav-button">Wireshark</button></a>
-  </div>
+  <a href="nmap.html"><button class="nav-button">Nmap</button></a>
+  <a href="../index.html"><button class="nav-button">Home</button></a>
+  <a href="wireshark.html"><button class="nav-button">Wireshark</button></a>
+</div>
+
+<!-- Retain matrix script as-is -->
 <script>
   const canvas = document.getElementById('matrixCanvas');
   const ctx = canvas.getContext('2d');
@@ -255,8 +295,7 @@ exploit
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
   });
-  
 </script>
-
 </body>
+
 </html>
