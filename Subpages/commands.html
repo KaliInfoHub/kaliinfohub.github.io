@@ -61,13 +61,6 @@
   z-index: 999;
 }
 
-    nav {
-      text-align: center;
-      margin-top: 10px;
-      z-index: 1;
-      position: relative;
-    }
-
     nav ul {
       list-style: none;
       padding: 0;
@@ -86,6 +79,27 @@
       color: #00ccff;
       text-decoration: none;
       display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
     section {
@@ -355,7 +369,11 @@
   </div>
 
 </section>
-
+<div class="nav-buttons">
+    <a href="tools.html"><button class="nav-button">← Tools</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="tutorials.html"><button class="nav-button">Tutorials →</button></a>
+</div>
   <script>
   const canvas = document.getElementById('matrixCanvas');
   const ctx = canvas.getContext('2d');
