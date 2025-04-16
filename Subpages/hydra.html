@@ -82,12 +82,19 @@
       text-decoration: underline;
     }
     header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-align: center;
-      font-size: 2.5rem;
-      margin-bottom: 30px;
-      color: #00ccff;
-      text-shadow: 0 0 10px #00ccff55;
-      padding-top: 40px;
+      padding: 120px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
     section {
       background: #111;
