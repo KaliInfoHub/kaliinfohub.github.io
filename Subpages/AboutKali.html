@@ -121,8 +121,7 @@
     p {
       line-height: 1.6;
     }
-    
-    /* New styles for enhanced content */
+
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -153,28 +152,41 @@
     .tool-category {
       margin: 40px 0;
     }
-    
+
     .tool-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
     }
-    
+
     .tool-badge {
+      display: inline-block;
+      padding: 6px 12px;
+      margin: 4px;
       background-color: #111;
       color: #00ffcc;
       border: 1px solid #00ffcc;
       border-radius: 4px;
-      padding: 5px 10px;
-      font-size: 0.9rem;
+      cursor: pointer;
+      transition: background-color 0.3s;
     }
-    
+
+    .tool-badge:hover {
+      background-color: #00ccff;
+      color: #000;
+    }
+
+    .tool-badge.active {
+      background-color: #4285f4;
+      color: white;
+    }
+
     .timeline {
       position: relative;
       margin: 30px 0;
       padding: 20px 0;
     }
-    
+
     .timeline::before {
       content: '';
       position: absolute;
@@ -184,14 +196,14 @@
       width: 2px;
       background: linear-gradient(to bottom, transparent, #00ccff, transparent);
     }
-    
+
     .timeline-item {
       position: relative;
       margin-bottom: 30px;
       display: flex;
       justify-content: space-between;
     }
-    
+
     .timeline-content {
       width: 45%;
       background-color: rgba(0, 0, 0, 0.5);
@@ -199,7 +211,7 @@
       border-radius: 8px;
       border: 1px solid #00ccff;
     }
-    
+
     .timeline-date {
       position: absolute;
       top: 50%;
@@ -211,37 +223,39 @@
       border-radius: 4px;
       font-weight: bold;
     }
-    
+
     .image-showcase {
       display: flex;
       justify-content: space-between;
       margin: 30px 0;
       gap: 20px;
+      flex-wrap: wrap;
     }
-    
+
     .image-container {
-      flex: 1;
-      border: 1px solid #00ccff;
+      width: 600px;
+      height: 340px;
+      text-align: center;
       border-radius: 8px;
       overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
       position: relative;
+      border: 1px solid #00ccff;
     }
-    
-    .image-container {
-  width: 600px;  /* Fixed width for all containers */
-  height: 340px; /* Fixed height for all containers */
-  text-align: center;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  display: flex;
-  flex-direction: column;
-}
-    
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 4px;
+      transition: transform 0.3s ease;
+    }
+
     .image-container:hover img {
       transform: scale(1.05);
     }
-    
+
     .image-caption {
       position: absolute;
       bottom: 0;
@@ -251,8 +265,9 @@
       color: #00ffcc;
       padding: 10px;
       text-align: center;
+      font-style: italic;
     }
-    
+
     .quote-box {
       background-color: rgba(0, 0, 0, 0.5);
       border-left: 4px solid #00ffcc;
@@ -260,17 +275,17 @@
       margin: 30px 0;
       font-style: italic;
     }
-    
+
     .quote-author {
       text-align: right;
       color: #00ccff;
       margin-top: 10px;
     }
-    
+
     .faq-item {
       margin-bottom: 20px;
     }
-    
+
     .faq-question {
       background-color: rgba(0, 0, 0, 0.5);
       padding: 15px;
@@ -280,7 +295,7 @@
       font-weight: bold;
       color: #00ccff;
     }
-    
+
     .faq-answer {
       background-color: rgba(0, 0, 0, 0.3);
       padding: 15px;
@@ -288,90 +303,63 @@
       border: 1px solid #00ccff;
       border-top: none;
     }
-    
+
+    /* Deployment-specific image showcase tweaks */
+    .deployment-showcase .image-container {
+      width: 220px;
+      height: 200px;
+    }
+
+    .deployment-showcase .image-container img {
+      height: 140px;
+    }
+
+    .deployment-showcase .image-caption {
+      font-size: 14px;
+      padding: 8px;
+    }
+
     /* Responsive adjustments */
     @media (max-width: 768px) {
       .feature-grid {
         grid-template-columns: 1fr;
       }
-      
+
       .timeline::before {
         left: 30px;
       }
-      
+
       .timeline-item {
         flex-direction: column;
+        align-items: flex-start;
       }
-      
+
       .timeline-content {
         width: 100%;
-        margin-left: 50px;
+        margin-left: 0;
       }
-      
+
       .timeline-date {
-        left: 30px;
-        transform: translate(-50%, -50%);
+        position: static;
+        transform: none;
+        margin: 10px 0;
       }
-      
+
       .image-showcase {
         flex-direction: column;
+        align-items: center;
+      }
+
+      .image-container {
+        width: 90%;
+        height: auto;
       }
     }
-	.tool-badge {
-  display: inline-block;
-  padding: 6px 12px;
-  margin: 4px;
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.tool-badge:hover {
-  background-color: #e0e0e0;
-}
-
-.tool-badge.active {
-  background-color: #4285f4;
-  color: white;
-}
-
-.image-container {
-  position: relative;
-  text-align: center;
-}
-
-.image-container img {
-  max-width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  transition: all 0.3s ease;
-}
-
-.image-caption {
-  margin-top: 8px;
-  font-style: italic;
-  color: #666;
-}
-/* Add a specific class to target only these images */
-.deployment-showcase .image-container {
-  width: 220px;  /* Smaller width */
-  height: 200px; /* Smaller height */
-}
-
-.deployment-showcase .image-container img {
-  height: 140px; /* Smaller image height */
-}
-
-.deployment-showcase .image-caption {
-  font-size: 14px; /* Smaller font size for captions */
-  padding: 8px;
-}
   </style>
 </head>
 <body>
   <canvas id="matrixCanvas"></canvas>
-  
+
   <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
     position: absolute;
     top: 10px;
@@ -390,7 +378,6 @@
       width: 100px;
     ">User/Pass Generator</button>
   </a>
-  
   <a href="../GamesHub/gameshub.html" title="GameHub" style="
     position: absolute;
     left: 140px;
@@ -421,10 +408,10 @@
     <ul>
       <li><a href="AboutKali.html">About Kali</a></li>
       <li><a href="install.html">Installation</a></li>
-      <li><a href="tools.html">Tools & Features</a></li>
+      <li><a href="tools.html">Top Tools</a></li>
       <li><a href="commands.html">Commands</a></li>
       <li><a href="tutorials.html">Tutorials</a></li>
-      <li><a href="community.html">Community Area</a></li>
+      <li><a href="community.html">Community</a></li>
       <li><a href="contact.html">Contact Page</a></li>
     </ul>
   </nav>
@@ -567,83 +554,75 @@
     <span class="tool-badge" data-image="../Icons/shodan.png" data-caption="IoT device discovery with Shodan">Shodan</span>
   </div>
 </div>
-    
-    <div class="tool-category">
-      <h3>Vulnerability Assessment</h3>
-      <p>Tools for identifying security weaknesses and vulnerabilities in systems.</p>
-	  <div class="image-container" style="margin: 20px 0;">
-        <img src="../Icons/vuln.png" alt="Web Application Testing">
-        <div class="image-caption">Analyzing vulnerabilities with Kali's tools</div>
-      <div class="tool-list">
-        <span class="tool-badge">OpenVAS</span>
-        <span class="tool-badge">Nikto</span>                                                                    
-        <span class="tool-badge">Nessus</span>
-        <span class="tool-badge">OWASP ZAP</span>
-        <span class="tool-badge">SQLmap</span>
-        <span class="tool-badge">WPScan</span>
-      </div>
-    </div>
-    
-    <div class="tool-category">
-      <h3>Web Application Analysis</h3>
-      <p>Tools specifically designed for testing web applications and services.</p>
-      <div class="image-container" style="margin: 20px 0;">
-        <img src="../Icons/webapp.png" alt="Web Application Testing">
-        <div class="image-caption">Analyzing web vulnerabilities with Kali's tools</div>
-      </div>
-      <div class="tool-list">
-        <span class="tool-badge">Burp Suite</span>
-        <span class="tool-badge">OWASP ZAP</span>
-        <span class="tool-badge">SQLmap</span>
-        <span class="tool-badge">WPScan</span>
-        <span class="tool-badge">Skipfish</span>
-        <span class="tool-badge">Dirbuster</span>
-      </div>
-    </div>
-    
-    <div class="tool-category">
-      <h3>Password Attacks</h3>
-      <p>Tools for testing password strength and performing password recovery.</p>
-	  <div class="image-container" style="margin: 20px 0;">
-        <img src="../Icons/passattack.png" alt="Web Application Testing">
-        <div class="image-caption">Analyzing password strength and performing password recovery</div>
-      <div class="tool-list">
-        <span class="tool-badge">Hashcat</span>
-        <span class="tool-badge">John the Ripper</span>
-        <span class="tool-badge">Hydra</span>
-        <span class="tool-badge">Medusa</span>
-        <span class="tool-badge">Crunch</span>
-        <span class="tool-badge">Cewl</span>
-      </div>
-    </div>
-    
-    <div class="tool-category">
-      <h3>Wireless Attacks</h3>
-      <p>Tools for testing wireless network security.</p>
-      <div class="image-container" style="margin: 20px 0;">
-        <img src="../Icons/wifiattacks.jpg" alt="Wireless Security Testing">
-        <div class="image-caption">Wireless network security assessment tools</div>
-      </div>
-      <div class="tool-list">
-        <span class="tool-badge">Aircrack-ng</span>
-        <span class="tool-badge">Kismet</span>
-        <span class="tool-badge">Wifite</span>
-        <span class="tool-badge">Reaver</span>
-        <span class="tool-badge">Pixiewps</span>
-        <span class="tool-badge">Bully</span>
-      </div>
-    </div>
-    
-    <h2>Deployment Options</h2>
-<div class="image-showcase deployment-showcase">
-  <a href="https://www.kali.org/docs/installation/hard-disk-install/" class="image-link">
-    <div class="image-container">
-      <img src="../Icons/iso.jpg" alt="Kali on Bare Metal">
-      <div class="image-caption">Bare Metal Installation</div>
-    </div>
-  </a>
   
-  <a href="https://www.kali.org/docs/virtualization/" class="image-link">
+  <div class="tool-category">
+  <h3>Vulnerability Assessment</h3>
+  <p>Tools for identifying security weaknesses and vulnerabilities in systems.</p>
+  <div class="image-container" style="margin: 20px 0;">
+    <img id="tool-image" src="../Icons/theharvester.png" alt="Information Gathering Tools in Action">
+    <div class="image-caption" id="image-caption">Discovering network information with Kali tools</div>
+  </div>
+  <div class="tool-list">
+    <span class="tool-badge" data-image="../Icons/nmapterminal.jpg" data-caption="Network scanning with Nmap">OpenVAS</span>
+    <span class="tool-badge" data-image="../Icons/recon.png" data-caption="Web reconnaissance with Recon-ng">Nikto</span>
+    <span class="tool-badge" data-image="../Icons/maltegopage.png" data-caption="Entity relationship mapping with Maltego">Nessus</span>
+    <span class="tool-badge" data-image="../Icons/theharvester.png" data-caption="Information gathering with theHarvester">QWASP ZAP</span>
+    <span class="tool-badge" data-image="../Icons/dmitry.png" data-caption="Gathering information with DMitry">SQLMap</span>
+    <span class="tool-badge" data-image="../Icons/shodan.png" data-caption="IoT device discovery with Shodan">WPScan</span>
+  </div>
+</div>
+
+<div class="tool-category">
+  <h3>Web Application Analysis</h3>
+      <p>Tools specifically designed for testing web applications and services.</p>
+  <div class="image-container" style="margin: 20px 0;">
+    <img id="tool-image" src="../Icons/theharvester.png" alt="Information Gathering Tools in Action">
+    <div class="image-caption" id="image-caption">Discovering network information with Kali tools</div>
+  </div>
+  <div class="tool-list">
+    <span class="tool-badge" data-image="../Icons/nmapterminal.jpg" data-caption="Network scanning with Nmap">Burp Suite</span>
+    <span class="tool-badge" data-image="../Icons/recon.png" data-caption="Web reconnaissance with Recon-ng">QWASP ZAP</span>
+    <span class="tool-badge" data-image="../Icons/maltegopage.png" data-caption="Entity relationship mapping with Maltego">SQLMap</span>
+    <span class="tool-badge" data-image="../Icons/theharvester.png" data-caption="Information gathering with theHarvester">WPScan</span>
+    <span class="tool-badge" data-image="../Icons/dmitry.png" data-caption="Gathering information with DMitry">Skipfish</span>
+    <span class="tool-badge" data-image="../Icons/shodan.png" data-caption="IoT device discovery with Shodan">Dirbuster</span>
+  </div>
+</div>
+
+<div class="tool-category">
+  <h3>Password Attacks</h3>
+      <p>Tools for testing password strength and performing password recovery.</p>
+  <div class="image-container" style="margin: 20px 0;">
+    <img id="tool-image" src="../Icons/theharvester.png" alt="Information Gathering Tools in Action">
+    <div class="image-caption" id="image-caption">Analyzing password strength and performing password recovery</div>
+  </div>
+  <div class="tool-list">
+    <span class="tool-badge" data-image="../Icons/nmapterminal.jpg" data-caption="Network scanning with Nmap">Hashcat</span>
+    <span class="tool-badge" data-image="../Icons/recon.png" data-caption="Web reconnaissance with Recon-ng">John the Ripper</span>
+    <span class="tool-badge" data-image="../Icons/maltegopage.png" data-caption="Entity relationship mapping with Maltego">Hydra</span>
+    <span class="tool-badge" data-image="../Icons/theharvester.png" data-caption="Information gathering with theHarvester">Medusa</span>
+    <span class="tool-badge" data-image="../Icons/dmitry.png" data-caption="Gathering information with DMitry">Crunch</span>
+    <span class="tool-badge" data-image="../Icons/shodan.png" data-caption="IoT device discovery with Shodan">Cewl</span>
+  </div>
+</div>
+
+<div class="tool-category">
+  <h3>Wireless Attacks</h3>
+      <p>Tools for testing wireless network security.</p>
+  <div class="image-container" style="margin: 20px 0;">
+    <img id="tool-image" src="../Icons/theharvester.png" alt="Information Gathering Tools in Action">
+    <div class="image-caption" id="image-caption">Wireless network security assessment tools</div>
+  </div>
+  <div class="tool-list">
+    <span class="tool-badge" data-image="../Icons/nmapterminal.jpg" data-caption="Network scanning with Nmap">Aircrack-ng</span>
+    <span class="tool-badge" data-image="../Icons/recon.png" data-caption="Web reconnaissance with Recon-ng">Kismet</span>
+    <span class="tool-badge" data-image="../Icons/maltegopage.png" data-caption="Entity relationship mapping with Maltego">Reaver</span>
+    <span class="tool-badge" data-image="../Icons/theharvester.png" data-caption="Information gathering with theHarvester">Wifite</span>
+    <span class="tool-badge" data-image="../Icons/dmitry.png" data-caption="Gathering information with DMitry">Pixiewps</span>
+    <span class="tool-badge" data-image="../Icons/shodan.png" data-caption="IoT device discovery with Shodan">Bully</span>
+  </div>
+</div>
+  <ahref="https://www.kali.org/docs/virtualization/" class="image-link">
     <div class="image-container">
       <img src="../Icons/vmpic.PNG" alt="Kali on Virtual Machine">
       <div class="image-caption">Virtual Machine</div>
@@ -817,4 +796,4 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   </script>
 </body>
-</html>
+	</html>
