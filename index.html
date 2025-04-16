@@ -345,7 +345,7 @@
 }
 
 #loading-bar-wrapper {
-  width: 80%;
+  width: 99%;
   height: 16px;
   border: 2px solid #00ccff;
   border-radius: 8px;
@@ -459,43 +459,17 @@ W   W  EEEEE  LLLLL  CCCC  OOO   M   M  EEEEE
 </div>
   <canvas id="matrixCanvas"></canvas>
 
-  <a href="PassGen/Anonypass.html" title="User/Pass Generator" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Kelly Slab', 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100px;
-    ">User/Pass Generator</button>
-  </a>
-  <a href="GamesHub/gameshub.html" title="GameHub" style="
-    position: absolute;
-    left: 140px;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Kelly Slab', 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 100px;
-    ">GameHub</button>
-  </a>
+  <a href="subloadingscreen.html?target=PassGen/Anonypass.html" title="User/Pass Generator" style="position: absolute; top: 10px; right: 10px; z-index: 999;">
+  <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', 'Courier New', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
+    User/Pass Generator
+  </button>
+</a>
+
+<a href="Subpages/subloadingscreen.html?target=../GamesHub/gameshub.html" title="GameHub" style="position: absolute; left: 140px; top: 10px; right: 10px; z-index: 999;">
+  <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', 'Courier New', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
+    GameHub
+  </button>
+</a>
 
   <a href="../index.html">
   <img src="Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
@@ -829,6 +803,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 <button onclick="localStorage.removeItem('visitedBefore'); location.reload();">Reset Loading Screen</button>
+  
+
 </body>
-                                                                            
 </html>
