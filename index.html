@@ -354,6 +354,42 @@
   border-radius: 8px;
   overflow: hidden;
 }
+  .terminal-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+    }
+
+    .terminal-box {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 20px;
+      width: 480px;
+      max-width: 90%;
+      font-family: monospace;
+      font-size: 14px;
+      overflow-y: auto;
+      height: 300px;
+      box-shadow: 0 0 20px #00ccff88;
+    }
+
+    .loading-bar {
+      width: 80%;
+      height: 8px;
+      background: linear-gradient(to right, #00ccff 70%, transparent 70%);
+      border-radius: 5px;
+      margin: 20px auto;
+      border: 1px solid #00ccff;
+    }
+
+    .ascii-welcome {
+      text-align: center;
+      white-space: pre;
+      font-family: monospace;
+      margin-top: 20px;
+      color: #00ccff;
+    }
 
 
 #loading-bar {
@@ -380,59 +416,64 @@
   to { opacity: 1; transform: scale(1); }
 }
 #boot-text {
-  position: relative;
-}
-
-#boot-text::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: repeating-linear-gradient(
-    to bottom,
-    rgba(0, 255, 204, 0.03),
-    rgba(0, 255, 204, 0.03) 1px,
-    transparent 1px,
-    transparent 3px
-  );
-  pointer-events: none;
-  z-index: 1;
-}
-
-.glitch {
-  position: relative;
-  color: #00ffcc;
-  animation: glitch 1s infinite;
-}
-
-@keyframes glitch {
-  0% { text-shadow: 1px 0 red, -1px 0 cyan; }
-  25% { text-shadow: -1px 0 red, 1px 0 cyan; }
-  50% { text-shadow: 1px 1px red, -1px -1px cyan; }
-  75% { text-shadow: -1px -1px red, 1px 1px cyan; }
-  100% { text-shadow: 0 0 red, 0 0 cyan; }
-}
-
-.blink-cursor {
-  position: absolute;
-  animation: blink 1s infinite;
-  color: #00ccff;
-}
-
-@keyframes blink {
-  0%, 50% { opacity: 1; }
-  51%, 100% { opacity: 0; }
-}
-
-#ascii-banner {
-  display: none;
-  color: #00ffcc;
-  font-family: monospace;
-  white-space: pre;
-  text-align: center;
-  margin-top: 20px;
-}
+      white-space: pre-wrap;
+      width: 600px;
+      max-width: 90%;
+      height: 200px;
+      padding: 20px;
+      background-color: #0d0d0d;
+      border: 1px solid #00ccff44;
+      box-shadow: 0 0 10px #00ffcc55;
+      border-radius: 10px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      animation: flicker 2s infinite;
+      display: none;
+      /* Remove any existing positioning that might interfere */
+      position: relative;
+      margin: 0 auto; /* Simple horizontal centering */
+    }
+    
+    /* Make sure loading screen centers its content */
+    #loading-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      color: #00ffcc;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      font-size: 0.95rem;
+      z-index: 99999;
+      overflow: hidden;
+    }
+    
+    /* Center loading bar */
+    #loading-bar-wrapper {
+      width: 80%;
+      max-width: 600px;
+      height: 16px;
+      border: 2px solid #00ccff;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 20px auto;
+      display: none;
+    }
+    
+    /* Center ASCII banner */
+    #ascii-banner {
+      display: none;
+      color: #00ffcc;
+      font-family: monospace;
+      white-space: pre;
+      text-align: center;
+      margin: 20px auto;
+    }
 
 </style>
 </head>
@@ -501,7 +542,7 @@ W   W  EEEEE  LLLLL  CCCC  OOO   M   M  EEEEE
       <em>Nmap</em></a>, capturing packets with <a href="Subpages/wireshark.html" target="_blank" style="color: #00ccff; text-decoration: none;">
       <em>Wireshark</em></a>, or simulating attacks with <a href="Subpages/metasploit.html" target="_blank" style="color: #00ccff; text-decoration: none;">
       <em>Metasploit</em></a>, Kali is the ultimate playground for learning and practicing cybersecurity and ethical hacking.</p>
-    <img src="Icons/kalidesktop.png" alt="Kali Desktop" style="max-width:70%; border-radius: 8px; margin: 10px 0;">
+	  <img src="Icons/kalidesktop.png" alt="Kali Desktop" style="max-width:70%; border-radius: 8px; margin: 10px 0;">
   </section>
 <section style="background-color: #111; padding: 20px; text-align: center; border-top: 1px solid #00ccff33; border-bottom: 1px solid #00ccff33;">
   <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 40px;">
