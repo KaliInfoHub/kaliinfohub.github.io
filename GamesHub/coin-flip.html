@@ -5,16 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Coin Flip</title>
   <style>
-    body {
+    html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
       background-color: #0d0d0d;
       color: #00ffcc;
       font-family: 'Courier New', monospace;
-      padding: 40px 20px;
-      text-align: center;
     }
-    header, section, .kali-logo, a {
+    
+    canvas#matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+    
+    header, section, .kali-logo, a, h1, button, .game-output, p {
       position: relative;
       z-index: 1;
+    }
+
+    body {
+      padding: 40px 20px;
+      text-align: center;
     }
 
     header {
@@ -41,10 +58,12 @@
       height: auto;
       z-index: 999;
     }
+    
     h1 {
       color: #00ccff;
       margin-bottom: 30px;
     }
+    
     button {
       background-color: #00ccff;
       color: black;
@@ -55,6 +74,7 @@
       border-radius: 6px;
       cursor: pointer;
     }
+    
     input {
       background-color: #222;
       color: #00ffcc;
@@ -62,6 +82,7 @@
       padding: 8px;
       margin: 10px;
     }
+    
     .game-output {
       margin-top: 20px;
       font-size: 1.2rem;
@@ -69,6 +90,9 @@
   </style>
 </head>
 <body>
+    <!-- Matrix Background -->
+    <canvas id="matrixCanvas"></canvas>
+    
     <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
     position: absolute;
     top: 10px;
@@ -80,17 +104,17 @@
       color: #000;
       border: none;
       padding: 6px 10px;
-      font-size: 0.6rem;
+      font-size: 0.8rem;
       font-family: 'Courier New', monospace;
       border-radius: 4px;
       cursor: pointer;
-      width: 70px;
+      width: 90px;
     ">User/Pass Generator</button>
   </a>
   <a href="gameshub.html" title="GameHub" style="
     position: absolute;
-    top: 30px;
-    right: 138px;
+    top: 10px;
+    left: 138px;
     z-index: 999;
   ">
     <button style="
@@ -111,13 +135,62 @@
   <h1>Coin Flip</h1>
   <button onclick="flipCoin()">Flip Coin</button>
   <div class="game-output" id="output"></div>
+  
   <script>
+    // Matrix effect
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const letters = 'アァイィウエオカキクケコサシスセソ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const fontSize = 16;
+    const columns = Math.floor(canvas.width / fontSize);
+    const drops = Array(columns).fill(1);
+
+    function drawMatrix() {
+      ctx.fillStyle = 'rgba(26, 26, 26, 0.08)'; // Fade effect
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = `${fontSize}px monospace`;
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters.charAt(Math.floor(Math.random() * letters.length));
+
+        // Random color choice: mostly grey, sometimes green or blue
+        const rand = Math.random();
+        if (rand > 0.985) {
+          ctx.fillStyle = '#00ff00'; // Green
+        } else if (rand > 0.97) {
+          ctx.fillStyle = '#00ccff'; // Light blue
+        } else {
+          ctx.fillStyle = '#555';    // Grey
+        }
+
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        // Reset drop
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(drawMatrix, 40);
+
+    window.addEventListener('resize', () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
     
-          function flipCoin() {
-            const result = Math.random() > 0.5 ? "Heads" : "Tails";
-            document.getElementById('output').textContent = "Result: " + result;
-          }
-        
+    // Game function
+    function flipCoin() {
+      const result = Math.random() > 0.5 ? "Heads" : "Tails";
+      document.getElementById('output').textContent = "Result: " + result;
+    }
   </script>
   <p><a href="../index.html">← Back to Home</a></p>
 </body>
