@@ -17,7 +17,7 @@
       position: absolute;
       top: -25px;
       left: -15px;
-      width: 100px;
+      width: 150px;
       height: auto;
       z-index: 999;
     }
@@ -36,11 +36,14 @@
       text-decoration: underline;
     }
     header {
+      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-align: center;
-      font-size: 1.8rem;
-      margin-bottom: 30px;
-      margin-top: 45px;
-      color: #00ccff;
+      padding: 120px 20px 20px;
+      font-size: 2rem;
+      font-weight: bold;
+      animation: glow 2s ease-in-out infinite alternate;
     }
     section {
       background: #111;
