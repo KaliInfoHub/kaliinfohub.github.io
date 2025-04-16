@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,12 +7,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
-  margin: 0;
-  font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
-  background-color: #0d0d0d;
-  color: #00ffcc;
-  overflow-x: hidden;
-}
+      margin: 0;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+      background-color: #0d0d0d;
+      color: #00CCFF;
+      overflow-x: hidden;
+    }
 
     canvas#matrixCanvas {
       position: fixed;
@@ -31,7 +30,7 @@
     }
 
     header {
-      background: linear-gradient(90deg, #00ffcc, #00ccff);
+      background: linear-gradient(90deg, #0080FF, #00CCFF);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
@@ -42,25 +41,25 @@
     }
 
     @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffcc; }
-      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+      from { text-shadow: 0 0 10px #00CCFF; }
+      to { text-shadow: 0 0 20px #00CCFF, 0 0 30px #00CCFF; }
     }
 
     .kali-logo {
       position: absolute;
       top: -20px;
       left: -10px;
-      width: 100px;
+      width: 120px;
       height: auto;
       z-index: 999;
     }
     .logo-link {
-  display: inline-block;  /* Makes the anchor wrap the image fully */
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 999;
-}
+      display: inline-block;  /* Makes the anchor wrap the image fully */
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 999;
+    }
 
     nav {
       text-align: center;
@@ -81,10 +80,10 @@
 
     nav ul li a {
       background-color: #111;
-      border: 1px solid #00ccff;
+      border: 1px solid #00CCFF;
       padding: 10px 15px;
       border-radius: 6px;
-      color: #00ccff;
+      color: #00CCFF;
       text-decoration: none;
       display: inline-block;
     }
@@ -96,7 +95,7 @@
     }
 
     h2 {
-      color: #00ccff;
+      color: #00CCFF;
       text-align: center;
       margin-bottom: 20px;
     }
@@ -105,16 +104,16 @@
       background-color: #111;
       padding: 20px;
       border-radius: 10px;
-      border: 1px solid #00ccff44;
+      border: 1px solid #00CCFF;
     }
 
     input, textarea {
       width: 100%;
       background-color: #000;
-      border: 1px solid #00ccff;
+      border: 1px solid #00CCFF;
       padding: 10px;
       margin-bottom: 15px;
-      color: #00ffcc;
+      color: #00CCFF;
       font-family: monospace;
     }
 
@@ -141,7 +140,7 @@
       overflow: hidden;
       font-family: 'Courier New', monospace;
       background: black;
-      color: #00ff00;
+      color: #00CCFF;
     }
 
     canvas {
@@ -151,31 +150,45 @@
       z-index: -1;
     }
 
-    nav {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      background: rgba(0, 0, 0, 0.85);
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
       display: flex;
       justify-content: center;
-      padding: 1rem;
-      z-index: 10;
-      box-shadow: 0 2px 10px #00ff00;
+      gap: 10px;
+      flex-wrap: wrap;
     }
 
-    nav button {
-      background: none;
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      padding: 0.2rem 0.8rem;
-      margin: 0 1rem;
+    nav ul li a {
+      background-color: #111;
+      border: 1px solid #00ccff;
+      padding: 10px 15px;
+      border-radius: 6px;
+      color: #00ccff;
+      text-decoration: none;
+      display: inline-block;
+    }
+	.nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    .nav-button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 8px 15px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
       cursor: pointer;
-      font-size: 1rem;
+      transition: all 0.3s ease;
     }
-
-    nav button:hover {
-      background: #00ff00;
-      color: black;
+    .nav-button:hover {
+      background-color: #00ffcc;
+      box-shadow: 0 0 15px #00ffcc;
     }
 
     .section {
@@ -191,14 +204,14 @@
     /* Password generator styles */
     .container {
       position: relative;
-      top: 63%;
+      top: 45%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
       background: rgba(0, 0, 0, 0.7);
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 0 20px #00ff00;
+      box-shadow: 0 0 20px #00CCFF;
       width: 90%;
       max-width: 450px;
     }
@@ -211,8 +224,8 @@
 
     button {
       background: #000;
-      border: 1px solid #00ff00;
-      color: #00ff00;
+      border: 1px solid #00CCFF;
+      color: #00CCFF;
       padding: 0.5rem 1rem;
       cursor: pointer;
       font-size: 1rem;
@@ -220,14 +233,14 @@
     }
 
     button:hover {
-      background: #00ff00;
+      background: #00CCFF;
       color: #000;
     }
 
     label, input, select {
       display: block;
       margin: 0.4rem auto;
-      color: #00ff00;
+      color: #00CCFF;
     }
 
     input, select {
@@ -244,11 +257,11 @@
       align-items: center;
     }
     @media (max-width: 600px) {
-  .wrapper {
-    flex-direction: column;
-    align-items: stretch;
-  }
-}
+      .wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
 
     /* Username generator styles */
     .wrapper {
@@ -297,7 +310,7 @@
       border-radius: 6px;
       margin-top: 4px;
       background: rgba(255, 255, 255, 0.2);
-      color: #fff;
+      color: #00CCFF;
     }
 
     .username-container button {
@@ -308,18 +321,24 @@
     }
 
     .username-container button:hover {
-      background: #29b6f6;
+      background: #00CCFF;
     }
   </style>
 </head>
 <body>
-<canvas id="matrix"></canvas>
-
+<canvas id="matrixCanvas"></canvas>
+<a href="../index.html" class="logo-link">
+  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+</a>
 <nav>
   <button onclick="switchSection('password')">🔐 Password Generator</button>
   <button onclick="switchSection('username')">🧑 Username Generator</button>
 </nav>
-
+<div class="nav-buttons">
+    <a href="../GamesHub/gameshub.html"><button class="nav-button">Games Hub</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="../Subpages/hacked.html"><button class="nav-button">DONT CLICK HERE!</button></a>
+  </div>
 <div id="password" class="section active">
   <div class="container">
     <h1>Password Generator</h1>
@@ -339,9 +358,7 @@
     <button onclick="generatePassword()">Generate Password</button>
     <button onclick="copyPassword()">Copy to Clipboard</button>
   </div>
-  <p><a href="../index.html">← Back to Home</a></p>
 </div>
-
 <div id="username" class="section username-section">
   <div class="wrapper">
     <div class="username-container">
@@ -357,32 +374,65 @@
     </div>
     <div class="result-box" id="result">Your username will appear here!</div>
   </div>
-  <p><a href="../index.html">← Back to Home</a></p>
 </div>
-
 <script>
-// Matrix background
-const canvas = document.getElementById('matrix');
+// Enhanced Matrix background (combining both styles)
+const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
-canvas.height = window.innerHeight;
+
+// Set canvas to full window size
 canvas.width = window.innerWidth;
-const letters = "01";
-const fontSize = 14;
-const columns = canvas.width / fontSize;
-const drops = Array.from({ length: columns }).fill(1);
+canvas.height = window.innerHeight;
+
+// Characters to use in the matrix rain
+const letters = 'アァイィウエオカキクケコサシスセソ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const fontSize = 16;
+const columns = Math.floor(canvas.width / fontSize);
+
+// Initialize drops array
+const drops = Array(columns).fill(1);
+
 function drawMatrix() {
-  ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+  // Semi-transparent background for fade effect
+  ctx.fillStyle = 'rgba(26, 26, 26, 0.08)';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.fillStyle = "#0f0";
-  ctx.font = fontSize + "px monospace";
+
+  ctx.font = `${fontSize}px monospace`;
+
   for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
+    // Get random character
+    const text = letters.charAt(Math.floor(Math.random() * letters.length));
+
+    // Random color choice: mostly grey, sometimes green or blue
+    const rand = Math.random();
+    if (rand > 0.985) {
+      ctx.fillStyle = '#00ff00'; // Green
+    } else if (rand > 0.97) {
+      ctx.fillStyle = '#00ccff'; // Light blue
+    } else {
+      ctx.fillStyle = '#555';    // Grey
+    }
+
+    // Draw the character
     ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+
+    // Reset drop
+    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+      drops[i] = 0;
+    }
+
     drops[i]++;
   }
 }
-setInterval(drawMatrix, 33);
+
+// Run the matrix effect animation
+setInterval(drawMatrix, 40);
+
+// Handle window resize
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
 
 // Section switcher
 function switchSection(id) {
@@ -390,8 +440,7 @@ function switchSection(id) {
   document.getElementById(id).classList.add('active');
 }
 
-// Load other scripts (password and username generators)
-
+// Password Generator Functions
 function generatePassword() {
   const length = parseInt(document.getElementById("length").value) || 16;
   const includeUpper = document.getElementById("includeUpper").checked;
@@ -460,7 +509,7 @@ function copyPassword() {
   navigator.clipboard.writeText(text).then(() => alert("Password copied to clipboard!"));
 }
 
-
+// Username Generator Functions
 const adjectives = ["Cool","Happy","Quick","Lazy","Bright","Silent","Sunny","Magic","Smart","Funny","Daddy","Mummy","Legend","Killer","Ninja","Horny","Mystic","Sexy","Idiot","Crazy"];
 const nouns = ["Tiger","Pizza","Cloud","Robot","Chair","Penguin","Wizard","Rocket","Panda","Guitar","Noodle","Taco","Dragon","Zebra","Unicorn","Kitten","Puppy","Banana","Ninja","Burrito"];
 const separators = ["", "_", ".", "-"];
@@ -508,8 +557,6 @@ function generateUsername() {
 
   document.getElementById("result").textContent = "⚠️ Couldn't generate a username. Adjust your settings.";
 }
-
 </script>
-<script>
-    
+</body>
 </html>
