@@ -195,12 +195,268 @@
       background-color: #660000 !important;
       color: #ffcccc;
     }
-  
+    .terminal-section {
+  background-color: #000;
+  color: #00ffcc;
+  font-family: monospace;
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 1px solid #00ffcc33;
+}
+
+#terminal {
+  background-color: #111;
+  border: 1px solid #00ffcc33;
+  border-radius: 8px;
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+
+#terminal-output {
+  white-space: pre-wrap;
+  line-height: 1.5em;
+  margin-bottom: 10px;
+  min-height: 200px;
+}
+
+.terminal-input-line {
+  display: flex;
+  align-items: center;
+}
+
+.prompt {
+  color: #00ccff;
+  margin-right: 5px;
+}
+
+#terminal-input {
+  background: none;
+  border: none;
+  color: #00ffcc;
+  flex: 1;
+  font-family: monospace;
+  font-size: 1rem;
+  outline: none;
+}
+  #loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: #00ffcc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Kelly Slab', 'Courier New', monospace;
+  font-size: 0.95rem;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+#boot-text {
+  white-space: pre-wrap;
+  max-width: 90%;
+  padding: 20px;
+  background-color: #0d0d0d;
+  border: 1px solid #00ccff44;
+  box-shadow: 0 0 10px #00ffcc55;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  animation: type 4s steps(40, end);
+  overflow: hidden;
+}
+
+@keyframes type {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+#loading-bar-wrapper {
+  width: 80%;
+  height: 16px;
+  border: 2px solid #00ccff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+#loading-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00ffcc, #00ccff);
+  animation: loadBar 3s ease-out forwards;
+}
+
+@keyframes loadBar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+#boot-text {
+  animation: type 4s steps(40, end), flicker 1.5s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  90% { opacity: 0.9; }
+  95% { opacity: 0.85; }
+  97% { opacity: 0.6; }
+  98% { opacity: 0.95; }
+  99% { opacity: 0.9; }
+}
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: #00ffcc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', monospace;
+  font-size: 0.95rem;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+#boot-text {
+  background-color: #0d0d0d;
+  border: 1px solid #00ccff44;
+  box-shadow: 0 0 10px #00ffcc55;
+  border-radius: 10px;
+  width: 600px;
+  height: 200px;
+  padding: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  white-space: pre-wrap;
+  animation: flicker 2s infinite;
+  display: none;
+}
+
+@keyframes type {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+#loading-bar-wrapper {
+  width: 80%;
+  height: 16px;
+  border: 2px solid #00ccff;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+
+#loading-bar {
+  width: 0%;
+  height: 100%;
+  background: linear-gradient(90deg, #00ffcc, #00ccff);
+  animation: loadBar 3s ease-out forwards;
+}
+
+@keyframes loadBar {
+  0% { width: 0%; }
+  100% { width: 100%; }
+}
+#boot-logo {
+  width: 120px;
+  height: auto;
+  margin-bottom: 20px;
+  filter: drop-shadow(0 0 10px #00ccff88);
+  animation: fadeIn 1s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+#boot-text {
+  position: relative;
+}
+
+#boot-text::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    rgba(0, 255, 204, 0.03),
+    rgba(0, 255, 204, 0.03) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+.glitch {
+  position: relative;
+  color: #00ffcc;
+  animation: glitch 1s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 1px 0 red, -1px 0 cyan; }
+  25% { text-shadow: -1px 0 red, 1px 0 cyan; }
+  50% { text-shadow: 1px 1px red, -1px -1px cyan; }
+  75% { text-shadow: -1px -1px red, 1px 1px cyan; }
+  100% { text-shadow: 0 0 red, 0 0 cyan; }
+}
+
+.blink-cursor {
+  position: absolute;
+  animation: blink 1s infinite;
+  color: #00ccff;
+}
+
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
+#ascii-banner {
+  display: none;
+  color: #00ffcc;
+  font-family: monospace;
+  white-space: pre;
+  text-align: center;
+  margin-top: 20px;
+}
 
 </style>
 </head>
 <body>
+<div id="loading-screen">
+    <img src="Icons/TranspKali.png" alt="Kali Logo" id="boot-logo">
 
+<div id="press-key" style="text-align:center;">
+  <p style="font-size: 1.2rem;">[ SYSTEM PAUSED ]</p>
+  <p>Press any key to initiate secure boot sequence...</p>
+</div>
+
+<pre id="boot-text"></pre>
+
+<div id="loading-bar-wrapper" style="display:none;">
+  <div id="loading-bar"></div>
+</div>
+
+<div id="ascii-banner">
+W   W  EEEEE  L      CCCC  OOO   M   M  EEEEE
+W   W  E      L     C     O   O  MM MM  E    
+W W W  EEEE   L     C     O   O  M M M  EEEE 
+WW WW  E      L     C     O   O  M   M  E    
+W   W  EEEEE  LLLLL  CCCC  OOO   M   M  EEEEE 
+</div>      
+  <audio id="type-sound" src="https://www.fesliyanstudios.com/play-mp3/387" preload="auto"></audio>
+</div>
   <canvas id="matrixCanvas"></canvas>
 
   <a href="PassGen/Anonypass.html" title="User/Pass Generator" style="
@@ -248,16 +504,16 @@
   <header>The Kali Linux Info Hub</header>
 
   <nav style="text-align:center; margin-top: 10px; z-index: 1; position: relative;">
-    <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
-      <li><a href="Subpages/AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
-      <li><a href="Subpages/install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
-      <li><a href="Subpages/tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tools & Features</a></li>
-      <li><a href="Subpages/commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
-      <li><a href="Subpages/tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
-      <li><a href="Subpages/community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community Area</a></li>
-      <li><a href="Subpages/contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
-    </ul>
-  </nav>
+  <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
+    <li><a href="Subpages/subloadingscreen.html?target=AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
+    <li><a href="Subpages/subloadingscreen.html?target=install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
+    <li><a href="Subpages/subloadingscreen.html?target=tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tools & Features</a></li>
+    <li><a href="Subpages/subloadingscreen.html?target=commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
+    <li><a href="Subpages/subloadingscreen.html?target=tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
+    <li><a href="Subpages/subloadingscreen.html?target=community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community Area</a></li>
+    <li><a href="Subpages/subloadingscreen.html?target=contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
+  </ul>
+</nav>
 
 
   <section class="overview">
@@ -433,11 +689,146 @@
       canvas.height = window.innerHeight;
       canvas.width = window.innerWidth;
     });
-  
+    
+    document.addEventListener('DOMContentLoaded', function() {
+  const terminalInput = document.getElementById('terminal-input');
+const terminalOutput = document.getElementById('terminal-output');
+
+
+const commands = {
+  'help': `Available commands:
+help, ls, pwd, echo, clear, whoami, ifconfig, sudo, neofetch`,
+  'ls': 'Desktop  Documents  Downloads  Tools  kali.txt',
+  'pwd': '/home/kali',
+  'whoami': 'kali',
+  'echo': (args) => args.join(' '),
+  'clear': () => { terminalOutput.innerHTML = ''; return ''; },
+  'ifconfig': `eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
+inet 192.168.1.10  netmask 255.255.255.0  broadcast 192.168.1.255`,
+  'sudo': 'Nice try, but you’re not root here!',
+  'neofetch': `kali@webshell
+------------------
+OS: Kali Linux Web
+Kernel: 5.10-custom
+Shell: Bash
+Terminal: WebSim`
+};
+
+
+terminalInput.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter') {
+    const input = terminalInput.value.trim();
+    const [cmd, ...args] = input.split(' ');
+    let output = '';
+
+    if (commands[cmd]) {
+      output = typeof commands[cmd] === 'function' ? commands[cmd](args) : commands[cmd];
+    } else {
+      output = `Command not found: ${cmd}`;
+    }
+
+    terminalOutput.innerHTML += `<div><span class="prompt">kali@webshell:~$</span> ${input}</div>`;
+    if (output) terminalOutput.innerHTML += `<div>${output}</div>`;
+    terminalInput.value = '';
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
+});
+});
+
 </script>
 
 
+  <section class="terminal-section">
+    <h2 class="section-title">Try the Terminal</h2>
+    <div id="terminal">
+      <div id="terminal-output"></div>
+      <div class="terminal-input-line">
+        <span class="prompt">kali@webshell:~$</span>
+        <input type="text" id="terminal-input"autocomplete="off" />
+      </div>
+    </div>
+  </section>
   
+</script>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const pressKeyPrompt = document.getElementById("press-key");
+  const bootTextEl = document.getElementById("boot-text");
+  const loadingBar = document.getElementById("loading-bar-wrapper");
+  const asciiBanner = document.getElementById("ascii-banner");
+
+  const bootLines = [
+    "Login: root",
+    "Password: ********",
+    "Access granted.",
+    "Initializing Kali Linux Info Hub...",
+    "Authenticating...",
+    "[OK] Network Interface initialized",
+    "[OK] Terminal subsystem online",
+    "[OK] Ethical hacking modules armed",
+    "Establishing secure connection...",
+    "[OK] Firewall evasion module active",
+    "[OK] AES Encryption protocols ready",
+    "Welcome, Operative."
+  ];
+
+  let lineIndex = 0;
+  let charIndex = 0;
+
+  // Function to type out each character in boot lines
+  function typeChar() {
+    if (lineIndex < bootLines.length) {
+      const currentLine = bootLines[lineIndex];
+
+      if (charIndex < currentLine.length) {
+        bootTextEl.innerHTML += currentLine[charIndex];
+        charIndex++;
+        setTimeout(typeChar, 17); // Type one character at a time
+      } else {
+        bootTextEl.innerHTML += "\n"; // New line after a full line is typed
+        lineIndex++;
+        charIndex = 0;
+        setTimeout(typeChar, 75); // Add a short delay before typing the next line
+      }
+    } else {
+      asciiBanner.style.display = "block";
+      loadingBar.style.display = "block";
+      setTimeout(() => {
+        document.getElementById("loading-screen").style.transition = "opacity 0.8s ease";
+        document.getElementById("loading-screen").style.opacity = "0";
+        setTimeout(() => {
+          document.getElementById("loading-screen").style.display = "none";
+        }, 800); // Fade out the loading screen
+      }, 3000);
+    }
+  }
+
+  // Function to start the boot animation after key press or click
+  function startBoot() {
+    pressKeyPrompt.style.display = "none"; // Hide the 'press key' prompt
+    bootTextEl.style.display = "block"; // Show the boot text
+    typeChar(); // Start typing the boot lines
+  }
+
+  // First-time visitor logic using localStorage
+  if (!localStorage.getItem("visitedBefore")) {
+    document.getElementById("loading-screen").style.display = "block";
+    window.scrollTo(0, 0); // Reset scroll position to top
+    localStorage.setItem("visitedBefore", "true");
+
+    // Start boot animation after user interaction (keydown or click)
+    window.addEventListener("keydown", startBoot, { once: true });
+    window.addEventListener("click", startBoot, { once: true });
+  } else {
+    // Skip the loading screen for returning visitors
+    document.getElementById("loading-screen").style.display = "none";
+    document.getElementById("ascii-banner").style.display = "none";
+    document.getElementById("loading-bar-wrapper").style.display = "none";
+  }
+});
+</script>
+<button onclick="localStorage.removeItem('visitedBefore'); location.reload();">Reset Loading Screen</button>
 </body>
+                                                                            
 </html>
