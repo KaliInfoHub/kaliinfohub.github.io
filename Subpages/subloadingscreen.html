@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #000;
+      font-family: monospace;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      color: #00ccff;
+    }
+
+    .terminal {
+      text-align: center;
+    }
+
+    .glitch-text {
+      font-size: 2rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    .glitch-text:before {
+      content: 'Loading...';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: black;
+      clip-path: inset(0 0 0 0);
+      animation: glitchEffect 1.5s infinite;
+    }
+
+    @keyframes glitchEffect {
+      0% { clip-path: inset(0 0 0 0); transform: translate(-2px, -2px); }
+      25% { clip-path: inset(0 0 0 2px); transform: translate(2px, 2px); }
+      50% { clip-path: inset(2px 2px 0 0); transform: translate(-2px, 2px); }
+      75% { clip-path: inset(0 0 2px 0); transform: translate(2px, -2px); }
+      100% { clip-path: inset(0 0 0 0); transform: translate(0, 0); }
+    }
+
+    .loading-bar {
+      width: 200px;
+      height: 8px;
+      background: #222;
+      border: 1px solid #00ccff;
+      margin-top: 20px;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .loading-fill {
+      height: 100%;
+      width: 0%;
+      background: #00ccff;
+      animation: fillBar 3s linear forwards;
+    }
+
+    @keyframes fillBar {
+      from { width: 0%; }
+      to { width: 100%; }
+    }
+
+    canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="terminal">
+    <div class="glitch-text">Loading...</div>
+    <div class="loading-bar">
+      <div class="loading-fill"></div>
+    </div>
+  </div>
+
+  <canvas id="matrixCanvas"></canvas>
+
+  <script>
+    // Matrix background
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+    canvas.height = window.innerHeight;
+    canvas.width = window.innerWidth;
+
+    const letters = '01';
+    const fontSize = 14;
+    const columns = canvas.width / fontSize;
+    const drops = Array(Math.floor(columns)).fill(1);
+
+    function draw() {
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      ctx.font = fontSize + 'px monospace';
+
+      for (let i = 0; i < drops.length; i++) {
+        const text = letters[Math.floor(Math.random() * letters.length)];
+        const rand = Math.random();
+        ctx.fillStyle = rand < 0.85 ? '#888' : (rand < 0.95 ? '#0f0' : '#00ccff');
+        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          drops[i] = 0;
+        }
+
+        drops[i]++;
+      }
+    }
+
+    setInterval(draw, 33);
+
+    window.addEventListener('resize', () => {
+      canvas.height = window.innerHeight;
+      canvas.width = window.innerWidth;
+    });
+
+    // REDIRECT: Grab ?target= from the URL
+    const params = new URLSearchParams(window.location.search);
+    const target = params.get("target") || "index.html"; // fallback page
+    setTimeout(() => {
+      window.location.href = target;
+    }, 3000);
+  </script>
+</body>
+</html>
