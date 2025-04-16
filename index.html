@@ -774,12 +774,12 @@ document.addEventListener("DOMContentLoaded", function () {
       if (charIndex < currentLine.length) {
         bootTextEl.innerHTML += currentLine[charIndex];
         charIndex++;
-        setTimeout(typeChar, 17); // Type one character at a time
+        setTimeout(typeChar, 1); // Type one character at a time
       } else {
         bootTextEl.innerHTML += "\n"; // New line after a full line is typed
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeChar, 75); // Add a short delay before typing the next line
+        setTimeout(typeChar, 20); // Add a short delay before typing the next line
       }
     } else {
       asciiBanner.style.display = "block";
