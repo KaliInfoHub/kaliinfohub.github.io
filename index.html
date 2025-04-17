@@ -475,6 +475,29 @@
       margin: 20px auto;
     }
 
+	  /* Footer Styling */
+        footer {
+            background-color: #333;
+            color: grey;
+            padding: 20px 0;
+			text-align: center;
+			position: relative;
+			z-index: 999;
+        }
+
+        footer p {
+            margin: 10px 0;
+        }
+
+        footer a {
+            color: #00ffcc;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
 </style>
 </head>
 <body>
@@ -888,7 +911,9 @@ document.addEventListener("DOMContentLoaded", function () {
   Show loading screen next time
 </label>
 <button onclick="localStorage.removeItem('visitedBefore'); location.reload();">Reset Loading Screen</button>
-  
-
+  <footer>
+        <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 </body>
 </html>
