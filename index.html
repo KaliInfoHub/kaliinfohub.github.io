@@ -781,14 +781,14 @@ terminalInput.addEventListener('keydown', function(e) {
     </div>
   </section>
   
-</script>
-
-<script>
+<script defer>
 document.addEventListener("DOMContentLoaded", function () {
   const pressKeyPrompt = document.getElementById("press-key");
   const bootTextEl = document.getElementById("boot-text");
   const loadingBar = document.getElementById("loading-bar-wrapper");
   const asciiBanner = document.getElementById("ascii-banner");
+  const loadingScreen = document.getElementById("loading-screen");
+  const toggleCheckbox = document.getElementById("toggleLoadingScreen");
 
   const bootLines = [
     "Login: root",
@@ -808,7 +808,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let lineIndex = 0;
   let charIndex = 0;
 
-  // Function to type out each character in boot lines
   function typeChar() {
     if (lineIndex < bootLines.length) {
       const currentLine = bootLines[lineIndex];
@@ -816,50 +815,78 @@ document.addEventListener("DOMContentLoaded", function () {
       if (charIndex < currentLine.length) {
         bootTextEl.innerHTML += currentLine[charIndex];
         charIndex++;
-        setTimeout(typeChar, 1); // Type one character at a time
+        setTimeout(typeChar, 1);
       } else {
-        bootTextEl.innerHTML += "\n"; // New line after a full line is typed
+        bootTextEl.innerHTML += "\n";
         lineIndex++;
         charIndex = 0;
-        setTimeout(typeChar, 20); // Add a short delay before typing the next line
+        setTimeout(typeChar, 20);
       }
     } else {
       asciiBanner.style.display = "block";
       loadingBar.style.display = "block";
       setTimeout(() => {
-        document.getElementById("loading-screen").style.transition = "opacity 0.8s ease";
-        document.getElementById("loading-screen").style.opacity = "0";
+        loadingScreen.style.transition = "opacity 0.8s ease";
+        loadingScreen.style.opacity = "0";
         setTimeout(() => {
-          document.getElementById("loading-screen").style.display = "none";
-        }, 800); // Fade out the loading screen
+          loadingScreen.style.pointerEvents = "none";
+          loadingScreen.style.display = "none";
+        }, 800);
       }, 2000);
     }
   }
 
-  // Function to start the boot animation after key press or click
   function startBoot() {
-    pressKeyPrompt.style.display = "none"; // Hide the 'press key' prompt
-    bootTextEl.style.display = "block"; // Show the boot text
-    typeChar(); // Start typing the boot lines
+    pressKeyPrompt.style.display = "none";
+    bootTextEl.style.display = "block";
+    typeChar();
   }
 
-  // First-time visitor logic using localStorage
-  if (!localStorage.getItem("visitedBefore")) {
-    document.getElementById("loading-screen").style.display = "block";
-    window.scrollTo(0, 0); // Reset scroll position to top
-    localStorage.setItem("visitedBefore", "true");
+  // Check toggle preference
+  const showLoading = localStorage.getItem("showLoadingScreen") !== "false";
 
-    // Start boot animation after user interaction (keydown or click)
+  if (showLoading) {
+    loadingScreen.style.display = "block";
+    window.scrollTo(0, 0);
     window.addEventListener("keydown", startBoot, { once: true });
     window.addEventListener("click", startBoot, { once: true });
   } else {
-    // Skip the loading screen for returning visitors
-    document.getElementById("loading-screen").style.display = "none";
-    document.getElementById("ascii-banner").style.display = "none";
-    document.getElementById("loading-bar-wrapper").style.display = "none";
+    // Skip loading screen, immediately hide it
+    loadingScreen.style.display = "none";
+    asciiBanner.style.display = "none";
+    loadingBar.style.display = "none";
+    bootTextEl.style.display = "block";
+  }
+
+  // Initialize toggle checkbox value
+  if (toggleCheckbox) {
+    toggleCheckbox.checked = showLoading;
+
+    toggleCheckbox.addEventListener("change", function () {
+      localStorage.setItem("showLoadingScreen", toggleCheckbox.checked.toString());
+    });
   }
 });
 </script>
+
+<!-- Optional toggle somewhere on your page -->
+<label style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  background-color: rgba(0, 0, 50, 0.9);
+  color: #00f7ff;
+  padding: 10px 15px;
+  border: 1px solid #00f7ff;
+  font-family: monospace;
+  font-size: 14px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #00f7ff;
+">
+  <input type="checkbox" id="toggleLoadingScreen" style="accent-color: #00f7ff; margin-right: 6px;">
+  Show loading screen next time
+</label>
 <button onclick="localStorage.removeItem('visitedBefore'); location.reload();">Reset Loading Screen</button>
   
 
