@@ -1,94 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Rock, Paper, Scissors</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rock Paper Scissors</title>
+  <link rel="stylesheet" href="../style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
     body {
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
+      font-family: 'Share Tech Mono', monospace;
+      text-align: center;
       padding: 40px 20px;
-      text-align: center;
-    }
-    header, section, .kali-logo, a {
-      position: relative;
-      z-index: 1;
     }
 
-    header {
-      background: linear-gradient(90deg, #00ffcc, #00ccff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-align: center;
-      padding: 10px 20px 20px;
-      font-size: 1rem;
-      font-weight: bold;
-      animation: glow 2s ease-in-out infinite alternate;
-    }
-
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00ffcc; }
-      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
-    }
-    
     .kali-logo {
       position: fixed;
       top: -20px;
       left: -10px;
-      width: 100px;
-      height: auto;
+      width: 150px;
       z-index: 999;
     }
+
     h1 {
+      font-size: 2rem;
+      margin-top: 80px;
+      margin-bottom: 30px;
       color: #00ccff;
+      text-shadow: 0 0 10px #00ffcc;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
       margin-bottom: 30px;
     }
+    
     button {
       background-color: #00ccff;
       color: black;
       border: none;
-      padding: 10px 20px;
-      margin: 10px;
+      padding: 12px 24px;
+      margin: 20px;
       font-family: monospace;
-      border-radius: 6px;
+      font-size: 1rem;
+      border-radius: 8px;
       cursor: pointer;
+      transition: 0.3s ease;
     }
-    input {
-      background-color: #222;
+
+    button:hover {
+      box-shadow: 0 0 10px #00ccff;
+      transform: scale(1.05);
+    }
+
+    .choice-btn {
+      background-color: transparent;
+      border: 2px solid #00ccff;
+      border-radius: 12px;
       color: #00ffcc;
-      border: 1px solid #00ccff;
-      padding: 8px;
-      margin: 10px;
+      font-size: 1.1rem;
+      padding: 10px;
+      cursor: pointer;
+      width: 100px;
+      transition: all 0.3s ease;
     }
+
+    .choice-btn:hover {
+      background-color: #00ccff;
+      color: #000;
+      transform: scale(1.1);
+      box-shadow: 0 0 12px #00ccff;
+    }
+
     .game-output {
       margin-top: 20px;
-      font-size: 1.2rem;
+      font-size: 1.3rem;
+      text-shadow: 0 0 5px #00ffcc;
+    }
+
+    .emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-    <a href="../index.html">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-  <h1>Rock, Paper, Scissors</h1>
-  <button onclick="play('rock')">Rock</button><button onclick="play('paper')">Paper</button><button onclick="play('scissors')">Scissors</button>
-  <div class="game-output" id="output"></div>
-  <script>
+    <canvas id="matrixCanvas"></canvas>
     
-          function play(choice) {
-            const options = ['rock','paper','scissors'];
-            const cpu = options[Math.floor(Math.random()*3)];
-            let result = "";
-            if (choice === cpu) result = "It’s a tie!";
-            else if ((choice === 'rock' && cpu === 'scissors') || (choice === 'paper' && cpu === 'rock') || (choice === 'scissors' && cpu === 'paper'))
-              result = "You win!";
-            else result = "You lose!";
-            document.getElementById('output').textContent = `CPU chose ${cpu}. ${result}`;
-          }
-        
+    <label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 15px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+  <select id="effectToggle">
+  <option value="matrix">Matrix</option>
+  <option value="starfield">Starfield</option>
+  <option value="warp">Warp Speed</option>
+  <option value="particles">Particles</option>
+  <option value="circuit">Circuit Pulse</option>
+</select>
+</label>
+<!-- Navigation Buttons Top Right -->
+  <a href="../PassGen/Anonypass.html" style="position: absolute; top: -10px; right: -17px; z-index: 999;">
+    <button>User/Pass Generator</button>
+  </a>
+  <a href="gameshub.html" style="position: absolute; top: 50px; left: 245px; z-index: 999;">
+    <button>GameHub</button>
+  </a>
+  <a href="../index.html">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <h1>Rock, Paper, Scissors</h1>
+
+  <div class="choices">
+    <button class="choice-btn" onclick="play('rock')">✊ Rock</button>
+    <button class="choice-btn" onclick="play('paper')">✋ Paper</button>
+    <button class="choice-btn" onclick="play('scissors')">✌️ Scissors</button>
+  </div>
+
+  <div class="game-output" id="output"></div>
+
+<p><a class="nav" href="gameshub.html">← Back to GameHub</a></p>
+
+  <script>
+    function play(playerChoice) {
+      const options = ['rock', 'paper', 'scissors'];
+      const emojis = { rock: '✊', paper: '✋', scissors: '✌️' };
+      const cpuChoice = options[Math.floor(Math.random() * 3)];
+
+      let result = '';
+      if (playerChoice === cpuChoice) {
+        result = "It's a tie!";
+      } else if (
+        (playerChoice === 'rock' && cpuChoice === 'scissors') ||
+        (playerChoice === 'paper' && cpuChoice === 'rock') ||
+        (playerChoice === 'scissors' && cpuChoice === 'paper')
+      ) {
+        result = "You win!";
+      } else {
+        result = "You lose!";
+      }
+
+      document.getElementById('output').innerHTML = `
+        <span class="emoji">You: ${emojis[playerChoice]} vs CPU: ${emojis[cpuChoice]}</span>
+        ${result}
+      `;
+    }
   </script>
-  
+  <script src="../starfield.js"></script>
 </body>
 </html>
