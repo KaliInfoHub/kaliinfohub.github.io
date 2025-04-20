@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="../style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <title>Coin Flip</title>
   <style>
     html, body {
@@ -11,27 +13,23 @@
       overflow: hidden;
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      text-align: center;
     }
-    
+
     canvas#matrixCanvas {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: 0;
+      z-index: -1;
       pointer-events: none;
     }
-    
-    header, section, .kali-logo, a, h1, button, .game-output, p {
-      position: relative;
-      z-index: 1;
-    }
 
-    body {
-      padding: 40px 20px;
-      text-align: center;
+    header, section, .kali-logo, a, h1, button, .game-output, p, select {
+      position: relative;
+      z-index: 0;
     }
 
     header {
@@ -39,7 +37,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       text-align: center;
-      padding: 10px 20px 20px;
+      padding: 150px 20px 20px;
       font-size: 1rem;
       font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
@@ -49,21 +47,22 @@
       from { text-shadow: 0 0 10px #00ffcc; }
       to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
-    
+
     .kali-logo {
       position: fixed;
       top: -20px;
       left: -10px;
-      width: 100px;
+      width: 150px;
       height: auto;
       z-index: 999;
     }
-    
+
     h1 {
       color: #00ccff;
-      margin-bottom: 30px;
+      margin-top: 60px;
+      margin-bottom: 20px;
     }
-    
+
     button {
       background-color: #00ccff;
       color: black;
@@ -73,8 +72,14 @@
       font-family: monospace;
       border-radius: 6px;
       cursor: pointer;
+      transition: 0.2s ease;
     }
-    
+
+    button:hover {
+      box-shadow: 0 0 10px #00ccff;
+      transform: scale(1.05);
+    }
+
     input {
       background-color: #222;
       color: #00ffcc;
@@ -82,116 +87,129 @@
       padding: 8px;
       margin: 10px;
     }
-    
+
     .game-output {
       margin-top: 20px;
-      font-size: 1.2rem;
+      font-size: 1.6rem;
     }
+
+    #coinImg {
+      width: 100px;
+      margin: 20px auto;
+      display: block;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 300px;
+      margin-bottom: 20px;
+    }
+
+    select {
+      background-color: rgba(0, 0, 50, 0.9);
+      color: #00f7ff;
+      border: 1px solid #00f7ff;
+      font-family: monospace;
+      padding: 8px;
+      border-radius: 6px;
+    }
+
+  
   </style>
 </head>
 <body>
-    <!-- Matrix Background -->
-    <canvas id="matrixCanvas"></canvas>
-    
-    <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 90px;
-    ">User/Pass Generator</button>
+
+  <canvas id="matrixCanvas"></canvas>
+
+  <!-- Navigation Buttons Top Right -->
+  <a href="../PassGen/Anonypass.html" style="position: absolute; top: 10px; right: -6px; z-index: 999;">
+    <button>User/Pass Generator</button>
   </a>
-  <a href="gameshub.html" title="GameHub" style="
-    position: absolute;
-    top: 10px;
-    left: 138px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 80px;
-    ">GameHub</button>
+  <a href="gameshub.html" style="position: absolute; top: 50px; left: 275px; z-index: 999;">
+    <button>GameHub</button>
   </a>
-    <a href="../index.html">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-  <h1>Coin Flip</h1>
+
+  <a href="../index.html">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo" />
+  </a>
+
+  <header>Welcome to the Coin Flip Game</header>
+  <h1>Flip the Coin!</h1>
   <button onclick="flipCoin()">Flip Coin</button>
+
+  <img id="coinImg" src="../Icons/coin-heads.png" alt="Coin Image" />
+
   <div class="game-output" id="output"></div>
-  
+
+  <!-- Flip Sound -->
+  <audio id="coinSound" src="../Sounds/coin-flip.mp3" preload="auto"></audio>
+
+  <!-- Effect Toggle -->
+  <label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999;">
+    <select id="effectToggle">
+      <option value="matrix">Matrix</option>
+      <option value="starfield">Starfield</option>
+      <option value="warp">Warp Speed</option>
+      <option value="particles">Particles</option>
+      <option value="circuit">Circuit Pulse</option>
+    </select>
+  </label>
+
+  <!-- Navigation Buttons Bottom -->
+  <div class="nav-buttons">
+    <a href="metasploit.html"><button>← Metasploit</button></a>
+    <a href="../index.html"><button>Home</button></a>
+    <a href="hydra.html"><button>Hydra →</button></a>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  </footer>
+
+  <!-- Coin Flip Script -->
   <script>
-    // Matrix effect
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const letters = 'アァイィウエオカキクケコサシスセソ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    const fontSize = 16;
-    const columns = Math.floor(canvas.width / fontSize);
-    const drops = Array(columns).fill(1);
-
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(26, 26, 26, 0.08)'; // Fade effect
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-      ctx.font = `${fontSize}px monospace`;
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-
-        // Random color choice: mostly grey, sometimes green or blue
-        const rand = Math.random();
-        if (rand > 0.985) {
-          ctx.fillStyle = '#00ff00'; // Green
-        } else if (rand > 0.97) {
-          ctx.fillStyle = '#00ccff'; // Light blue
-        } else {
-          ctx.fillStyle = '#555';    // Grey
-        }
-
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-        // Reset drop
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-
-        drops[i]++;
-      }
-    }
-
-    setInterval(drawMatrix, 40);
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-    
-    // Game function
     function flipCoin() {
-      const result = Math.random() > 0.5 ? "Heads" : "Tails";
-      document.getElementById('output').textContent = "Result: " + result;
+      const output = document.getElementById("output");
+      const coinImg = document.getElementById("coinImg");
+      const isHeads = Math.random() < 0.5;
+      const result = isHeads ? "Heads" : "Tails";
+
+      // Set image
+      coinImg.src = isHeads ? "../Icons/coin-heads.png" : "../Icons/coin-tails.png";
+
+      // Animate the coin
+      coinImg.style.transform = "rotateY(360deg)";
+      setTimeout(() => {
+        coinImg.style.transform = "rotateY(0deg)";
+      }, 600);
+
+      // Show result
+      output.innerHTML = `<span style="animation: flip 0.6s ease-in-out;">${result}</span>`;
+
+      // Play sound
+      const sound = document.getElementById("coinSound");
+      sound.currentTime = 0;
+      sound.play();
     }
   </script>
-  <p><a href="../index.html">← Back to Home</a></p>
+
+  <!-- Optional Animation Keyframes -->
+  <style>
+    @keyframes flip {
+      0% { transform: rotateY(0); }
+      50% { transform: rotateY(180deg); }
+      100% { transform: rotateY(360deg); }
+    }
+  </style>
+
+  <!-- Matrix Background Script -->
+  <script src="../starfield.js"></script>
+  <footer>
+        <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 </body>
 </html>
