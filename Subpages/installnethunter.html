@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Install Kali NetHunter | Kali Info Hub</title>
+  <link rel="stylesheet" href="../style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -97,6 +98,9 @@
     }
 </style>
 <body>
+    
+    <canvas id="matrixCanvas"></canvas>
+    
 <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
     position: absolute;
     top: 10px;
@@ -134,7 +138,16 @@
       width: 100px;
     ">GameHub</button>
   </a>
-<canvas id="matrixCanvas"></canvas>
+
+<label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 15px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+  <select id="effectToggle">
+  <option value="matrix">Matrix</option>
+  <option value="starfield">Starfield</option>
+  <option value="warp">Warp Speed</option>
+  <option value="particles">Particles</option>
+  <option value="circuit">Circuit Pulse</option>
+</select>
+</label>
 
 <a href="../index.html">
   <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
@@ -278,6 +291,15 @@
     canvas.height = window.innerHeight;
   });
 </script>
-<p><a href="../index.html">← Back to Home</a></p>
+<p style="text-align:center; margin: 40px 0;">
+<div class="nav-buttons">
+    <a href="installusb.html"><button class="nav-button">← Live USB</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="community.html"><button class="nav-button">Community →</button></a>
+  </div>
+<footer>
+        <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 </body>
 </html>
