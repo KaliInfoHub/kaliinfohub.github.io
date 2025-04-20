@@ -1,135 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Reaction Time Test</title>
   <style>
     body {
       background-color: #0d0d0d;
       color: #00ffcc;
       font-family: 'Courier New', monospace;
-      padding: 40px 20px;
       text-align: center;
+      padding: 40px 20px;
+      transition: background-color 0.3s ease;
     }
-    header, section, .kali-logo, a {
-      position: relative;
-      z-index: 1;
-    }
-
     header {
+      font-size: 1.2rem;
+      margin-top: 80px;
+      margin-bottom: 30px;
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-align: center;
-      padding: 10px 20px 20px;
-      font-size: 1rem;
-      font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
     }
-
     @keyframes glow {
       from { text-shadow: 0 0 10px #00ffcc; }
       to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
-    
+    button {
+      background-color: #00ccff;
+      color: #000;
+      border: none;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: monospace;
+      margin: 10px;
+    }
+    .game-output {
+      margin-top: 300px;
+      font-size: 1.5rem;
+      min-height: 40px;
+    }
+    .reaction-history {
+      margin-top: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
     .kali-logo {
       position: fixed;
       top: -20px;
       left: -10px;
-      width: 100px;
-      height: auto;
+      width: 150px;
       z-index: 999;
     }
-    h1 {
+    a {
       color: #00ccff;
-      margin-bottom: 30px;
-    }
-    button {
-      background-color: #00ccff;
-      color: black;
-      border: none;
-      padding: 10px 20px;
-      margin: 10px;
-      font-family: monospace;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    input {
-      background-color: #222;
-      color: #00ffcc;
-      border: 1px solid #00ccff;
-      padding: 8px;
-      margin: 10px;
-    }
-    .game-output {
-      margin-top: 20px;
-      font-size: 1.2rem;
+      text-decoration: none;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-    <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.6rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 70px;
-    ">User/Pass Generator</button>
+  <a href="../index.html">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
   </a>
-  <a href="gameshub.html" title="GameHub" style="
-    position: absolute;
-    top: 30px;
-    right: 138px;
-    z-index: 999;
-  ">
-    <button style="
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 6px 10px;
-      font-size: 0.8rem;
-      font-family: 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      width: 80px;
-    ">GameHub</button>
-  </a>
-    <a href="../index.html">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-  <h1>Reaction Time Test</h1>
-  <button id="startBtn" onclick="startTest()">Start</button>
-  <div class="game-output" id="output"></div>
-  <script>
-    
-          let startTime;
-          function startTest() {
-            document.getElementById('output').textContent = "Wait for green...";
-            document.getElementById('startBtn').disabled = true;
-            setTimeout(() => {
-              startTime = Date.now();
-              document.getElementById('output').textContent = "CLICK NOW!";
-              document.body.onclick = () => {
-                const reaction = Date.now() - startTime;
-                document.getElementById('output').textContent = "Reaction time: " + reaction + "ms";
-                document.body.onclick = null;
-                document.getElementById('startBtn').disabled = false;
-              };
-            }, Math.random() * 3000 + 1000);
-          }
-        
-  </script>
+  <header>Reaction Time Test</header>
+  <button id="startBtn">Start</button>
+  <div class="game-output" id="output">Click "Start" to begin.</div>
+  <div class="reaction-history" id="history"></div>
   <p><a href="../index.html">← Back to Home</a></p>
+
+  <script>
+    let startTime;
+    let timeoutId;
+    let testState = "idle"; // idle, waiting, ready
+    const output = document.getElementById('output');
+    const startBtn = document.getElementById('startBtn');
+    const history = document.getElementById('history');
+    const reactionTimes = [];
+
+    function reset() {
+      testState = "idle";
+      startBtn.disabled = false;
+      document.body.style.backgroundColor = "#0d0d0d";
+    }
+
+    document.addEventListener("click", (event) => {
+      // ignore clicks on the Start button
+      if (event.target === startBtn) return;
+
+      if (testState === "waiting") {
+        clearTimeout(timeoutId);
+        output.textContent = "Too soon! Wait for green.";
+        document.body.style.backgroundColor = "#330000";
+        reset();
+      } else if (testState === "ready") {
+        const reactionTime = Date.now() - startTime;
+        reactionTimes.push(reactionTime);
+        output.textContent = `Reaction time: ${reactionTime} ms`;
+        history.innerHTML = "History: " + reactionTimes.join(" ms, ") + " ms";
+        reset();
+      }
+    });
+
+    startBtn.addEventListener("click", (event) => {
+      event.stopPropagation(); // Prevents this from counting as a body click
+      output.textContent = "Get ready...";
+      testState = "waiting";
+      startBtn.disabled = true;
+      document.body.style.backgroundColor = "#0d0d0d";
+
+      timeoutId = setTimeout(() => {
+        testState = "ready";
+        startTime = Date.now();
+        output.textContent = "CLICK NOW!";
+        document.body.style.backgroundColor = "#005f00";
+      }, Math.random() * 3000 + 1000);
+    });
+  </script>
 </body>
 </html>
