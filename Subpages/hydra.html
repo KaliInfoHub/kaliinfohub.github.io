@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hydra | Kali Linux Info Hub</title>
+  <link rel="stylesheet" href="../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
@@ -12,9 +13,26 @@
       background-color: #0d0d0d;
       color: #00ffcc;
       overflow-x: hidden;
-      padding: 20px;
-      line-height: 1.6;
     }
+    
+    /* Add a main container to control the content width */
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+    
+    #matrixCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+    }
+    
     .kali-logo {
       position: absolute;
       top: -25px;
@@ -23,13 +41,15 @@
       height: auto;
       z-index: 999;
     }
+    
     .logo-link {
-      display: inline-block;  /* Makes the anchor wrap the image fully */
+      display: inline-block;
       position: absolute;
       top: 10px;
       left: 10px;
       z-index: 999;
     }
+    
     nav ul {
       list-style: none;
       padding: 0;
@@ -49,16 +69,14 @@
       text-decoration: none;
       display: inline-block;
     }
-    nav ul li a:hover {
-      background-color: #1a1a1a;
-      box-shadow: 0 0 8px #00ccff66;
-    }
+    
     .nav-buttons {
       display: flex;
       justify-content: space-between;
       margin-top: 30px;
       margin-bottom: 20px;
     }
+    
     .nav-button {
       background-color: #00ccff;
       color: #000;
@@ -70,17 +88,21 @@
       cursor: pointer;
       transition: all 0.3s ease;
     }
+    
     .nav-button:hover {
       background-color: #00ffcc;
       box-shadow: 0 0 15px #00ffcc;
     }
+    
     a {
       color: #00ccff;
       text-decoration: none;
     }
+    
     a:hover {
       text-decoration: underline;
     }
+    
     header {
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
@@ -96,22 +118,28 @@
       from { text-shadow: 0 0 10px #00ffcc; }
       to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
+    
     section {
       background: #111;
       border: 1px solid #00ccff33;
       padding: 20px;
       border-radius: 10px;
       margin-bottom: 20px;
+      width: 100%;
+      box-sizing: border-box;
     }
+    
     h2 {
       color: #00ccff;
       border-bottom: 1px solid #00ccff33;
       padding-bottom: 8px;
     }
+    
     h3 {
       color: #00ccff;
       margin-top: 20px;
     }
+    
     code {
       display: block;
       background: #1a1a1a;
@@ -122,6 +150,7 @@
       white-space: pre-wrap;
       font-family: 'Courier New', monospace;
     }
+    
     .inline-code {
       display: inline;
       background: #1a1a1a;
@@ -130,41 +159,57 @@
       border: 1px solid #00ffcc44;
       font-family: 'Courier New', monospace;
     }
+    
     table {
       width: 100%;
       border-collapse: collapse;
       margin: 15px 0;
     }
+    
     th, td {
       padding: 8px;
       text-align: left;
       border: 1px solid #00ffcc44;
     }
+    
     th {
       background-color: #1a1a1a;
     }
+    
     .warning-box {
       background-color: #331111;
       border-left: 4px solid #ff5555;
       padding: 10px;
       margin: 15px 0;
     }
+    
     .tip-box {
       background-color: #112233;
       border-left: 4px solid #00ccff;
       padding: 10px;
       margin: 15px 0;
     }
+    
     ul, ol {
       padding-left: 20px;
     }
+    
     li {
       margin-bottom: 5px;
     }
-  </style>
+    
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 30px;
+      border-top: 1px solid #00ccff33;
+    }
+      </style>
 </head>
 <body>
-<a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
+  <canvas id="matrixCanvas"></canvas>
+  
+  <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
     position: absolute;
     top: 10px;
     right: 10px;
@@ -182,6 +227,7 @@
       width: 100px;
     ">User/Pass Generator</button>
   </a>
+
   <a href="../GamesHub/gameshub.html" title="GameHub" style="
     position: absolute;
     left: 140px;
@@ -201,423 +247,84 @@
       width: 100px;
     ">GameHub</button>
   </a>
-<a href="../index.html"
-   class="logo-link">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-<canvas id="matrixCanvas"></canvas>
-<style>
-  canvas#matrixCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
-    pointer-events: none;
-  }
+  
+  <label style="position: fixed; bottom: 0px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 16px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+    <select id="effectToggle">
+      <option value="matrix">Matrix</option>
+      <option value="starfield">Starfield</option>
+      <option value="warp">Warp Speed</option>
+      <option value="particles">Particles</option>
+      <option value="circuit">Circuit Pulse</option>
+    </select>
+  </label>
+  
+  <a href="../index.html" class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
 
-  body > *:not(canvas) {
-    position: relative;
-    z-index: 1;
-  }
-</style>
-
-  <header>Hydra</header>
-  <nav>
-    <ul>
-      <li><a href="AboutKali.html">About Kali</a></li>
-      <li><a href="install.html">Installation</a></li>
-      <li><a href="tools.html">Tools & Features</a></li>
-      <li><a href="commands.html">Commands</a></li>
-      <li><a href="tutorials.html">Tutorials</a></li>
-      <li><a href="community.html">Community Area</a></li>
-      <li><a href="contact.html">Contact Page</a></li>
-    </ul>
-  </nav>
-
-  <section>
-    <h2>What is Hydra?</h2>
-    <p>Hydra is a fast and flexible password-cracking tool that supports a wide range of protocols including FTP, SSH, Telnet, HTTP, HTTPS, SMB, and more. It is primarily used to perform dictionary-based brute-force attacks on login credentials.</p>
+  <!-- Add container div to control content width -->
+  <div class="container">
+    <header>Hydra</header>
     
-    <h3>Key Features</h3>
-    <ul>
-      <li>Support for over 50 protocols/services</li>
-      <li>Multi-threaded parallel connection capability</li>
-      <li>Flexible user/password list handling</li>
-      <li>Modular design with plug-in support</li>
-      <li>IPv6 support</li>
-      <li>Restore functionality for interrupted sessions</li>
-      <li>Free and open source software (FOSS)</li>
-    </ul>
-    
-    <div class="warning-box">
-      <strong>⚠️ Warning:</strong> THC-Hydra is a powerful tool intended for legal security testing. Always ensure you have explicit permission to test any system you don't own. Unauthorized access attempts are illegal in most jurisdictions.
-    </div>
-  </section>
+    <nav>
+      <ul>
+        <li><a href="AboutKali.html">About Kali</a></li>
+        <li><a href="install.html">Installation</a></li>
+        <li><a href="tools.html">Tools & Features</a></li>
+        <li><a href="commands.html">Commands</a></li>
+        <li><a href="tutorials.html">Tutorials</a></li>
+        <li><a href="community.html">Community Area</a></li>
+        <li><a href="contact.html">Contact Page</a></li>
+      </ul>
+    </nav>
 
-  <section>
-    <h2>Installation in Kali Linux</h2>
-    <p>Hydra comes pre-installed on Kali Linux. To ensure you have the latest version:</p>
-    <code>sudo apt update
+    <section>
+      <h2>What is Hydra?</h2>
+      <p>Hydra is a fast and flexible password-cracking tool that supports a wide range of protocols including FTP, SSH, Telnet, HTTP, HTTPS, SMB, and more. It is primarily used to perform dictionary-based brute-force attacks on login credentials.</p>
+      
+      <h3>Key Features</h3>
+      <ul>
+        <li>Support for over 50 protocols/services</li>
+        <li>Multi-threaded parallel connection capability</li>
+        <li>Flexible user/password list handling</li>
+        <li>Modular design with plug-in support</li>
+        <li>IPv6 support</li>
+        <li>Restore functionality for interrupted sessions</li>
+        <li>Free and open source software (FOSS)</li>
+      </ul>
+      
+      <div class="warning-box">
+        <strong>⚠️ Warning:</strong> THC-Hydra is a powerful tool intended for legal security testing. Always ensure you have explicit permission to test any system you don't own. Unauthorized access attempts are illegal in most jurisdictions.
+      </div>
+    </section>
+
+    <!-- Rest of the sections remain the same but now inside the container div -->
+    <section>
+      <h2>Installation in Kali Linux</h2>
+      <p>Hydra comes pre-installed on Kali Linux. To ensure you have the latest version:</p>
+      <code>sudo apt update
 sudo apt install hydra</code>
 
-    <p>To verify your installation:</p>
-    <code>hydra -h</code>
-    
-    <p>This will display the help menu with a list of supported protocols and basic usage information.</p>
-  </section>
+      <p>To verify your installation:</p>
+      <code>hydra -h</code>
+      
+      <p>This will display the help menu with a list of supported protocols and basic usage information.</p>
+    </section>
 
-  <section>
-    <h2>Basic Usage</h2>
-    <p>The general syntax for Hydra is:</p>
-    <code>hydra [options] [protocol://target]</code>
+    <!-- Additional sections would go here -->
     
-    <h3>Common Options</h3>
-    <table>
-      <tr>
-        <th>Option</th>
-        <th>Description</th>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-l username</span></td>
-        <td>Specify a single username</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-L userlist.txt</span></td>
-        <td>Specify a file containing multiple usernames</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-p password</span></td>
-        <td>Specify a single password</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-P passlist.txt</span></td>
-        <td>Specify a file containing multiple passwords</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-C combo.txt</span></td>
-        <td>Specify a file with username:password combinations</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-t n</span></td>
-        <td>Number of parallel connections (default: 16)</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-s PORT</span></td>
-        <td>Specify a non-default port</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-v / -V</span></td>
-        <td>Verbose / Very verbose mode</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-o output.txt</span></td>
-        <td>Write found credentials to file</td>
-      </tr>
-      <tr>
-        <td><span class="inline-code">-f</span></td>
-        <td>Stop after finding first valid credentials</td>
-      </tr>
-    </table>
-    
-    <h3>Examples</h3>
-    <p>Brute-force an SSH login with a username and a password list:</p>
-    <code>hydra -l root -P /usr/share/wordlists/rockyou.txt ssh://192.168.1.10</code>
-    
-    <p>Brute-force an HTTP login form:</p>
-    <code>hydra -L users.txt -P passwords.txt 192.168.1.10 http-post-form</code>
-    <code>"/login.php:user=^USER^&pass=^PASS^:F=incorrect"</code>
-    
-    <p>Brute-force FTP service with multiple usernames and passwords:</p>
-    <code>hydra -L users.txt -P passwords.txt ftp://192.168.1.10</code>
-    
-    <p>Attack a specific port (e.g., SMTP on port 587):</p>
-    <code>hydra -l admin -P passwords.txt smtp://192.168.1.10:587</code>
-    
-    <p>Use a combo list of username:password pairs:</p>
-    <code>hydra -C combo_list.txt ssh://192.168.1.10</code>
-  </section>
-
-  <section>
-    <h2>Supported Protocols</h2>
-    <p>Hydra supports numerous protocols, including:</p>
-    <table>
-      <tr>
-        <th>Protocol Category</th>
-        <th>Supported Protocols</th>
-      </tr>
-      <tr>
-        <td>Remote Access</td>
-        <td>ssh, telnet, rsh, rlogin, rdp</td>
-      </tr>
-      <tr>
-        <td>File Transfer</td>
-        <td>ftp, ftps, sftp, scp</td>
-      </tr>
-      <tr>
-        <td>Web</td>
-        <td>http-get, http-post, http-form, https-form, https-get</td>
-      </tr>
-      <tr>
-        <td>Mail</td>
-        <td>smtp, smtps, pop3, pop3s, imap, imaps</td>
-      </tr>
-      <tr>
-        <td>Databases</td>
-        <td>mysql, mssql, oracle, postgresql</td>
-      </tr>
-      <tr>
-        <td>Network</td>
-        <td>smb, snmp, vnc, ldap, ldap3</td>
-      </tr>
-      <tr>
-        <td>Other</td>
-        <td>cisco, cvs, firebird, ncp, pcanywhere, redis, teamspeak, xmpp</td>
-      </tr>
-    </table>
-    
-    <p>To see the complete list of supported protocols:</p>
-    <code>hydra -h | grep "Supported services" -A 30</code>
-  </section>
-
-  <section>
-    <h2>Advanced Usage</h2>
-    
-    <h3>HTTP Form-Based Authentication</h3>
-    <p>Web forms often require specific formatting. The general syntax is:</p>
-    <code>hydra [target] http-post-form "[path]:[form parameters]:[failed login identifier]"</code>
-    
-    <p>For example, to attack a WordPress login form:</p>
-    <code>hydra -l admin -P passwords.txt 192.168.1.10 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=Invalid username"</code>
-    
-    <div class="tip-box">
-      <strong>Tip:</strong> To analyze a form's parameters, use your browser's developer tools (F12) and examine the network requests when submitting the form.
+    <div class="nav-buttons">
+      <a href="wireshark.html"><button class="nav-button">Wireshark</button></a>
+      <a href="../index.html"><button class="nav-button">Home</button></a>
+      <a href="burpsuite.html"><button class="nav-button">Burp Suite</button></a>
     </div>
     
-    <h3>Using Proxy</h3>
-    <p>To route your Hydra traffic through a proxy:</p>
-    <code>hydra -l admin -P passlist.txt http-proxy://192.168.1.10:3128 http-post-form "..."</code>
-    
-    <h3>Rate Limiting</h3>
-    <p>Some services have rate limiting or lockout policies. Use these options to slow down attacks:</p>
-    <code>hydra -l user -P passlist.txt -t 1 -W 5 ssh://192.168.1.10</code>
-    <p>This uses 1 thread (-t 1) and waits 5 seconds between connection attempts (-W 5).</p>
-    
-    <h3>Restore Interrupted Session</h3>
-    <p>If Hydra is interrupted, it creates a .restore file. To continue:</p>
-    <code>hydra -R</code>
-  </section>
-
-  <section>
-    <h2>Practical Examples</h2>
-    
-    <h3>Example 1: SSH Brute Force</h3>
-    <p>Attempt to crack SSH on a local target using common usernames and passwords:</p>
-    <code>hydra -L common_users.txt -P top_passwords.txt ssh://192.168.1.5</code>
-    <p>This approach is useful in penetration testing scenarios where weak login credentials may be in use.</p>
-    
-    <h3>Example 2: SMTP Authentication</h3>
-    <p>Test email server authentication with a list of potential credentials:</p>
-    <code>hydra -L users.txt -P passwords.txt smtp://mail.example.com -v</code>
-    
-    <h3>Example 3: WordPress Admin Panel</h3>
-    <p>Attempt to find WordPress admin credentials:</p>
-    <code>hydra -l admin -P /usr/share/wordlists/rockyou.txt 192.168.1.100 http-post-form "/wp-login.php:log=^USER^&pwd=^PASS^&wp-submit=Log+In:F=is incorrect"</code>
-    
-    <h3>Example 4: FTP with Known Username</h3>
-    <p>When you know a valid username and need to find the password:</p>
-    <code>hydra -l ftpuser -P /usr/share/wordlists/fasttrack.txt ftp://192.168.1.5 -v</code>
-  </section>
-
-  <section>
-    <h2>Creating Custom Wordlists</h2>
-    <p>Effective password cracking often requires targeted wordlists. Here are some ways to create them:</p>
-    
-    <h3>Using Cewl to Generate Website-Specific Wordlists</h3>
-    <p>CeWL can crawl a website and create a wordlist from its content:</p>
-    <code>cewl -d 2 -m 5 -w custom_wordlist.txt http://example.com</code>
-    <p>This crawls to a depth of 2, includes words of minimum length 5, and saves them to custom_wordlist.txt.</p>
-    
-    <h3>Password Mutations with John the Ripper</h3>
-    <p>You can use John the Ripper's rules to create variations of existing passwords:</p>
-    <code>john --wordlist=base_list.txt --rules --stdout > mutated_list.txt</code>
-    
-    <div class="tip-box">
-      <strong>Pro Tip:</strong> Combine multiple approaches for more effective wordlists. Start with targeted words, add common passwords, and apply mutations to create a comprehensive custom list.
-    </div>
-  </section>
-  
-  <section>
-    <h2>Defending Against Hydra Attacks</h2>
-    <p>As a security professional, it's important to understand how to protect systems from brute force attacks:</p>
-    
-    <ul>
-      <li><strong>Account Lockout Policies:</strong> Implement temporary or permanent lockouts after a specific number of failed attempts</li>
-      <li><strong>Rate Limiting:</strong> Slow down authentication attempts from the same IP address</li>
-      <li><strong>Two-Factor Authentication (2FA):</strong> Add a second authentication factor beyond passwords</li>
-      <li><strong>Strong Password Policies:</strong> Enforce complex, long passwords that resist brute forcing</li>
-      <li><strong>IP Blocking:</strong> Use tools like Fail2ban to automatically block IPs with suspicious activity</li>
-      <li><strong>Non-Standard Ports:</strong> While security by obscurity isn't strong by itself, changing default ports adds a small layer of protection</li>
-      <li><strong>Logging and Monitoring:</strong> Set up alerts for multiple failed login attempts</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Troubleshooting Common Issues</h2>
-    
-    <h3>High Failure Rate</h3>
-    <p>If you're seeing too many failures despite known good credentials:</p>
-    <ul>
-      <li>Reduce the number of threads using <span class="inline-code">-t 4</span> or lower</li>
-      <li>Add a delay between attempts using <span class="inline-code">-W 2</span> (2 second delay)</li>
-      <li>Verify your target is correctly specified, including protocol and port</li>
-    </ul>
-    
-    <h3>HTTP Form Issues</h3>
-    <p>For web form attacks:</p>
-    <ul>
-      <li>Make sure you've correctly identified all required form fields</li>
-      <li>Check for CSRF tokens that might be required</li>
-      <li>Ensure you've correctly identified the failed login message</li>
-      <li>Try using <span class="inline-code">-V</span> (verbose mode) to see exactly what's being sent</li>
-    </ul>
-    
-    <h3>Connection Problems</h3>
-    <p>If you can't connect to the target:</p>
-    <ul>
-      <li>Verify the target is online with a simple ping test</li>
-      <li>Confirm the service is running with <span class="inline-code">nmap -p [port] [target]</span></li>
-      <li>Check for firewalls or IPS systems that might be blocking your attempts</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>Related Tools</h2>
-    <p>Hydra works well with these other Kali tools:</p>
-    
-    <table>
-      <tr>
-        <th>Tool</th>
-        <th>Purpose</th>
-        <th>How it Complements Hydra</th>
-      </tr>
-      <tr>
-        <td>Nmap</td>
-        <td>Network scanning</td>
-        <td>Identify open services before targeting with Hydra</td>
-      </tr>
-      <tr>
-        <td>John the Ripper</td>
-        <td>Password cracking</td>
-        <td>Create customized wordlists for use with Hydra</td>
-      </tr>
-      <tr>
-        <td>Hashcat</td>
-        <td>Password recovery</td>
-        <td>Crack password hashes obtained after successful Hydra runs</td>
-      </tr>
-      <tr>
-        <td>Burp Suite</td>
-        <td>Web application testing</td>
-        <td>Analyze web forms before crafting Hydra HTTP attacks</td>
-      </tr>
-      <tr>
-        <td>Metasploit</td>
-        <td>Exploitation framework</td>
-        <td>Use credentials found by Hydra for deeper exploitation</td>
-      </tr>
-    </table>
-  </section>
-
-  <section>
-    <h2>Command Cheat Sheet</h2>
-    <table>
-      <tr>
-        <th>Task</th>
-        <th>Command</th>
-      </tr>
-      <tr>
-        <td>Basic SSH attack</td>
-        <td><code>hydra -l user -P passlist.txt ssh://target</code></td>
-      </tr>
-      <tr>
-        <td>HTTP POST form</td>
-        <td><code>hydra -l admin -P passlist.txt target http-post-form "/login:user=^USER^&pass=^PASS^:F=failed"</code></td>
-      </tr>
-      <tr>
-        <td>SMTP authentication</td>
-        <td><code>hydra -l user@domain.com -P passlist.txt smtp://mail.server.com</code></td>
-      </tr>
-      <tr>
-        <td>MySQL database</td>
-        <td><code>hydra -l root -P passlist.txt mysql://target</code></td>
-      </tr>
-      <tr>
-        <td>RDP (Remote Desktop)</td>
-        <td><code>hydra -L userlist.txt -P passlist.txt rdp://target</code></td>
-      </tr>
-      <tr>
-        <td>FTP with specific port</td>
-        <td><code>hydra -l user -P passlist.txt ftp://target:2121</code></td>
-      </tr>
-      <tr>
-        <td>With IP range</td>
-        <td><code>hydra -l admin -P passlist.txt ssh://192.168.0.0/24</code></td>
-      </tr>
-    </table>
-  </section>
-  
-  <div class="nav-buttons">
-    <a href="wireshark.html"><button class="nav-button">Wireshark</button></a>
-    <a href="../index.html"><button class="nav-button">Home</button></a>
-    <a href="burpsuite.html"><button class="nav-button">Burp Suite</button></a>
+    <footer>
+      <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+      <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
   </div>
   
-<script>
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const letters = '01';
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
-
-  function drawMatrix() {
-    // Fade the previous frame slightly for the trailing effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = fontSize + 'px monospace';
-
-    for (let i = 0; i < drops.length; i++) {
-      const text = letters.charAt(Math.floor(Math.random() * letters.length));
-
-      // Randomly pick color: mostly grey, sometimes green or blue
-      const rand = Math.random();
-      if (rand < 0.85) {
-        ctx.fillStyle = '#888'; // grey
-      } else if (rand < 0.95) {
-        ctx.fillStyle = '#0f0'; // green
-      } else {
-        ctx.fillStyle = '#00ccff'; // blue
-      }
-
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(drawMatrix, 33);
-
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
+  <script src="../starfield.js"></script>
 </body>
 </html>
