@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kali Linux Fun Games Hub</title>
+  <link rel="stylesheet" href="../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
@@ -27,7 +28,7 @@
     header {
       text-align: center;
       font-size: 2.2rem;
-      padding: 80px 20px 30px;
+      padding: 110px 20px 0px;
       background: linear-gradient(90deg, #00ffcc, #00ccff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -42,20 +43,20 @@
     }
 
     .logo-link {
-      position: fixed;
-      top: 10px;
-      left: 10px;
+      position: absolute;
+      top: -25px;
+      left: -15px;
       z-index: 999;
     }
 
     .logo-link img {
-      width: 80px;
+      width: 150px;
       height: auto;
     }
 
     .button-fixed {
-      position: absolute;
-      z-index: 999;
+      position: fixed;
+      z-index: 9999;
       background-color: #00ccff;
       color: #000;
       font-size: 0.8rem;
@@ -110,18 +111,32 @@
   <!-- Matrix Background -->
   <canvas id="matrixCanvas"></canvas>
 
+<label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 15px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+  <select id="effectToggle">
+  <option value="matrix">Matrix</option>
+  <option value="starfield">Starfield</option>
+  <option value="warp">Warp Speed</option>
+  <option value="particles">Particles</option>
+  <option value="circuit">Circuit Pulse</option>
+</select>
+</label>
+
   <!-- Logo -->
   <a href="../index.html" class="logo-link">
     <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" />
   </a>
 
   <!-- Utility Buttons -->
-  <a href="../PassGen/Anonypass.html" title="User/Pass Generator">
-    <button class="button-fixed userpass-button">User/Pass Generator</button>
-  </a>
-  <a href="gameshub.html" title="GameHub">
-    <button class="button-fixed gamehub-button">GameHub</button>
-  </a>
+  <a href="Subpages/subloadingscreen.html?target=../PassGen/Anonypass.html" title="User/Pass Generator" style="position: absolute; top: 10px; right: 10px; z-index: 999;">
+  <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', 'Courier New', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
+    User/Pass Generator
+  </button>
+</a>
+  <a href="Subpages/subloadingscreen.html?target=../GamesHub/gameshub.html" title="GameHub" style="position: absolute; left: 140px; top: 10px; z-index: 999;">
+  <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', 'Courier New', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
+    GameHub
+  </button>
+</a>
 
   <!-- Page Header -->
   <header>Kali Linux Fun Games Hub</header>
@@ -138,46 +153,10 @@
   </div>
 
   <!-- Matrix Effect Script -->
-  <script>
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const letters = '01';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function drawMatrix() {
-      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.font = fontSize + 'px monospace';
-
-      for (let i = 0; i < drops.length; i++) {
-        const text = letters.charAt(Math.floor(Math.random() * letters.length));
-        const rand = Math.random();
-        if (rand < 0.85) {
-          ctx.fillStyle = '#888'; // grey
-        } else if (rand < 0.95) {
-          ctx.fillStyle = '#0f0'; // green
-        } else {
-          ctx.fillStyle = '#00ccff'; // blue
-        }
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
-        }
-        drops[i]++;
-      }
-    }
-
-    setInterval(drawMatrix, 33);
-
-    window.addEventListener('resize', () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    });
-  </script>
+  <script src="../starfield.js"></script>
+  <footer>
+        <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 </body>
 </html>
