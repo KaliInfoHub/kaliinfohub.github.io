@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>The Kali Linux Info Hub</title>
+  <link rel="stylesheet" href="style.css">
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
     body {
@@ -16,15 +17,7 @@
   overflow-x: hidden;
 }
 
-    canvas#matrixCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
-    }
+    
 
     header, section, .kali-logo, a {
       position: relative;
@@ -531,7 +524,15 @@ W   W  EEEEE  LLLLL  CCCC  OOO   M   M  EEEEE
     User/Pass Generator
   </button>
 </a>
-
+<label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 15px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+  <select id="effectToggle">
+  <option value="matrix">Matrix</option>
+  <option value="starfield">Starfield</option>
+  <option value="warp">Warp Speed</option>
+  <option value="particles">Particles</option>
+  <option value="circuit">Circuit Pulse</option>
+</select>
+</label>
 <a href="Subpages/subloadingscreen.html?target=../GamesHub/gameshub.html" title="GameHub" style="position: absolute; left: 140px; top: 10px; z-index: 999;">
   <button style="background-color: #00ccff; color: #000; border: none; padding: 6px 10px; font-size: 0.8rem; font-family: 'Kelly Slab', 'Courier New', monospace; border-radius: 4px; cursor: pointer; width: 100px;">
     GameHub
@@ -654,7 +655,7 @@ W   W  EEEEE  LLLLL  CCCC  OOO   M   M  EEEEE
       <button onclick="checkAnswer(this, false)">Aircrack-ng</button>
     </div>
   </section>
-
+<script src="starfield.js"></script>  
   <script>
     const form = document.getElementById('forumForm');
     const posts = document.getElementById('forumPosts');
@@ -698,52 +699,7 @@ W   W  EEEEE  LLLLL  CCCC  OOO   M   M  EEEEE
   });
 }
 
-    // Matrix Effect Script
-    const canvas = document.getElementById('matrixCanvas');
-    const ctx = canvas.getContext('2d');
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
-
-    const letters = '01';
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops = Array(Math.floor(columns)).fill(1);
-
-    function draw() {
-  ctx.fillStyle = 'rgba(0, 0, 0, 0.05)'; // Fades previous characters
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.font = fontSize + 'px monospace';
-
-  for (let i = 0; i < drops.length; i++) {
-    const text = letters[Math.floor(Math.random() * letters.length)];
-
-    // Randomize color: mostly grey, with rare green and blue
-    const rand = Math.random();
-    if (rand < 0.85) {
-      ctx.fillStyle = '#888'; // grey
-    } else if (rand < 0.95) {
-      ctx.fillStyle = '#0f0'; // green
-    } else {
-      ctx.fillStyle = '#00ccff'; // blue
-    }
-
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
-    }
-
-    drops[i]++;
-  }
-}
-
-    setInterval(draw, 33);
-
-    window.addEventListener('resize', () => {
-      canvas.height = window.innerHeight;
-      canvas.width = window.innerWidth;
-    });
+    
     
     document.addEventListener('DOMContentLoaded', function() {
   const terminalInput = document.getElementById('terminal-input');
