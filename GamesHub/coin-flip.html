@@ -7,13 +7,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <title>Coin Flip</title>
   <style>
-    html, body {
+     body {
       margin: 0;
       padding: 0;
       overflow: hidden;
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Kelly Slab', 'Courier New', monospace;
+      font-family: 'Kelly Slab', 'Kelly Slab', 'Courier New', monospace;
       text-align: center;
     }
 
@@ -23,7 +23,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      z-index: -1;
+      z-index: -1 !important;
       pointer-events: none;
     }
 
@@ -69,7 +69,7 @@
       border: none;
       padding: 10px 20px;
       margin: 10px;
-      font-family: monospace;
+      font-family: 'Kelly Slab', monospace;
       border-radius: 6px;
       cursor: pointer;
       transition: 0.2s ease;
@@ -111,7 +111,7 @@
       background-color: rgba(0, 0, 50, 0.9);
       color: #00f7ff;
       border: 1px solid #00f7ff;
-      font-family: monospace;
+      font-family: 'Kelly Slab', monospace;
       padding: 8px;
       border-radius: 6px;
     }
@@ -164,10 +164,7 @@
     <a href="hydra.html"><button>Hydra →</button></a>
   </div>
 
-  <footer>
-    <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
-    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
-  </footer>
+<script src="../starfield.js"></script>
 
   <!-- Coin Flip Script -->
   <script>
@@ -205,8 +202,6 @@
     }
   </style>
 
-  <!-- Matrix Background Script -->
-  <script src="../starfield.js"></script>
   <footer>
         <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
         <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
