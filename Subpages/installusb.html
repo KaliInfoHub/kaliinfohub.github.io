@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Boot from Live USB | Kali Info Hub</title>
+  <link rel="stylesheet" href="../style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
@@ -115,6 +116,17 @@
 <body>
 
 <canvas id="matrixCanvas"></canvas>
+
+<label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 15px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+  <select id="effectToggle">
+  <option value="matrix">Matrix</option>
+  <option value="starfield">Starfield</option>
+  <option value="warp">Warp Speed</option>
+  <option value="particles">Particles</option>
+  <option value="circuit">Circuit Pulse</option>
+</select>
+</label>
+
 <a href="../PassGen/Anonypass.html" title="User/Pass Generator" style="
     position: absolute;
     top: 10px;
@@ -201,53 +213,16 @@
   <p><strong>Ideal For:</strong> Portability, safe testing, temporary environments, forensics.</p>
 </section>
 
-<script>
-  const canvas = document.getElementById('matrixCanvas');
-  const ctx = canvas.getContext('2d');
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-
-  const letters = '01';
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-  const drops = Array(Math.floor(columns)).fill(1);
-
-  function drawMatrix() {
-    // Fade the previous frame slightly for the trailing effect
-    ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.font = fontSize + 'px monospace';
-
-    for (let i = 0; i < drops.length; i++) {
-      const text = letters.charAt(Math.floor(Math.random() * letters.length));
-
-      // Randomly pick color: mostly grey, sometimes green or blue
-      const rand = Math.random();
-      if (rand < 0.85) {
-        ctx.fillStyle = '#888'; // grey
-      } else if (rand < 0.95) {
-        ctx.fillStyle = '#0f0'; // green
-      } else {
-        ctx.fillStyle = '#00ccff'; // blue
-      }
-
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
-      }
-
-      drops[i]++;
-    }
-  }
-
-  setInterval(drawMatrix, 33);
-
-  window.addEventListener("resize", () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
-<p><a href="../index.html">← Back to Home</a></p>
+<script src="../starfield.js"></script>
+<p style="text-align:center; margin: 40px 0;">
+<div class="nav-buttons">
+    <a href="installdualboot.html"><button class="nav-button">← Dual Boot</button></a>
+    <a href="../index.html"><button class="nav-button">Home</button></a>
+    <a href="installnethunter.html"><button class="nav-button">Nethunter →</button></a>
+  </div>
+<footer>
+        <p>&copy; 2025 The Kali Linux Info Hub. All rights reserved.</p>
+        <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+    </footer>
 </body>
 </html>
