@@ -4,16 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anonymous Pass/Username</title>
+  <link rel="stylesheet" href="../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Kelly+Slab&display=swap" rel="stylesheet">
   <style>
-    body {
+    /* Base Styles */
+    html, body {
       margin: 0;
-      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
       background-color: #0d0d0d;
       color: #00CCFF;
       overflow-x: hidden;
+      min-height: 100%;
     }
 
+    /* Matrix Canvas */
     canvas#matrixCanvas {
       position: fixed;
       top: 0;
@@ -24,189 +28,128 @@
       pointer-events: none;
     }
 
-    header, section, .kali-logo, a {
+    /* Navigation */
+    .main-header {
       position: relative;
-      z-index: 1;
-    }
-
-    header {
-      background: linear-gradient(90deg, #0080FF, #00CCFF);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      z-index: 10;
+      padding: 80px 20px 20px;
       text-align: center;
-      padding: 70px 20px 20px;
-      font-size: 2rem;
-      font-weight: bold;
-      animation: glow 2s ease-in-out infinite alternate;
     }
 
-    @keyframes glow {
-      from { text-shadow: 0 0 10px #00CCFF; }
-      to { text-shadow: 0 0 20px #00CCFF, 0 0 30px #00CCFF; }
+    .logo-link {
+      position: absolute;
+      top: -11px;
+      left: -3px;
+      z-index: 100;
     }
 
     .kali-logo {
-      position: absolute;
-      top: -20px;
-      left: -10px;
-      width: 120px;
+      width: 150px;
       height: auto;
-      z-index: 999;
-    }
-    .logo-link {
-      display: inline-block;  /* Makes the anchor wrap the image fully */
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      z-index: 999;
     }
 
     nav {
-      text-align: center;
-      margin-top: 10px;
-      z-index: 1;
       position: relative;
+      z-index: 10;
+      padding: 15px 0;
+      left: 80px;
+      text-align: center;
     }
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    nav ul li a {
+    nav button {
       background-color: #111;
       border: 1px solid #00CCFF;
-      padding: 10px 15px;
+      padding: 12px 20px;
+      margin: 0 10px;
       border-radius: 6px;
       color: #00CCFF;
-      text-decoration: none;
-      display: inline-block;
-    }
-
-    section {
-      padding: 20px;
-      max-width: 800px;
-      margin: auto;
-    }
-
-    h2 {
-      color: #00CCFF;
-      text-align: center;
-      margin-bottom: 20px;
-    }
-
-    form {
-      background-color: #111;
-      padding: 20px;
-      border-radius: 10px;
-      border: 1px solid #00CCFF;
-    }
-
-    input, textarea {
-      width: 100%;
-      background-color: #000;
-      border: 1px solid #00CCFF;
-      padding: 10px;
-      margin-bottom: 15px;
-      color: #00CCFF;
-      font-family: monospace;
-    }
-
-    button {
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      font-weight: bold;
       cursor: pointer;
-    }
-
-    p.note {
-      text-align: center;
-      color: #ccc;
-      font-size: 0.9rem;
-    }
-  </style>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      font-family: 'Courier New', monospace;
-      background: black;
-      color: #00CCFF;
-    }
-
-    canvas {
-      position: absolute;
-      top: 0;
-      left: 0;
-      z-index: -1;
-    }
-
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    nav ul li a {
-      background-color: #111;
-      border: 1px solid #00ccff;
-      padding: 10px 15px;
-      border-radius: 6px;
-      color: #00ccff;
-      text-decoration: none;
-      display: inline-block;
-    }
-	.nav-buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 30px;
-      margin-bottom: 20px;
-    }
-    .nav-button {
-      background-color: #00ccff;
-      color: #000;
-      border: none;
-      padding: 16px 25px;
-      font-size: 0.9rem;
       font-family: 'Kelly Slab', 'Courier New', monospace;
-      border-radius: 4px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .nav-button:hover {
-      background-color: #00ffcc;
-      box-shadow: 0 0 15px #00ffcc;
     }
 
+    nav button:hover {
+      background-color: #00CCFF;
+      color: #111;
+    }
+
+    /* Main Content Sections */
     .section {
       display: none;
-      height: 100vh;
-      overflow-y: auto;
+      position: relative;
+      z-index: 5;
+      padding: 20px;
+      min-height: 80vh;
     }
 
     .active {
       display: block;
     }
 
-    /* Password generator styles */
+    /* Password Generator Styles */
     .container {
       position: relative;
-      top: 45%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      margin: 40px auto;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 0 20px #00CCFF;
+      width: 80%;
+      max-width: 500px;
+    }
+
+    .password {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      word-break: break-word;
+      padding: 10px;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid #00CCFF;
+      border-radius: 5px;
+    }
+
+    button {
+      background: #000;
+      border: 1px solid #00CCFF;
+      color: #00CCFF;
+      padding: 0.5rem 1rem;
+      margin: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+    }
+
+    button:hover {
+      background: #00CCFF;
+      color: #000;
+    }
+
+    label {
+      display: block;
+      margin: 0.8rem 0 0.3rem;
+      text-align: left;
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    input[type="number"], input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      background: #000;
+      border: 1px solid #00CCFF;
+      color: #00CCFF;
+      border-radius: 5px;
+      box-sizing: border-box;
+      margin-bottom: 5px;
+    }
+
+    /* Username Generator Styles */
+    .username-section {
+      position: relative;
+      margin: 1rem 0;
       text-align: center;
       background: rgba(0, 0, 0, 0.7);
       padding: 2rem;
@@ -216,347 +159,410 @@
       max-width: 450px;
     }
 
-    .password {
-      font-size: 1.5rem;
-      margin: 1rem 0;
-      word-break: break-word;
-    }
-
-    button {
-      background: #000;
-      border: 1px solid #00CCFF;
-      color: #00CCFF;
-      padding: 0.5rem 1rem;
-      cursor: pointer;
-      font-size: 1rem;
-      margin: 0.5rem;
-    }
-
-    button:hover {
-      background: #00CCFF;
-      color: #000;
-    }
-
-    label, input, select {
-      display: block;
-      margin: 0.4rem auto;
-      color: #00CCFF;
-    }
-
-    input, select {
-      padding: 0.4rem;
-      background: #000;
-      border: 1px solid #00ff00;
-      color: #00ff00;
-      text-align: center;
-    }
-
-    .flex-row {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    @media (max-width: 600px) {
-      .wrapper {
-        flex-direction: column;
-        align-items: stretch;
-      }
-    }
-
-    /* Username generator styles */
     .wrapper {
       display: flex;
-      max-width: 1000px;
-      width: 100%;
-      box-sizing: border-box;
-      gap: 10px;
-      z-index: 2;
-      margin: 0 auto;
-      color: white;
-    }
-
-    .username-section {
-      background: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+      flex-direction: row;
+      max-width: 900px;
+      margin: 40px auto;
+      gap: 20px;
     }
 
     .username-container {
-      background: rgba(255, 255, 255, 0.08);
       flex: 1;
-      padding: 90px;
+      background: rgba(0, 0, 0, 0.7);
+      padding: 1px 1px 1px;
       border-radius: 20px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(10px);
     }
 
     .result-box {
       flex: 1;
-      background: rgba(255, 255, 255, 0.1);
+      background: rgba(0, 0, 0, 0.7);
       border-radius: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 32px;
+      font-size: 28px;
       font-weight: bold;
       text-align: center;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
       padding: 20px;
-      backdrop-filter: blur(8px);
+      min-height: 200px;
+      word-break: break-word;
     }
 
-    input[type="text"], input[type="number"] {
-      width: 60%;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      margin-top: 4px;
-      background: rgba(255, 255, 255, 0.2);
-      color: #00CCFF;
+    /* Footer Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin: 30px auto;
+      max-width: 800px;
+      padding: 0 20px;
+      position: relative;
+      z-index: 10;
     }
 
-    .username-container button {
-      margin-top: 20px;
-      background: #4fc3f7;
+    .nav-button {
+      background-color: #00CCFF;
       color: #000;
-      border-radius: 8px;
+      border: none;
+      padding: 16px 25px;
+      font-size: 0.9rem;
+      font-family: 'Kelly Slab', 'Courier New', monospace;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .username-container button:hover {
-      background: #00CCFF;
+    .nav-button:hover {
+      background-color: #00FFCC;
+      box-shadow: 0 0 15px #00FFCC;
+    }
+
+    h1 {
+      color: #00CCFF;
+      margin-top: 0;
+      margin-bottom: 1.5rem;
+      text-shadow: 0 0 10px #00CCFF;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .wrapper {
+        flex-direction: column;
+      }
+      
+      .username-container, .result-box {
+        width: 100%;
+      }
+      
+      .nav-buttons {
+        flex-direction: column;
+        gap: 10px;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
-<canvas id="matrixCanvas"></canvas>
-<a href="../index.html" class="logo-link">
-  <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
-</a>
-<nav>
-  <button onclick="switchSection('password')">🔐 Password Generator</button>
-  <button onclick="switchSection('username')">🧑 Username Generator</button>
-</nav>
-<div class="nav-buttons">
+  <canvas id="matrixCanvas"></canvas>
+
+  <a href="../index.html" class="logo-link">
+    <img src="../Icons/TranspKali.png" alt="Kali Linux Logo" class="kali-logo">
+  </a>
+
+  <nav>
+    <button onclick="switchSection('password')">🔐 Password Generator</button>
+    <button onclick="switchSection('username')">🧑 Username Generator</button>
+  </nav>
+<label style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background-color: rgba(0, 0, 50, 0.9); color: #00f7ff; padding: 10px 15px; border: 1px solid #00f7ff; font-family: monospace; font-size: 14px; border-radius: 8px; box-shadow: 0 0 10px #00f7ff;">
+  <select id="effectToggle">
+  <option value="matrix">Matrix</option>
+  <option value="starfield">Starfield</option>
+  <option value="warp">Warp Speed</option>
+  <option value="particles">Particles</option>
+  <option value="circuit">Circuit Pulse</option>
+</select>
+</label>
+<div class="main-header">
+    <h1>Anonymous Tools</h1>
+  </div>
+
+  <div id="password" class="section active">
+    <div class="container">
+      <h1>Password Generator</h1>
+      <label for="length">Password Length:</label>
+      <input type="number" id="length" value="16" min="4" max="64">
+      
+      <label><input type="checkbox" id="includeUpper" checked> Include Uppercase Letters</label>
+      <label><input type="checkbox" id="includeLower" checked> Include Lowercase Letters</label>
+      <label><input type="checkbox" id="includeSpecial" checked> Include Special Characters</label>
+      <label><input type="checkbox" id="includeNumbers" checked> Include Numbers</label>
+      <label><input type="checkbox" id="excludeSimilar"> Exclude Similar Characters (O, 0, l, 1)</label>
+      <label><input type="checkbox" id="pronounceable"> Use Pronounceable Password</label>
+      
+      <label for="customSpecial">Custom Special Characters (optional):</label>
+      <input type="text" id="customSpecial" placeholder="e.g. @#$%&*">
+      
+      <label for="blacklist">Blacklist Characters/Words (comma-separated):</label>
+      <input type="text" id="blacklist" placeholder="e.g. password,1234">
+      
+      <div class="password" id="passwordDisplay">Your password will appear here</div>
+      
+      <button onclick="generatePassword()">Generate Password</button>
+      <button onclick="copyPassword()">Copy to Clipboard</button>
+    </div>
+  </div>
+
+  <div id="username" class="section username-section">
+    <div class="wrapper">
+      <div class="username-container">
+        <h1>Username Generator</h1>
+        <label for="minLength">Minimum Length:</label>
+        <input type="number" id="minLength" value="6" min="1">
+        
+        <label for="maxLength">Maximum Length:</label>
+        <input type="number" id="maxLength" value="16" min="1">
+        
+        <label><input type="checkbox" id="uppercase" checked> Capitalize Words</label>
+        <label><input type="checkbox" id="digits" checked> Include Digits</label>
+        <label><input type="checkbox" id="special"> Include Special Characters</label>
+        
+        <label for="prefix">Prefix (optional):</label>
+        <input type="text" id="prefix">
+        
+        <label for="suffix">Suffix (optional):</label>
+        <input type="text" id="suffix">
+        
+        <button onclick="generateUsername()">Generate Username</button>
+      </div>
+      <div class="result-box" id="result">Your username will appear here!</div>
+    </div>
+  </div>
+
+  <div class="nav-buttons">
     <a href="../GamesHub/gameshub.html"><button class="nav-button">Games Hub</button></a>
     <a href="../index.html"><button class="nav-button">Home</button></a>
     <a href="../Subpages/hacked.html"><button class="nav-button">DONT CLICK HERE!</button></a>
   </div>
-<div id="password" class="section active">
-  <div class="container">
-    <h1>Password Generator</h1>
-    <label for="length">Password Length:</label>
-    <input type="number" id="length" value="16" min="4" max="64">
-    <label><input type="checkbox" id="includeUpper" checked> Include Uppercase Letters</label>
-    <label><input type="checkbox" id="includeLower" checked> Include Lowercase Letters</label>
-    <label><input type="checkbox" id="includeSpecial" checked> Include Special Characters</label>
-    <label><input type="checkbox" id="includeNumbers" checked> Include Numbers</label>
-    <label><input type="checkbox" id="excludeSimilar"> Exclude Similar Characters (O, 0, l, 1)</label>
-    <label><input type="checkbox" id="pronounceable"> Use Pronounceable Password</label>
-    <label for="customSpecial">Custom Special Characters (optional):</label>
-    <input type="text" id="customSpecial" placeholder="e.g. @#$%&*">
-    <label for="blacklist">Blacklist Characters/Words (comma-separated):</label>
-    <input type="text" id="blacklist" placeholder="e.g. password,1234">
-    <div class="password" id="passwordDisplay">Your password will appear here</div>
-    <button onclick="generatePassword()">Generate Password</button>
-    <button onclick="copyPassword()">Copy to Clipboard</button>
-  </div>
-</div>
-<div id="username" class="section username-section">
-  <div class="wrapper">
-    <div class="username-container">
-      <h1>Username Generator</h1>
-      <label>Minimum Length: <input type="number" id="minLength" value="6" min="1"></label>
-      <label>Maximum Length: <input type="number" id="maxLength" value="16" min="1"></label>
-      <label><input type="checkbox" id="uppercase" checked> Capitalize Words</label>
-      <label><input type="checkbox" id="digits" checked> Include Digits</label>
-      <label><input type="checkbox" id="special"> Include Special Characters</label>
-      <label>Prefix (optional): <input type="text" id="prefix"></label>
-      <label>Suffix (optional): <input type="text" id="suffix"></label>
-      <button onclick="generateUsername()">Generate Username</button>
-    </div>
-    <div class="result-box" id="result">Your username will appear here!</div>
-  </div>
-</div>
-<script>
-// Enhanced Matrix background (combining both styles)
-const canvas = document.getElementById('matrixCanvas');
-const ctx = canvas.getContext('2d');
+<script src="../starfield.js"></script>
+  <script>
+    
 
-// Set canvas to full window size
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-// Characters to use in the matrix rain
-const letters = 'アァイィウエオカキクケコサシスセソ0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-const fontSize = 16;
-const columns = Math.floor(canvas.width / fontSize);
-
-// Initialize drops array
-const drops = Array(columns).fill(1);
-
-function drawMatrix() {
-  // Semi-transparent background for fade effect
-  ctx.fillStyle = 'rgba(26, 26, 26, 0.08)';
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.font = `${fontSize}px monospace`;
-
-  for (let i = 0; i < drops.length; i++) {
-    // Get random character
-    const text = letters.charAt(Math.floor(Math.random() * letters.length));
-
-    // Random color choice: mostly grey, sometimes green or blue
-    const rand = Math.random();
-    if (rand > 0.985) {
-      ctx.fillStyle = '#00ff00'; // Green
-    } else if (rand > 0.97) {
-      ctx.fillStyle = '#00ccff'; // Light blue
-    } else {
-      ctx.fillStyle = '#555';    // Grey
+    // Section switcher
+    function switchSection(id) {
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
     }
 
-    // Draw the character
-    ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+    // Password Generator Functions
+    function generatePassword() {
+      const length = parseInt(document.getElementById("length").value) || 16;
+      const includeUpper = document.getElementById("includeUpper").checked;
+      const includeLower = document.getElementById("includeLower").checked;
+      const includeSpecial = document.getElementById("includeSpecial").checked;
+      const includeNumbers = document.getElementById("includeNumbers").checked;
+      const excludeSimilar = document.getElementById("excludeSimilar").checked;
+      const pronounceable = document.getElementById("pronounceable").checked;
+      const customSpecial = document.getElementById("customSpecial").value || ".?!";
+      const blacklist = document.getElementById("blacklist").value.toLowerCase().split(',').map(s => s.trim());
 
-    // Reset drop
-    if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-      drops[i] = 0;
+      let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+      let lower = "abcdefghijklmnopqrstuvwxyz";
+      let special = customSpecial;
+      let numbers = "0123456789";
+
+      if (excludeSimilar) {
+        const similar = /[O0l1I]/g;
+        upper = upper.replace(similar, '');
+        lower = lower.replace(similar, '');
+        special = special.replace(similar, '');
+        numbers = numbers.replace(similar, '');
+      }
+
+      let charSets = [];
+      if (includeUpper) charSets.push(upper);
+      if (includeLower) charSets.push(lower);
+      if (includeSpecial) charSets.push(special);
+      if (includeNumbers) charSets.push(numbers);
+
+      let characters = charSets.join('');
+      if (characters.length === 0) {
+        document.getElementById("passwordDisplay").textContent = "Please select at least one character type.";
+        return;
+      }
+
+      let password = '';
+
+      if (pronounceable) {
+        const consonants = "bcdfghjklmnpqrstvwxyz";
+        const vowels = "aeiou";
+        for (let i = 0; i < length; i++) {
+          password += i % 2 === 0 ? consonants[Math.floor(Math.random() * consonants.length)] : vowels[Math.floor(Math.random() * vowels.length)];
+        }
+      } else {
+        for (let set of charSets) {
+          password += set[Math.floor(Math.random() * set.length)];
+        }
+        for (let i = password.length; i < length; i++) {
+          password += characters[Math.floor(Math.random() * characters.length)];
+        }
+        password = password.split('').sort(() => Math.random() - 0.5).join('');
+      }
+
+      for (let term of blacklist) {
+        if (term && password.toLowerCase().includes(term)) {
+          return generatePassword();
+        }
+      }
+
+      document.getElementById("passwordDisplay").textContent = password;
     }
 
-    drops[i]++;
-  }
-}
-
-// Run the matrix effect animation
-setInterval(drawMatrix, 40);
-
-// Handle window resize
-window.addEventListener('resize', () => {
-  canvas.width = window.innerWidth;
-  canvas.height = window.innerHeight;
-});
-
-// Section switcher
-function switchSection(id) {
-  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-// Password Generator Functions
-function generatePassword() {
-  const length = parseInt(document.getElementById("length").value) || 16;
-  const includeUpper = document.getElementById("includeUpper").checked;
-  const includeLower = document.getElementById("includeLower").checked;
-  const includeSpecial = document.getElementById("includeSpecial").checked;
-  const includeNumbers = document.getElementById("includeNumbers").checked;
-  const excludeSimilar = document.getElementById("excludeSimilar").checked;
-  const pronounceable = document.getElementById("pronounceable").checked;
-  const customSpecial = document.getElementById("customSpecial").value || ".?!";
-  const blacklist = document.getElementById("blacklist").value.toLowerCase().split(',').map(s => s.trim());
-
-  let upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-  let lower = "abcdefghijklmnopqrstuvwxyz";
-  let special = customSpecial;
-  let numbers = "0123456789";
-
-  if (excludeSimilar) {
-    const similar = /[O0l1I]/g;
-    upper = upper.replace(similar, '');
-    lower = lower.replace(similar, '');
-    special = special.replace(similar, '');
-    numbers = numbers.replace(similar, '');
-  }
-
-  let charSets = [];
-  if (includeUpper) charSets.push(upper);
-  if (includeLower) charSets.push(lower);
-  if (includeSpecial) charSets.push(special);
-  if (includeNumbers) charSets.push(numbers);
-
-  let characters = charSets.join('');
-  if (characters.length === 0) {
-    document.getElementById("passwordDisplay").textContent = "Please select at least one character type.";
-    return;
-  }
-
-  let password = '';
-
-  if (pronounceable) {
-    const consonants = "bcdfghjklmnpqrstvwxyz";
-    const vowels = "aeiou";
-    for (let i = 0; i < length; i++) {
-      password += i % 2 === 0 ? consonants[Math.floor(Math.random() * consonants.length)] : vowels[Math.floor(Math.random() * vowels.length)];
-    }
-  } else {
-    for (let set of charSets) {
-      password += set[Math.floor(Math.random() * set.length)];
-    }
-    for (let i = password.length; i < length; i++) {
-      password += characters[Math.floor(Math.random() * characters.length)];
-    }
-    password = password.split('').sort(() => Math.random() - 0.5).join('');
-  }
-
-  for (let term of blacklist) {
-    if (term && password.toLowerCase().includes(term)) {
-      return generatePassword();
-    }
-  }
-
-  document.getElementById("passwordDisplay").textContent = password;
-}
-
-function copyPassword() {
-  const text = document.getElementById("passwordDisplay").textContent;
-  navigator.clipboard.writeText(text).then(() => alert("Password copied to clipboard!"));
-}
-
-// Username Generator Functions
-const adjectives = ["Cool","Happy","Quick","Lazy","Bright","Silent","Sunny","Magic","Smart","Funny","Daddy","Mummy","Legend","Killer","Ninja","Horny","Mystic","Sexy","Idiot","Crazy"];
-const nouns = ["Tiger","Pizza","Cloud","Robot","Chair","Penguin","Wizard","Rocket","Panda","Guitar","Noodle","Taco","Dragon","Zebra","Unicorn","Kitten","Puppy","Banana","Ninja","Burrito"];
-const separators = ["", "_", ".", "-"];
-
-function getRandomItem(arr) {
-  return arr[Math.floor(Math.random() * arr.length)];
-}
-
-function generateUsername() {
-  const min = parseInt(document.getElementById("minLength").value);
-  const max = parseInt(document.getElementById("maxLength").value);
-  const capitalizeWords = document.getElementById("uppercase").checked;
-  const useDigits = document.getElementById("digits").checked;
-  const useSpecial = document.getElementById("special").checked;
-  const prefix = document.getElementById("prefix").value;
-  const suffix = document.getElementById("suffix").value;
-
-  let attempts = 0;
-  let username = "";
-
-  while (attempts < 50) {
-    const adjCount = Math.random() < 0.5 ? 1 : 2;
-    const nounCount = Math.random() < 0.5 ? 1 : 2;
-    let words = [];
-
-    for (let i = 0; i < adjCount; i++) words.push(getRandomItem(adjectives));
-    for (let i = 0; i < nounCount; i++) words.push(getRandomItem(nouns));
-
-    if (!capitalizeWords) words = words.map(word => word.toLowerCase());
-
-    const separator = getRandomItem(separators);
-    username = prefix + words.join(separator);
-
-    if (useDigits) username += Math.floor(Math.random() * 9999);
-    if (useSpecial) username += getRandomItem("!@#$%^&*");
-    username += suffix;
-
-    if (username.length >= min && username.length <= max) {
-      document.getElementById("result").textContent = username;
-      return;
+    function copyPassword() {
+      const text = document.getElementById("passwordDisplay").textContent;
+      navigator.clipboard.writeText(text).then(() => alert("Password copied to clipboard!"));
     }
 
-    attempts++;
-  }
+    // Username Generator Lists
+const adjectives = [
+    // Personality traits
+    "Adventurous", "Ambitious", "Brave", "Brilliant", "Daddy", "Cheerful", "Clever", "Cool", 
+    "Cosmic", "Creative", "Curious", "Daring", "Dazzling", "Determined", "Dreamy", "Dynamic", 
+    "Eager", "Elegant", "Energetic", "Enthusiastic", "Epic", "Fearless", "Fierce", "Friendly", 
+    "Funny", "Gentle", "Gleaming", "Glorious", "Graceful", "Happy", "Harmonious", "Heroic", 
+    "Honest", "Humorous", "Impressive", "Incredible", "Ingenious", "Innovative", "Inspiring", 
+    "Intelligent", "Jolly", "Jovial", "Mummy", "Kind", "Lively", "Logical", "Loyal", 
+    "Lucky", "Magical", "Magnificent", "Merry", "Mighty", "Mysterious", "Noble", "Optimistic", 
+    "Passionate", "Patient", "Peaceful", "Playful", "Pleasant", "Powerful", "Proud", "Quick", 
+    "Quiet", "Radiant", "Rapid", "Rational", "Remarkable", "Resilient", "Resourceful", "Respected", 
+    "Righteous", "Royal", "Sassy", "Savvy", "Scholarly", "Serene", "Sharp", "Shrewd", 
+    "Silent", "Sincere", "Skilled", "Smart", "Smooth", "Snappy", "Sociable", "Spectacular", 
+    "Speedy", "Spirited", "Splendid", "Stellar", "Strategic", "Strong", "Stunning", "Stylish", 
+    "Subtle", "Successful", "Sunny", "Super", "Swift", "Talented", "Tenacious", "Terrific", 
+    "Thoughtful", "Thriving", "Trustworthy", "Ultimate", "Unique", "Valiant", "Versatile", "Vibrant", 
+    "Victorious", "Vigilant", "Virtuous", "Vivacious", "Vivid", "Warm", "Watchful", "Whimsical", 
+    "Wise", "Witty", "Wonderful", "Zealous",
+    
+    // Colors and appearances
+    "Azure", "Blazing", "Blue", "Bright", "Bronze", "Burgundy", "Cerulean", "Charcoal", 
+    "Crimson", "Crystal", "Cyan", "Electric", "Emerald", "Fiery", "Flaming", "Fluorescent", 
+    "Frozen", "Gilded", "Golden", "Green", "Indigo", "Ivory", "Jade", "Lavender", 
+    "Magenta", "Maroon", "Midnight", "Neon", "Obsidian", "Orange", "Pearl", "Pink", 
+    "Platinum", "Purple", "Rainbow", "Red", "Ruby", "Rusty", "Sapphire", "Scarlet", 
+    "Shadow", "Shimmering", "Shining", "Silver", "Sparkling", "Teal", "Turquoise", "Violet", 
+    "Yellow",
+    
+    // Size and intensity
+    "Abundant", "Alpha", "Atomic", "Big", "Boundless", "Colossal", "Compact", "Cosmic", 
+    "Dominant", "Enormous", "Epic", "Extreme", "Giant", "Grand", "Huge", "Hyper", 
+    "Immense", "Infinite", "Jumbo", "Little", "Massive", "Mega", "Micro", "Mighty", 
+    "Mini", "Monumental", "Quantum", "Small", "Tiny", "Titanic", "Ultra", "Vast", 
+    "Wild", "Wee",
+    
+    // Style and theme
+    "Ancient", "Arcane", "Arctic", "Astral", "Celestial", "Classic", "Cosmic", "Cryptic", 
+    "Cyber", "Digital", "Ethereal", "Exotic", "Futuristic", "Galactic", "Global", "Legendary", 
+    "Lunar", "Mystic", "Mythical", "Nebulous", "Nordic", "Primal", "Quantum", "Retro", 
+    "Rustic", "Solar", "Stellar", "Stealth", "Technical", "Technological", "Tropical", "Urban", 
+    "Vintage", "Viral", "Virtual", "Zen"
+];
 
-  document.getElementById("result").textContent = "⚠️ Couldn't generate a username. Adjust your settings.";
-}
-</script>
+const nouns = [
+    // Animals
+    "Alligator", "Antelope", "Badger", "Beaver", "Bison", "Boar", "Buffalo", "Butterfly", 
+    "Cheetah", "Cobra", "Condor", "Cougar", "Coyote", "Crocodile", "Dolphin", "Dragon", 
+    "Eagle", "Elephant", "Falcon", "Ferret", "Fox", "Giraffe", "Gorilla", "Griffin", 
+    "Hawk", "Hedgehog", "Hippo", "Hyena", "Jaguar", "Kangaroo", "Koala", "Leopard", 
+    "Lion", "Lizard", "Llama", "Lynx", "Mammoth", "Meerkat", "Mongoose", "Monkey", 
+    "Moose", "Narwhal", "Octopus", "Otter", "Owl", "Panda", "Panther", "Parrot", 
+    "Penguin", "Phoenix", "Piranha", "Python", "Raccoon", "Raven", "Rhino", "Salamander", 
+    "Scorpion", "Seahorse", "Shark", "Sloth", "Snake", "Spider", "Squirrel", "Stingray", 
+    "Tiger", "Turtle", "Unicorn", "Viper", "Walrus", "Wasp", "Weasel", "Whale", 
+    "Wolf", "Wolverine", "Wombat", "Zebra",
+    
+    // Food and drink
+    "Almond", "Bagel", "Banana", "Biscuit", "Burger", "Burrito", "Caramel", "Cheese", 
+    "Cherry", "Chocolate", "Cinnamon", "Coconut", "Coffee", "Cookie", "Cupcake", "Donut", 
+    "Honey", "Kebab", "Kiwi", "Lemon", "Mango", "Maple", "Melon", "Muffin", 
+    "Noodle", "Nugget", "Oreo", "Pancake", "Peach", "Peanut", "Pepper", "Pizza", 
+    "Pretzel", "Ramen", "Salsa", "Sandwich", "Smoothie", "Spaghetti", "Steak", "Sushi", 
+    "Taco", "Tart", "Waffle", "Yogurt",
+    
+    // Objects and items
+    "Anvil", "Arrow", "Axe", "Backpack", "Balloon", "Beacon", "Blade", "Blaster", 
+    "Blimp", "Bomb", "Boomerang", "Boots", "Bottle", "Bow", "Bracelet", "Cannon", 
+    "Catapult", "Chainsaw", "Dildo", "Compass", "Crown", "Crystal", "Dagger", "Diamond", 
+    "Drone", "Emerald", "Flute", "Gadget", "Gauntlet", "Glider", "Glove", "Grenade", 
+    "Guitar", "Hammer", "Helmet", "Jetpack", "Katana", "Keyboard", "Lantern", "Locket", 
+    "Magnet", "Mask", "Mirror", "Missile", "Monocle", "Necklace", "Orb", "Pendant", 
+    "Pickaxe", "Pistol", "Potion", "Quiver", "Radar", "Rifle", "Ring", "Rocket", 
+    "Saber", "Scarf", "Shield", "Shuriken", "Slingshot", "Spear", "Sphere", "Statue", 
+    "Sword", "Tablet", "Buds", "Telescope", "Throne", "Torch", "Trident", "Trophy", 
+    "Turret", "Wand", "Watch", "Whip",
+    
+    // Profession and characters
+    "Agent", "Archer", "Assassin", "Athlete", "Baron", "Bounty", "Captain", "Champion", 
+    "Chef", "Commander", "Cowboy", "Detective", "Doctor", "Emperor", "Explorer", "Fighter", 
+    "General", "Gladiator", "Guardian", "Hunter", "Jester", "Knight", "Marshal", "Master", 
+    "Medic", "Mercenary", "Monarch", "Navigator", "Ninja", "Nomad", "Outlaw", "Overlord", 
+    "Paladin", "Phantom", "Pilot", "Pioneer", "Pirate", "Prophet", "Ranger", "Rogue", 
+    "Ronin", "Sailor", "Samurai", "Scout", "Sentinel", "Sergeant", "Sheriff", "Sniper", 
+    "Soldier", "Spy", "Striker", "Templar", "Thief", "Titan", "Trader", "Wizard", 
+    "Warrior", "Warlord",
+    
+    // Tech and sci-fi
+    "Algorithm", "Android", "Beacon", "Binary", "Circuit", "Codec", "Console", "Core", 
+    "Cortex", "Cyber", "Database", "Drone", "Engine", "Firewall", "Galaxy", "Hacker", 
+    "Helix", "Hologram", "Interface", "Laser", "Matrix", "Module", "Network", "Neural", 
+    "Nexus", "Orbit", "Packet", "Photon", "Pixel", "Portal", "Prism", "Protocol", 
+    "Proxy", "Pulse", "Quantum", "Quasar", "Reactor", "Robot", "Scanner", "Server", 
+    "Signal", "Solar", "Spaceship", "Spectrum", "Starship", "System", "Terminal", "Vector", 
+    "Vortex", "Warp"
+];
+
+// Example separators: "", "_", ".", "-"
+
+// Example usage:
+// function generateUsername() {
+//     const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+//     const noun = nouns[Math.floor(Math.random() * nouns.length)];
+//     const separator = separators[Math.floor(Math.random() * separators.length)];
+//     return adjective + separator + noun;
+// }
+
+// Example usage:
+// function generateUsername() {
+//     const adjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+//     const noun = nouns[Math.floor(Math.random() * nouns.length)];
+//     const separator = separators[Math.floor(Math.random() * separators.length)];
+//     return adjective + separator + noun;
+// }
+    const separators = ["", "_", ".", "-"];
+
+    function getRandomItem(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function generateUsername() {
+      const min = parseInt(document.getElementById("minLength").value);
+      const max = parseInt(document.getElementById("maxLength").value);
+      const capitalizeWords = document.getElementById("uppercase").checked;
+      const useDigits = document.getElementById("digits").checked;
+      const useSpecial = document.getElementById("special").checked;
+      const prefix = document.getElementById("prefix").value;
+      const suffix = document.getElementById("suffix").value;
+
+      let attempts = 0;
+      let username = "";
+
+      while (attempts < 50) {
+        const adjCount = Math.random() < 0.5 ? 1 : 2;
+        const nounCount = Math.random() < 0.5 ? 1 : 2;
+        let words = [];
+
+        for (let i = 0; i < adjCount; i++) words.push(getRandomItem(adjectives));
+        for (let i = 0; i < nounCount; i++) words.push(getRandomItem(nouns));
+
+        if (!capitalizeWords) words = words.map(word => word.toLowerCase());
+
+        const separator = getRandomItem(separators);
+        username = prefix + words.join(separator);
+
+        if (useDigits) username += Math.floor(Math.random() * 9999);
+        if (useSpecial) username += getRandomItem("!@#$%^&*");
+        username += suffix;
+
+        if (username.length >= min && username.length <= max) {
+          document.getElementById("result").textContent = username;
+          return;
+        }
+
+        attempts++;
+      }
+
+      document.getElementById("result").textContent = "⚠️ Couldn't generate a username. Adjust your settings.";
+    }
+  </script>
 </body>
 </html>
