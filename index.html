@@ -251,6 +251,7 @@
   font-size: 0.95rem;
   z-index: 99999;
   overflow: hidden;
+  
 }
 
 #boot-text {
@@ -495,6 +496,7 @@
 </head>
 <body>
 <div id="loading-screen">
+    <div id="start-overlay" style="position:absolute; top:0; left:0; right:0; bottom:0; z-index:100000; cursor:pointer;"></div>
     <img src="Icons/TranspKali.png" alt="Kali Logo" id="boot-logo">
 
 <div id="press-key" style="text-align:center;">
@@ -827,8 +829,13 @@ document.addEventListener("DOMContentLoaded", function () {
   if (showLoading) {
     loadingScreen.style.display = "block";
     window.scrollTo(0, 0);
-    window.addEventListener("keydown", startBoot, { once: true });
-    window.addEventListener("click", startBoot, { once: true });
+    // Touch/click support for iOS and all devices
+const startOverlay = document.getElementById("start-overlay");
+startOverlay.addEventListener("click", startBoot, { once: true });
+startOverlay.addEventListener("touchstart", startBoot, { once: true });
+
+// Fallback for keyboard interaction
+window.addEventListener("keydown", startBoot, { once: true });
   } else {
     // Skip loading screen, immediately hide it
     loadingScreen.style.display = "none";
