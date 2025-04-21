@@ -4,13 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Nmap | Kali Linux Info Hub</title>
+  <link rel="stylesheet" href="../style.css">
   <style>
     body {
+      margin: 0;
+      font-family: 'Kelly Slab', 'Courier New', Courier, monospace;
       background-color: #0d0d0d;
       color: #00ffcc;
-      font-family: 'Courier New', monospace;
-      padding: 20px;
-      line-height: 1.6;
+      overflow-x: hidden;
     }
 	 .kali-logo {
       position: absolute;
@@ -57,8 +58,26 @@
       border-radius: 10px;
       margin-bottom: 20px;
     }
-    h2 {
+    h1, h3 {
       color: #00ccff;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    
+    h2 {
+        color: #00ccff;
+        text-decoration: underline;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
     code {
       display: block;
@@ -181,17 +200,19 @@
 </style>
 
   <header>Nmap</header>
-  <nav>
-    <ul>
-      <li><a href="AboutKali.html">About Kali</a></li>
-      <li><a href="install.html">Installation</a></li>
-      <li><a href="tools.html">Tools & Features</a></li>
-      <li><a href="commands.html">Commands</a></li>
-      <li><a href="tutorials.html">Tutorials</a></li>
-      <li><a href="community.html">Community Area</a></li>
-      <li><a href="contact.html">Contact Page</a></li>
-    </ul>
-  </nav>
+  
+  <nav style="text-align:center; margin-top: 10px; z-index: 1; position: relative;">
+  <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
+      <li><a href="subloadingscreen.html?target=../index.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Home</a></li>
+    <li><a href="subloadingscreen.html?target=AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
+    <li><a href="subloadingscreen.html?target=install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
+    <li><a href="subloadingscreen.html?target=tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Top Tools</a></li>
+    <li><a href="subloadingscreen.html?target=commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
+    <li><a href="subloadingscreen.html?target=tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
+    <li><a href="subloadingscreen.html?target=community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community</a></li>
+    <li><a href="subloadingscreen.html?target=contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
+  </ul>
+</nav>
   <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
   <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
   <select id="tutorialNav" onchange="location = this.value;" style="
@@ -302,8 +323,6 @@
   <p>Skip host discovery (ping) and scan assuming the host is up. Useful for scanning live websites.</p>
 </section>
 
-
-  <p><a href="../index.html">← Back to Home</a></p>
 <div class="nav-buttons">
     <a href="nmap.html"><button class="nav-button">Nmap</button></a>
     <a href="../index.html"><button class="nav-button">Home</button></a>
