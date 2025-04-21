@@ -102,10 +102,26 @@
       margin: auto;
     }
 
-    h2 {
+    h1, h3 {
       color: #00ccff;
-      text-align: center;
-      margin-bottom: 20px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    
+    h2 {
+        color: #00ccff;
+        text-decoration: underline;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
 
     .team-card {
