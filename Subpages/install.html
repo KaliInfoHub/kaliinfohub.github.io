@@ -117,6 +117,26 @@
 
     h2, h3 {
       color: #00ccff;
+    }h1, h3 {
+      color: #00ccff;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    
+    h2 {
+        color: #00ccff;
+        text-decoration: underline;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
 
     a {
@@ -166,8 +186,9 @@
 
   <nav style="text-align:center; margin-top: 10px; z-index: 1; position: relative;">
   <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
+      <li><a href="subloadingscreen.html?target=../index.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Home</a></li>
     <li><a href="subloadingscreen.html?target=AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
-    <li><a href="install.html">Installation</a></li>
+    <li><a href="subloadingscreen.html?target=install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
     <li><a href="subloadingscreen.html?target=tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Top Tools</a></li>
     <li><a href="subloadingscreen.html?target=commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
     <li><a href="subloadingscreen.html?target=tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
