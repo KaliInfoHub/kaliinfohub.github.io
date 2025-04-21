@@ -53,9 +53,16 @@
       border-radius: 10px;
       margin-bottom: 20px;
     }
-    h2 {
+    h1, h2, h3 {
       color: #00ccff;
+      animation: glow 2s ease-in-out infinite alternate;
     }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
     code {
       display: block;
       background: #1a1a1a;
