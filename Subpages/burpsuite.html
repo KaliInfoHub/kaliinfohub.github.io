@@ -93,18 +93,34 @@
       border-radius: 10px;
       margin-bottom: 20px;
     }
+    
+   h1, h3 {
+      color: #00ccff;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    
     h2 {
-      color: #00ccff;
+        text-decoration: underline;
+        animation: glow 2s ease-in-out infinite alternate;
     }
-    h3 {
-      color: #00ccff;
-      margin-top: 20px;
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
     }
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+      }
+    
+    
     code {
       display: block;
       background: #1a1a1a;
       padding: 10px;
-      border-radius: 5px;
+      border-radius: 6px;
       border: 1px solid #00ffcc44;
       margin-top: 10px;
       white-space: pre-wrap;
@@ -146,9 +162,9 @@
       max-width: 100%;
       height: auto;
       display: block;
-      margin: 15px auto;
+      margin: 16px auto;
       border: 1px solid #00ccff55;
-      border-radius: 5px;
+      border-radius: 6px;
     }
   </style>
 </head>
