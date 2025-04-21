@@ -41,6 +41,28 @@
       font-weight: bold;
       animation: glow 2s ease-in-out infinite alternate;
     }
+    
+    h1, h3 {
+      color: #00ccff;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
+    
+    
+    h2 {
+        color: #00ccff;
+        text-decoration: underline;
+        animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
 
     @keyframes glow {
       from { text-shadow: 0 0 10px #00ffcc; }
@@ -119,7 +141,7 @@
     }
 
 
-    .nav-button {
+    .nav-buttons {
       background-color: #111;
       border: 1px solid #00ccff;
       padding: 10px 15px;
@@ -129,7 +151,7 @@
       transition: all 0.3s;
     }
 
-    .nav-button:hover {
+    .nav-buttons:hover {
       background-color: #00ccff22;
     }
 
@@ -254,16 +276,17 @@
   <header>Nikto</header>
 
   <nav style="text-align:center; margin-top: 10px; z-index: 1; position: relative;">
-    <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
-      <li><a href="Subpages/AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
-      <li><a href="Subpages/install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
-      <li><a href="Subpages/tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tools & Features</a></li>
-      <li><a href="Subpages/commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
-      <li><a href="Subpages/tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
-      <li><a href="Subpages/community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community Area</a></li>
-      <li><a href="Subpages/contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
-    </ul>
-  </nav>
+  <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
+      <li><a href="subloadingscreen.html?target=../index.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Home</a></li>
+    <li><a href="subloadingscreen.html?target=AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
+    <li><a href="subloadingscreen.html?target=install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
+    <li><a href="subloadingscreen.html?target=tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Top Tools</a></li>
+    <li><a href="subloadingscreen.html?target=commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
+    <li><a href="subloadingscreen.html?target=tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
+    <li><a href="subloadingscreen.html?target=community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community</a></li>
+    <li><a href="subloadingscreen.html?target=contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
+  </ul>
+</nav>
 <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
   <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Jump to a Tutorial:</label>
   <select id="tutorialNav" onchange="location = this.value;" style="
@@ -277,10 +300,10 @@
   
     <option value="#">--Nikto--</option>
     <option value="tutorials.html">Getting Started</option>
-    <option value="install.html">Installation Guide</option>
     <option value="nmap.html">Nmap</option>
     <option value="metasploit.html">Metasploit</option>
-    <option value="airodump-ng.html">Aircrack</option>
+    <option value="wireshark.html">Wireshark</option>
+    <option value="airodump-ng.html">Airodump</option>
     <option value="burp.html">Burp Suite</option>
     <option value="johntheripper.html">John the Ripper</option>
     <option value="hydra.html">Hydra</option>
