@@ -144,12 +144,12 @@
       background-color: rgba(0, 255, 204, 0.1);
       border-left: 4px solid #00ffcc;
       padding: 10px;
-      margin: 15px 0;
+      margin: 16px 0;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin: 15px 0;
+      margin: 16px 0;
     }
     th, td {
       border: 1px solid #00ccff55;
@@ -236,17 +236,18 @@
 </style>
 
   <header>Burp Suite - Web Application Security Testing Platform</header>
-  <nav>
-    <ul>
-      <li><a href="AboutKali.html">About Kali</a></li>
-      <li><a href="install.html">Installation</a></li>
-      <li><a href="tools.html">Tools & Features</a></li>
-      <li><a href="commands.html">Commands</a></li>
-      <li><a href="tutorials.html">Tutorials</a></li>
-      <li><a href="community.html">Community Area</a></li>
-      <li><a href="contact.html">Contact Page</a></li>
-    </ul>
-  </nav>
+  <nav style="text-align:center; margin-top: 10px; z-index: 1; position: relative;">
+  <ul style="list-style:none; padding:0; margin:0; display:flex; justify-content:center; gap: 10px; flex-wrap: wrap;">
+      <li><a href="subloadingscreen.html?target=../index.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Home</a></li>
+    <li><a href="subloadingscreen.html?target=AboutKali.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">About Kali</a></li>
+    <li><a href="subloadingscreen.html?target=install.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Installation</a></li>
+    <li><a href="subloadingscreen.html?target=tools.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Top Tools</a></li>
+    <li><a href="subloadingscreen.html?target=commands.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Commands</a></li>
+    <li><a href="subloadingscreen.html?target=tutorials.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Tutorials</a></li>
+    <li><a href="subloadingscreen.html?target=community.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Community</a></li>
+    <li><a href="subloadingscreen.html?target=contact.html" style="background-color:#111; border:1px solid #00ccff; padding:10px 15px; border-radius:6px; color:#00ccff; text-decoration:none; display:inline-block;">Contact Page</a></li>
+  </ul>
+</nav>
   <div style="text-align:center; margin: 10px; position: relative; z-index: 1;">
   <label for="tutorialNav" style="color:#00ccff; font-weight:bold;">Select a Tool:</label>
   <select id="tutorialNav" onchange="location = this.value;" style="
@@ -257,12 +258,16 @@
     font-family: monospace;
     margin-left: 10px;
   ">
-    <option value="#">BurpSuite</option>
+    <option value="#">--Burp Suite--</option>
     <option value="tutorials.html">Getting Started</option>
-    <option value="tutorial-nmap.html">Nmap Scanning</option>
-    <option value="tutorial-hydra.html">Hydra Attacks</option>
-    <option value="tutorial-aircrack.html">Wi-Fi Cracking</option>
-    <option value="tutorial-burp.html">Burp Suite Testing</option>
+    <option value="nmap.html">Nmap</option>
+    <option value="metasploit.html">Metasploit</option>
+    <option value="wireshark.html">Wireshark</option>
+    <option value="airodump-ng.html">Airodump</option>
+    <option value="burp.html">Burp Suite</option>
+    <option value="johntheripper.html">John the Ripper</option>
+    <option value="hydra.html">Hydra</option>
+    <option value="nikto.html">Nikto</option>
   </select>
 </div>
 
