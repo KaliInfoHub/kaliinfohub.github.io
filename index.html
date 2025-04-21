@@ -140,7 +140,13 @@
   -webkit-text-fill-color: initial;
   -webkit-background-clip: initial;
   background: none;
-}
+  animation: glow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #00ffcc; }
+      to { text-shadow: 0 0 20px #00ccff, 0 0 30px #00ccff; }
+    }
 
     .forum, .quiz, .examples {
       background-color: #111;
